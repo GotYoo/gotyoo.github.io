@@ -1,8 +1,8 @@
 # Site
-title:              青青的秘密花园
-bio:                'Write the Story'
-description:        "Me and My Lover"
-locale:             en_US
+title:              GotYoo
+bio:                'Developer · Builder · Life'
+description:        "GotYoo 的个人主页，收录项目、公开文章与 Life 记录。"
+locale:             zh_CN
 baseurl: "" # the site is served from the domain root
 url: "https://lxmhappy.live"
 
@@ -14,8 +14,8 @@ analytics-id:       "default"
 douyin:            "https://www.douyin.com/user/self?from_tab_name=main"
 
 # personal
-location:           Hang, CA
-phone:              13020631814
+location:           ''
+phone:              ''
 email:              654601458@qq.com # change this to your email to receive free emails for your contact submissions via Slapform.com
 
 # Other
