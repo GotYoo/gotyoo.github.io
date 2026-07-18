@@ -1,0 +1,14 @@
+---
+layout: interface
+page_key: projects
+title: Personal Interface · Case Study
+description: GotYoo 个人网站的信息架构、交互设计与静态部署案例。
+permalink: /projects/personal-interface/
+---
+<article class="case-study">
+  <header class="case-hero"><div class="case-hero__grid" aria-hidden="true"></div><div class="section-shell"><a class="case-back" href="{{ '/projects/' | relative_url }}">← PROJECT INDEX</a><p>CASE STUDY · 01 / 2026</p><h1>Personal<br><em>Interface</em></h1><div class="case-hero__summary"><p>将个人主页从单一展示页重构为可持续更新的职业内容系统。</p><dl><div><dt>ROLE</dt><dd>Design & Engineering</dd></div><div><dt>STACK</dt><dd>Jekyll · CSS · JavaScript</dd></div><div><dt>DELIVERY</dt><dd>GitHub Pages</dd></div></dl></div></div></header>
+  <section class="case-section"><div class="case-shell"><aside><span>01</span><p>CONTEXT</p></aside><div><h2>问题不是页面不够炫，<br>而是所有内容都挤在同一层。</h2><p class="case-lead">原有主页更像一段完整的视觉体验，但项目、文章、职业信息与生活记录缺少清晰边界。招聘者难以快速定位能力证据，生活内容也容易抢占职业信息的注意力。</p></div></div></section>
+  <section class="case-section case-section--dark"><div class="case-shell"><aside><span>02</span><p>DECISIONS</p></aside><div><h2>把网站拆成五个长期维护的界面。</h2><div class="decision-grid"><article><b>01</b><h3>Home</h3><p>只承担定位、精选项目、Experience 与关键入口。</p></article><article><b>02</b><h3>Projects</h3><p>项目索引与案例详情，不混入生活作品。</p></article><article><b>03</b><h3>Blog</h3><p>支持目录、阅读进度和代码复制的公开写作。</p></article><article><b>04</b><h3>Life</h3><p>独立、公开但低调，保存照片与时间线。</p></article><article><b>05</b><h3>Resume</h3><p>只展示可验证资料，并可直接打印保存。</p></article></div></div></div></section>
+  <section class="case-section"><div class="case-shell"><aside><span>03</span><p>INTERACTION</p></aside><div><h2>动态负责解释层级，<br>不负责替代内容。</h2><p class="case-lead">粒子网络用于第一印象，聚光和悬停预览用于项目探索，页面幕布用于建立跨页连续性。触屏和减少动态偏好下，这些效果会自动降级。</p><div class="case-demo"><div class="case-demo__cursor"></div><span>POINTER</span><p>hover → preview<br>click → transition<br>scroll → reveal</p></div></div></div></section>
+  <section class="case-section case-section--paper"><div class="case-shell"><aside><span>04</span><p>VALIDATION</p></aside><div><h2>每次改动都经过真实页面检查。</h2><ul class="validation-list"><li><span>01</span>JavaScript 语法与 Git diff 检查</li><li><span>02</span>桌面、手机和关键内页截图检查</li><li><span>03</span>横向溢出与公开链接数量检查</li><li><span>04</span>GitHub Pages 构建与线上 HTTP 检查</li></ul><a class="button button--primary" href="{{ '/resume/' | relative_url }}"><span>查看公开简历</span><i>↗</i></a></div></div></section>
+</article>

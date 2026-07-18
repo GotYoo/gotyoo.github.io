@@ -40,6 +40,7 @@ sitemap:
     <nav class="site-nav" aria-label="主导航">
       <a data-nav="home" href="{{ '/' | relative_url }}">首页</a>
       <a data-nav="projects" href="{{ '/projects/' | relative_url }}">项目</a>
+      <a href="#experience">经历</a>
       <a data-nav="blog" href="{{ '/blog/' | relative_url }}">文章</a>
       <a data-nav="life" href="{{ '/life/' | relative_url }}">Life</a>
       <a data-nav="about" href="{{ '/about/' | relative_url }}">关于</a>
@@ -85,16 +86,29 @@ sitemap:
       </div>
     </section>
 
+    <section class="experience section" id="experience">
+      <div class="section-shell">
+        <div class="section-index reveal" data-reveal><span>02</span><i></i><p>EXPERIENCE / 已验证的建设记录</p></div>
+        <div class="experience__head reveal" data-reveal><h2>经历不只是一列职位，<br><em>也包括如何把作品做完整。</em></h2><p>在正式教育和工作资料补充前，这里只展示能够从当前网站验证的建设过程。</p></div>
+        <div class="experience-list">
+          <article class="experience-row reveal" data-reveal><time>2026.07</time><div><span>PERSONAL SITE SYSTEM</span><h3>Personal Interface · 信息架构与视觉系统</h3></div><p>将根域名重构为职业主页，并拆分 Projects、Blog、Life、About 与 Resume，建立可持续扩展的内容结构。</p></article>
+          <article class="experience-row reveal" data-reveal><time>2026.07</time><div><span>INTERACTION ENGINEERING</span><h3>渐进增强 · 动效、性能与可访问性</h3></div><p>实现粒子网络、磁吸交互、聚光卡片、快捷导航和响应式降级，同时支持减少动态偏好。</p></article>
+          <article class="experience-row reveal" data-reveal><time>ONGOING</time><div><span>DOCUMENTATION</span><h3>案例与写作 · 从完成作品到解释选择</h3></div><p>为项目建立背景、职责、技术决策、验证与复盘结构，并把改版过程沉淀为公开文章。</p></article>
+        </div>
+        <a class="experience__resume magnetic" href="{{ '/resume/' | relative_url }}"><span>查看公开资料版简历</span><i>↗</i></a>
+      </div>
+    </section>
+
     <section class="projects section section--dark" id="selected">
       <div class="section-shell">
-        <div class="section-index section-index--dark reveal" data-reveal><span>02</span><i></i><p>SELECTED WORK / 精选项目</p></div>
+        <div class="section-index section-index--dark reveal" data-reveal><span>03</span><i></i><p>SELECTED WORK / 精选项目</p></div>
         <div class="section-heading reveal" data-reveal><h2>让项目自己<br><em>说明能力。</em></h2><p>每个案例都会逐步补全背景、职责、方案、结果与复盘。第一版只展示已经存在的作品。</p></div>
         <div class="project-stack">
-          <a class="project-card spotlight reveal" data-reveal data-tilt href="{{ '/' | relative_url }}">
+          <a class="project-card spotlight reveal" data-reveal data-tilt data-preview="interface" data-preview-title="Personal Interface" data-preview-meta="Jekyll · Motion · 2026" href="{{ '/projects/personal-interface/' | relative_url }}">
             <div class="project-card__visual project-card__visual--interface"><div class="mini-interface"><i></i><i></i><i></i><span>PERSONAL<br>INTERFACE</span></div><b>01</b></div>
             <div class="project-card__body"><div class="project-card__meta"><span>DESIGN & ENGINEERING</span><span>ONGOING</span></div><h3>Personal<br>Interface</h3><p>将项目、公开文章与 Life 组织为一个可持续演进的个人网站系统，兼顾表达、性能和可访问性。</p><div class="tags"><span>Jekyll</span><span>Design System</span><span>Motion</span></div><i class="round-arrow">↗</i></div>
           </a>
-          <a class="project-card project-card--compact spotlight reveal" data-reveal href="https://github.com/GotYoo" target="_blank" rel="noopener">
+          <a class="project-card project-card--compact spotlight reveal" data-reveal data-preview="code" data-preview-title="Code Archive" data-preview-meta="GitHub · Experiments" href="https://github.com/GotYoo" target="_blank" rel="noopener">
             <div class="project-card__visual project-card__visual--code"><code><span>const</span> next = idea<br>&nbsp;&nbsp;.map(build)<br>&nbsp;&nbsp;.filter(real);</code><b>02</b></div>
             <div class="project-card__body"><div class="project-card__meta"><span>OPEN SOURCE INDEX</span><span>GITHUB</span></div><h3>Code<br>Archive</h3><p>更多代码与实验保存在 GitHub。这里不为数量制造项目，只收录值得解释的过程。</p><div class="tags"><span>Repository</span><span>Experiments</span></div><i class="round-arrow">↗</i></div>
           </a>
@@ -105,7 +119,7 @@ sitemap:
 
     <section class="signals section" id="portals">
       <div class="section-shell">
-        <div class="section-index reveal" data-reveal><span>03</span><i></i><p>THREE SIGNALS / 三个入口</p></div>
+        <div class="section-index reveal" data-reveal><span>04</span><i></i><p>THREE SIGNALS / 三个入口</p></div>
         <div class="signal-grid">
           <a class="signal-card reveal spotlight" data-reveal href="{{ '/projects/' | relative_url }}"><span>01 / WORK</span><h3>Projects</h3><p>项目背景、职责、技术方案与复盘。</p><i>↗</i></a>
           <a class="signal-card reveal spotlight" data-reveal href="{{ '/blog/' | relative_url }}"><span>02 / THINKING</span><h3>Blog</h3><p>公开文章、技术笔记与阶段性思考。</p><i>↗</i></a>
@@ -118,7 +132,7 @@ sitemap:
 
   <footer class="site-footer">
     <div><span class="brand__mark">GY</span><p>GotYoo · Personal Interface</p></div>
-    <nav><a href="{{ '/projects/' | relative_url }}">Projects</a><a href="{{ '/blog/' | relative_url }}">Blog</a><a href="{{ '/life/' | relative_url }}">Life</a><a href="https://github.com/GotYoo" target="_blank" rel="noopener">GitHub</a></nav>
+    <nav><a href="{{ '/projects/' | relative_url }}">Projects</a><a href="{{ '/resume/' | relative_url }}">Resume</a><a href="{{ '/blog/' | relative_url }}">Blog</a><a href="{{ '/life/' | relative_url }}">Life</a><a href="https://github.com/GotYoo" target="_blank" rel="noopener">GitHub</a></nav>
     <p>© <span data-year></span> · BUILT WITH INTENT</p>
   </footer>
 
@@ -126,8 +140,10 @@ sitemap:
     <button class="command__backdrop" type="button" data-command-close aria-label="关闭导航"></button>
     <div class="command__panel" role="dialog" aria-modal="true" aria-labelledby="command-title">
       <div class="command__head"><span id="command-title">QUICK NAVIGATION</span><kbd>ESC</kbd></div>
-      <div class="command__list"><a href="{{ '/' | relative_url }}"><b>01</b><span>首页<small>Home</small></span><i>↗</i></a><a href="{{ '/projects/' | relative_url }}"><b>02</b><span>项目<small>Projects</small></span><i>↗</i></a><a href="{{ '/blog/' | relative_url }}"><b>03</b><span>文章<small>Writing</small></span><i>↗</i></a><a href="{{ '/life/' | relative_url }}"><b>04</b><span>生活<small>Life</small></span><i>↗</i></a><a href="{{ '/about/' | relative_url }}"><b>05</b><span>关于<small>About</small></span><i>↗</i></a></div>
+      <div class="command__list"><a href="{{ '/' | relative_url }}"><b>01</b><span>首页<small>Home</small></span><i>↗</i></a><a href="{{ '/projects/' | relative_url }}"><b>02</b><span>项目<small>Projects</small></span><i>↗</i></a><a href="{{ '/resume/' | relative_url }}"><b>03</b><span>简历<small>Resume</small></span><i>↗</i></a><a href="{{ '/blog/' | relative_url }}"><b>04</b><span>文章<small>Writing</small></span><i>↗</i></a><a href="{{ '/life/' | relative_url }}"><b>05</b><span>生活<small>Life</small></span><i>↗</i></a><a href="{{ '/about/' | relative_url }}"><b>06</b><span>关于<small>About</small></span><i>↗</i></a></div>
     </div>
   </div>
+  <div class="hover-preview" data-hover-preview aria-hidden="true"><div class="hover-preview__visual"></div><span></span><p></p></div>
+  <div class="route-curtain" aria-hidden="true"><i></i><i></i><span>OPENING NEXT VIEW</span></div>
 </body>
 </html>
