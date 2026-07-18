@@ -1,0 +1,8 @@
+---
+layout: interface
+---
+<article class="reading-page">
+  <header class="reading-hero"><div class="reading-hero__inner"><a href="{{ '/blog/' | relative_url }}">← WRITING INDEX</a><p>{{ page.date | date: "%Y.%m.%d" }} · DESIGN & ENGINEERING</p><h1>{{ page.title }}</h1><div><span data-reading-time>READING</span><button type="button" data-copy-url>复制文章链接</button></div></div></header>
+  <div class="reading-layout"><aside class="reading-toc"><p>ON THIS PAGE</p><nav data-article-toc></nav></aside><div class="reading-content" data-article-content>{{ content }}</div><aside class="reading-meter" aria-hidden="true"><i data-reading-meter></i><span>READ</span></aside></div>
+  <footer class="reading-end"><p>END OF NOTE</p><h2>写清楚选择，<br>也是工程的一部分。</h2><a href="{{ '/blog/' | relative_url }}">返回文章列表 ↗</a></footer>
+</article>
