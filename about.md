@@ -1,27 +1,11 @@
 ---
-layout: page
-title: Jekyll Theme - About - Massively
-description: When building a website it's helpful to see what the focus of your site is. This page is an example of how to show a website's focus.
-sitemap:
-    priority: 0.7
-    lastmod: 2017-11-02
-    changefreq: weekly
+layout: interface
+page_key: about
+title: About
+description: 关于 GotYoo 的个人网站与工作方式。
+permalink: /about/
 ---
-## About our Site
-
-<span class="image left"><img src="{{ "/images/pic04.jpg" | absolute_url }}" alt="" /></span>
-
-Making steady content and conveying it well takes a great deal of research and, hence, time and exertion. Building a profound established comprehension of your target customer needs is critical as your principle objective ought to be to fulfill their requirements as awesome content. You should need to enhance their lives. Having significant content like this may not be simple by any methods. Be that as it may, in any case, it's a fundamental apparatus in the event that you expect to grow a fruitful and supportable business in the present web focused world.
-
-Receiving the benefits of content is a certain something. Be that as it may, it's so substantially less demanding once you begin conveying all the more successfully. The profitable content thought isn't just about bragging your item's capacities and general worth or your organization's achievements. You should concentrate less on advertising how awesome your item is and rather concentrate on indicating how valuable it is. This is a client focused approach as it concentrates on their issues and your answer for them. Making yourself fundamental is critical.
-
-### Content is Imortant
-<div class="box">
-  <p>
-  In saying that, a one-measure fits-all approach won't do the trick with regards to content promoting. Rather, an emphasis on making remarkable, high caliber and totally genuine content that is engaging, helpful and fascinating for customers will get you the crown. From content, video and symbolism to infographics, studies, online courses and podcasts, whatever your favored content medium is, guarantee it is shareable and pertinent to your industry.
-  </p>
-</div>
-
-<span class="image left"><img src="{{ "/images/pic05.jpg" | absolute_url }}" alt="" /></span>
-
-On social media, we may share our own thoughts and advance our image notwithstanding spreading musings for different associations and affiliations. With such a critical number of associations with people and relationship on social media, our experience can be over-burden with a considerable measure of information.
+<section class="inner-hero"><div class="inner-hero__content"><p class="inner-hero__eyebrow reveal" data-reveal>04 / PROFILE & WORKING PRINCIPLES</p><h1 data-title><span>Ab<em>out</em></span></h1><p class="inner-hero__desc reveal" data-reveal>这是个人介绍的第一版：先保留真实、稳定的部分，具体教育经历、技术能力与求职信息将在资料确认后加入。</p><div class="inner-hero__count"><span>GOTYOO</span><br><span>PERSONAL INTERFACE</span></div></div></section>
+<section class="page-section"><div class="section-shell"><div class="section-index reveal" data-reveal><span>PROFILE</span><i></i><p>ABOUT THIS SITE</p></div><div class="about-grid"><h2 class="reveal" data-reveal>认真构建，<br>清楚表达，<br>持续留下作品。</h2><div class="about-copy reveal" data-reveal><p>本站用来整理我的项目、公开文章与 Life。职业内容负责呈现问题解决能力，生活内容则保留更自然的一面。</p><p>相比堆叠技术名词，我更希望通过完整项目说明具体做过什么、为什么这样选择，以及最后得到了怎样的结果。</p></div></div>
+<div class="principles"><article class="principle reveal" data-reveal><span>01</span><h3>真实优先</h3><p>不虚构经历、指标或项目规模。资料不足时保持克制，等到有证据再补充。</p></article><article class="principle reveal" data-reveal><span>02</span><h3>结构优先</h3><p>让信息层级、代码结构和交互反馈服务于内容，而不是只追求视觉复杂度。</p></article><article class="principle reveal" data-reveal><span>03</span><h3>持续迭代</h3><p>把个人网站当成长期项目，根据真实经历不断更新，而不是一次性的线上简历。</p></article></div>
+<div class="contact-panel reveal" data-reveal><div><p>OPEN CONNECTION</p><h2>从项目开始<br>认识我。</h2></div><a class="button button--light magnetic" href="https://github.com/GotYoo" target="_blank" rel="noopener"><span>访问 GitHub</span><i>↗</i></a></div></div></section>
