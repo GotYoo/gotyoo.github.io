@@ -3,8 +3,8 @@ title:              青青的秘密花园
 bio:                'Write the Story'
 description:        "Me and My Lover"
 locale:             en_US
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site
+baseurl: "" # the site is served from the domain root
+url: "https://lxmhappy.live"
 
 # Comments
 disqus_shortname:   default
