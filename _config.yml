@@ -10,18 +10,13 @@ url: "https://lxmhappy.live"
 disqus_shortname:   default
 
 # Social
-analytics-id:       "default"
 douyin:            "https://www.douyin.com/user/self?from_tab_name=main"
 
-# personal
-location:           ''
-phone:              ''
-email:              654601458@qq.com # change this to your email to receive free emails for your contact submissions via Slapform.com
+# Personal
+email:              654601458@qq.com
 
 # Other
 background_image:   /images/bg.jpg
-# Tip: The color palette and other styles can be configured in /_sass/lib/_vars.scss
-slapform_thankyou_page: /thank-you
 
 defaults:
 - scope:
@@ -29,8 +24,7 @@ defaults:
     type: posts
   values:
     permalink: "/blog/:title/"
-    layout: post
-    author:
+    layout: article
 
 # Jekyll
 permalink:          /blog/:title/
@@ -43,9 +37,6 @@ kramdown:
   toc_levels:       1..6
   enable_coderay:   false
 mathjax:            true
-sass:
-  sass_dir:         _sass
-  style:            compressed
 
 # Gems
 gems:
@@ -62,4 +53,4 @@ jekyll-mentions:
     base_url: https://github.com
 
 # Exclude list
-exclude: [README.md, Gemfile, Gemfile.lock, node_modules, gulpfile.js, package.json, _site, src, vendor, CNAME, LICENSE, Rakefile, old]
+exclude: [README.md, Gemfile, Gemfile.lock, node_modules, _site, CNAME, LICENSE]
