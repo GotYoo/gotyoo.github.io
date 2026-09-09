@@ -1,0 +1,148 @@
+---
+layout: null
+title: GotYoo · Developer & Builder
+description: GotYoo 的个人主页，收录项目、公开文章与 Life 记录。
+sitemap:
+  priority: 1.0
+  changefreq: weekly
+---
+<!doctype html>
+<html lang="zh-CN" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#06090d">
+  <meta name="description" content="{{ page.description }}">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ page.title }}">
+  <meta property="og:description" content="{{ page.description }}">
+  <meta property="og:url" content="{{ site.url }}/">
+  <meta property="og:image" content="{{ site.url }}/images/bg.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="{{ site.url }}/">
+  <link rel="icon" href="{{ '/assets/icon/favicon-32x32.png' | relative_url }}" sizes="32x32">
+  <link rel="apple-touch-icon" href="{{ '/assets/icon/apple-touch-icon.png' | relative_url }}">
+  <link rel="preload" href="{{ '/images/bg.jpg' | relative_url }}" as="image" fetchpriority="high">
+  <link rel="stylesheet" href="{{ '/assets/css/home.css' | relative_url }}">
+  <script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');</script>
+  <script src="{{ '/assets/js/home.js' | relative_url }}" defer></script>
+  <title>{{ page.title }}</title>
+</head>
+<body data-page="home" class="is-loading">
+  <a class="skip-link" href="#main">跳到正文</a>
+  <div class="boot" aria-hidden="true"><div class="boot__core"><span>GY</span><i></i></div><p>INITIALIZING PERSONAL INTERFACE</p></div>
+  <div class="page-grid" aria-hidden="true"></div>
+  <div class="scroll-progress" aria-hidden="true"><i></i></div>
+  <div class="cursor cursor--dot" aria-hidden="true"></div><div class="cursor cursor--ring" aria-hidden="true"></div>
+
+  <header class="site-header" data-header>
+    <a class="brand magnetic" href="{{ '/' | relative_url }}" aria-label="GotYoo 首页"><span class="brand__mark">GY</span><span class="brand__text">GOTYOO<small>PERSONAL INTERFACE</small></span></a>
+    <nav class="site-nav" aria-label="主导航">
+      <a data-nav="home" href="{{ '/' | relative_url }}">首页</a>
+      <a data-nav="projects" href="{{ '/projects/' | relative_url }}">项目</a>
+      <a href="#experience">经历</a>
+      <a data-nav="blog" href="{{ '/blog/' | relative_url }}">文章</a>
+      <a data-nav="life" href="{{ '/life/' | relative_url }}">Life</a>
+      <a data-nav="about" href="{{ '/about/' | relative_url }}">关于</a>
+    </nav>
+    <button class="command-trigger magnetic" type="button" data-command-open aria-label="打开快速导航"><kbd>⌘</kbd><kbd>K</kbd><span>导航</span></button>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero__image" data-parallax data-speed="0.08"></div>
+      <div class="hero__mesh" aria-hidden="true"></div>
+      <canvas id="ambient-canvas" class="hero__canvas" aria-hidden="true"></canvas>
+      <div class="hero__scan" aria-hidden="true"></div>
+      <div class="hero__content">
+        <div class="system-line reveal" data-reveal><span class="status-dot"></span><span>AVAILABLE FOR THE NEXT CHAPTER</span><span data-clock>00:00 CST</span></div>
+        <p class="hero__role reveal" data-reveal>DEVELOPER · BUILDER · VISUAL EXPLORER</p>
+        <h1 id="hero-title" class="hero__title" data-title>
+          <span>把复杂的想法</span>
+          <span class="hero__line-two">做成<span class="outline">可运行</span>的<b>作品。</b></span>
+        </h1>
+        <p class="hero__intro reveal" data-reveal>这里是我的个人界面：项目负责证明能力，文章负责沉淀思考，Life 负责保存真实的日常。</p>
+        <div class="hero__actions reveal" data-reveal>
+          <a class="button button--primary magnetic" href="#selected"><span>查看精选项目</span><i>↗</i></a>
+          <a class="button button--ghost magnetic" href="https://github.com/GotYoo" target="_blank" rel="noopener"><span>GitHub</span><i>↗</i></a>
+        </div>
+      </div>
+      <div class="hero__telemetry" aria-hidden="true"><span>SCROLL Y <b data-scroll-value>000</b></span><span>LAT 31.2304</span><span>LON 121.4737</span></div>
+      <a class="scroll-cue" href="#manifesto"><span>EXPLORE</span><i></i></a>
+    </section>
+
+    <section class="manifesto section" id="manifesto">
+      <div class="section-shell manifesto__grid">
+        <div class="section-index reveal" data-reveal><span>01</span><i></i><p>PROFILE / 工作方式</p></div>
+        <h2 class="display-title reveal" data-reveal>技术不是装饰，<br><em>是把想法送到现实的路径。</em></h2>
+        <div class="manifesto__copy reveal" data-reveal>
+          <p class="lead">我关注的不只是“能否实现”，还有结构是否清晰、交互是否自然，以及作品是否经得起真实使用。</p>
+          <p>本站仍在持续整理中。现阶段先呈现真实存在的项目、公开内容与生活记录，不使用虚构履历或夸大的数字。</p>
+          <a class="line-link" href="{{ '/about/' | relative_url }}">了解这个网站与我的工作方式 <span>↗</span></a>
+        </div>
+        <div class="capability-rail reveal" data-reveal aria-label="关注方向">
+          <span><b>01</b> Engineering</span><span><b>02</b> Interaction</span><span><b>03</b> Visual Systems</span><span><b>04</b> Documentation</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="experience section" id="experience">
+      <div class="section-shell">
+        <div class="section-index reveal" data-reveal><span>02</span><i></i><p>EXPERIENCE / EDUCATION</p></div>
+        <div class="experience__head reveal" data-reveal><h2>从计算机科学出发，<br><em>继续探索智能系统。</em></h2><p>本科阶段建立计算机科学基础，硕士阶段聚焦 AI Agent、RAG 与大模型应用工程。</p></div>
+        <div class="experience-list">
+          <article class="experience-row reveal" data-reveal><time>2024.09<br>— 2027.06</time><div><span>MASTER · CURRENT</span><h3>杭州电子科技大学</h3></div><p>计算机技术硕士。研究与实践方向聚焦 AI Agent、RAG 与大模型应用工程；两次获得学业奖学金。</p></article>
+          <article class="experience-row reveal" data-reveal><time>2020.09<br>— 2024.06</time><div><span>BACHELOR</span><h3>青岛大学</h3></div><p>计算机科学与技术本科。系统学习计算机基础与人工智能相关课程，并获得学业奖学金。</p></article>
+        </div>
+        <a class="experience__resume magnetic" href="{{ '/resume/' | relative_url }}"><span>查看原始 PDF 简历</span><i>↗</i></a>
+      </div>
+    </section>
+
+    <section class="projects section section--dark" id="selected">
+      <div class="section-shell">
+        <div class="section-index section-index--dark reveal" data-reveal><span>03</span><i></i><p>SELECTED WORK / 精选项目</p></div>
+        <div class="section-heading reveal" data-reveal><h2>让项目自己<br><em>说明能力。</em></h2><p>每个案例都会逐步补全背景、职责、方案、结果与复盘。第一版只展示已经存在的作品。</p></div>
+        <div class="project-stack">
+          <a class="project-card spotlight reveal" data-reveal data-tilt data-preview="code" data-preview-title="MiniCodeAgent" data-preview-meta="Agent Harness · 2026" href="https://github.com/GotYoo/MiniCodeAgent" target="_blank" rel="noopener">
+            <div class="project-card__visual project-card__visual--code"><code><span>agent</span>.run(task)<br>&nbsp;&nbsp;.remember()<br>&nbsp;&nbsp;.checkpoint();</code><b>01</b></div>
+            <div class="project-card__body"><div class="project-card__meta"><span>AI AGENT ENGINEERING</span><span>2026.03 — 06</span></div><h3>MiniCode<br>Agent</h3><p>面向代码仓库长链路任务，统一工具执行、分层记忆、上下文治理与 Checkpoint / Resume。</p><div class="tags"><span>Agent Harness</span><span>Tool Calling</span><span>Layered Memory</span></div><i class="round-arrow">↗</i></div>
+          </a>
+          <a class="project-card project-card--compact spotlight reveal" data-reveal data-preview="interface" data-preview-title="Travel Planning Agent" data-preview-meta="RAG · Planning · 2026" href="{{ '/resume/' | relative_url }}">
+            <div class="project-card__visual project-card__visual--interface"><div class="mini-interface"><i></i><i></i><i></i><span>PLAN<br>VALIDATE<br>RERANK</span></div><b>02</b></div>
+            <div class="project-card__body"><div class="project-card__meta"><span>RAG / TOOL-AUGMENTED PLANNING</span><span>2026.01 — 03</span></div><h3>Travel<br>Planning Agent</h3><p>结合结构化规划、地图 API、规则校验、预算复算和多候选 Rerank，生成可校验的多日行程。</p><div class="tags"><span>FastAPI</span><span>Vue 3</span><span>RAG</span></div><i class="round-arrow">↗</i></div>
+          </a>
+        </div>
+        <a class="section-cta magnetic" href="{{ '/projects/' | relative_url }}"><span>浏览全部项目</span><i>↗</i></a>
+      </div>
+    </section>
+
+    <section class="signals section" id="portals">
+      <div class="section-shell">
+        <div class="section-index reveal" data-reveal><span>04</span><i></i><p>THREE SIGNALS / 三个入口</p></div>
+        <div class="signal-grid">
+          <a class="signal-card reveal spotlight" data-reveal href="{{ '/projects/' | relative_url }}"><span>01 / WORK</span><h3>Projects</h3><p>项目背景、职责、技术方案与复盘。</p><i>↗</i></a>
+          <a class="signal-card reveal spotlight" data-reveal href="{{ '/blog/' | relative_url }}"><span>02 / THINKING</span><h3>Blog</h3><p>公开文章、技术笔记与阶段性思考。</p><i>↗</i></a>
+          <a class="signal-card signal-card--life reveal spotlight" data-reveal href="{{ '/life/' | relative_url }}"><span>03 / OFFLINE</span><h3>Life</h3><p>照片、旅行，以及值得留下的普通片刻。</p><i>↗</i></a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div><span class="brand__mark">GY</span><p>GotYoo · Personal Interface</p></div>
+    <nav><a href="mailto:654601458@qq.com">Email</a><a href="{{ '/projects/' | relative_url }}">Projects</a><a href="{{ '/resume/' | relative_url }}">Resume</a><a href="{{ '/blog/' | relative_url }}">Blog</a><a href="{{ '/life/' | relative_url }}">Life</a><a href="https://github.com/GotYoo" target="_blank" rel="noopener">GitHub</a></nav>
+    <p>© <span data-year></span> · BUILT WITH INTENT</p>
+  </footer>
+
+  <div class="command" data-command hidden>
+    <button class="command__backdrop" type="button" data-command-close aria-label="关闭导航"></button>
+    <div class="command__panel" role="dialog" aria-modal="true" aria-labelledby="command-title">
+      <div class="command__head"><span id="command-title">QUICK NAVIGATION</span><kbd>ESC</kbd></div>
+      <div class="command__list"><a href="{{ '/' | relative_url }}"><b>01</b><span>首页<small>Home</small></span><i>↗</i></a><a href="{{ '/projects/' | relative_url }}"><b>02</b><span>项目<small>Projects</small></span><i>↗</i></a><a href="{{ '/resume/' | relative_url }}"><b>03</b><span>简历<small>Resume</small></span><i>↗</i></a><a href="{{ '/blog/' | relative_url }}"><b>04</b><span>文章<small>Writing</small></span><i>↗</i></a><a href="{{ '/life/' | relative_url }}"><b>05</b><span>生活<small>Life</small></span><i>↗</i></a><a href="{{ '/about/' | relative_url }}"><b>06</b><span>关于<small>About</small></span><i>↗</i></a></div>
+    </div>
+  </div>
+  <div class="hover-preview" data-hover-preview aria-hidden="true"><div class="hover-preview__visual"></div><span></span><p></p></div>
+  <div class="route-curtain" aria-hidden="true"><i></i><i></i><span>OPENING NEXT VIEW</span></div>
+</body>
+</html>
