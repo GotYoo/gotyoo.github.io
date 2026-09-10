@@ -53,7 +53,7 @@ sitemap:
         <a href="https://github.com/GotYoo" target="_blank" rel="noopener" class="nav-link" style="display: inline-block;">
           GitHub @GotYoo ↗
         </a>
-        <a href="mailto:{{ site.email }}" class="btn-white-pill">
+        <a href="mailto:{{ site.email }}" class="btn-white-pill" data-contact-btn data-email="{{ site.email }}">
           Contact Me
         </a>
         <a href="{{ '/resume/' | relative_url }}" class="btn-glass-pill">
@@ -108,13 +108,18 @@ sitemap:
             <span class="window-meta">Hangzhou · CST</span>
           </div>
 
-          <div class="window-search">
-            <span>🔍</span>
-            <input type="text" placeholder="Search 4 projects, 8 essays, 12 notes..." disabled style="border:0; background:transparent; width:100%; outline:none; font:inherit; color:inherit;">
+          <div class="window-search-container">
+            <div class="window-search" id="workspace-search-box">
+              <span class="search-icon" aria-hidden="true">🔍</span>
+              <input type="text" id="workspace-search-input" placeholder="搜索项目、手记、履历... ( / 键聚焦)" autocomplete="off" spellcheck="false" aria-label="搜索项目、手记与履历">
+              <button type="button" id="workspace-search-clear" class="search-clear-btn" aria-label="清空搜索" style="display:none;">✕</button>
+            </div>
+            <!-- Instant Search Dropdown Palette -->
+            <div id="workspace-search-dropdown" class="search-dropdown is-hidden" role="listbox" aria-label="搜索结果建议"></div>
           </div>
 
           <div class="window-actions">
-            <a href="mailto:{{ site.email }}" class="btn-outline">
+            <a href="mailto:{{ site.email }}" class="btn-outline" data-contact-btn data-email="{{ site.email }}">
               ✉ 邮件联系
             </a>
             <a href="https://github.com/GotYoo" target="_blank" rel="noopener" class="btn-primary">
@@ -137,7 +142,7 @@ sitemap:
                 </button>
                 <button type="button" id="nav-tab-writing" class="sidebar-btn">
                   <span>✎ 深度手记 (Writing)</span>
-                  <span class="badge-count badge-gray">8</span>
+                  <span class="badge-count badge-gray">{{ site.posts.size }}</span>
                 </button>
                 <button type="button" id="nav-tab-pedigree" class="sidebar-btn">
                   <span>🎓 学术履历 (Pedigree)</span>
@@ -239,34 +244,37 @@ sitemap:
                   <p>沉淀系统设计认知、算法实验与阶段性思考</p>
                 </div>
                 <a href="{{ '/blog/' | relative_url }}" class="nav-link" style="color: #2563eb; font-size: 12px; font-weight: 600; text-shadow:none;">
-                  查看所有文章 →
+                  查看所有文章 ({{ site.posts.size }}) →
                 </a>
               </div>
 
-              <div class="article-stack">
-                <a href="{{ '/blog/building-personal-interface/' | relative_url }}" class="article-row">
+              <div class="article-stack" id="writing-article-stack">
+                {% for post in site.posts %}
+                <a href="{{ post.url | relative_url }}" class="article-row" data-searchable-item data-category="writing" data-title="{{ post.title }}">
                   <div class="article-meta">
-                    <span>2026.07.18 · ESSAY</span>
-                    <span>8 min read ↗</span>
+                    <span>{{ post.date | date: "%Y.%m.%d" }} · ESSAY</span>
+                    <span>阅读正文 ↗</span>
                   </div>
-                  <h4>把个人网站从展示页变成可持续的个人界面</h4>
+                  <h4>{{ post.title }}</h4>
+                  {% if post.excerpt %}
+                  <p class="article-row-excerpt" style="font-size: 12px; color: #64748b; margin-top: 6px; line-height: 1.55;">
+                    {{ post.excerpt | strip_html | strip_newlines | truncate: 110 }}
+                  </p>
+                  {% endif %}
                 </a>
+                {% endfor %}
 
-                <a href="{{ '/blog/' | relative_url }}" class="article-row">
-                  <div class="article-meta">
-                    <span>2026.02.18 · SYSTEM</span>
-                    <span>9 min read ↗</span>
+                <!-- Ongoing Writing In-Progress Card -->
+                <div class="article-upcoming-card">
+                  <div class="upcoming-indicator">
+                    <span class="upcoming-pulse-dot"></span>
+                    <span class="upcoming-label">IN PROGRESS · 持续沉淀中</span>
                   </div>
-                  <h4>工业级 RAG 检索校验：从向量相似度欺骗到多候选二次重排（Rerank）实战</h4>
-                </a>
-
-                <a href="{{ '/blog/' | relative_url }}" class="article-row">
-                  <div class="article-meta">
-                    <span>2025.11.05 · ARCHITECTURE</span>
-                    <span>11 min read ↗</span>
+                  <div class="upcoming-content">
+                    <div class="upcoming-title">工业级 RAG 检索校验与 Agent 状态自愈实践</div>
+                    <p class="upcoming-desc">关于多候选二次重排（Rerank）、向量相似度欺骗与自愈型 Agent 调度管线的实战总结正在整理撰写中，完成后将自动同步至此处。</p>
                   </div>
-                  <h4>构建自愈型 Agent：工具调用异常捕获与确定性状态回滚设计</h4>
-                </a>
+                </div>
               </div>
             </div>
 
@@ -336,12 +344,176 @@ sitemap:
       </div>
       <div>
         <a href="https://github.com/GotYoo" target="_blank" rel="noopener">GitHub</a>
-        <a href="mailto:{{ site.email }}">Email</a>
+        <a href="mailto:{{ site.email }}" data-contact-btn data-email="{{ site.email }}">Email</a>
         <a href="{{ '/resume/' | relative_url }}">Resume</a>
         <a href="{{ '/life/' | relative_url }}">Life</a>
       </div>
     </footer>
 
+  </div>
+
+  <!-- Search Database for Client-Side Instant Search -->
+  <script id="search-data" type="application/json">
+  [
+    {
+      "category": "projects",
+      "categoryLabel": "⚡ 精选项目",
+      "title": "MiniCodeAgent",
+      "subtitle": "2026.03 — 06 · AI Agent Engineering",
+      "description": "面向代码仓库长链路复杂任务，构建统一工具执行沙箱、分层记忆调度与断点恢复（Checkpoint / Resume）。",
+      "tags": ["Python", "AgentHarness", "LayeredMemory", "ToolCalling", "沙箱", "记忆治理", "智能体"],
+      "url": "https://github.com/GotYoo/MiniCodeAgent",
+      "target": "_blank",
+      "actionType": "link"
+    },
+    {
+      "category": "projects",
+      "categoryLabel": "⚡ 精选项目",
+      "title": "Travel Planning Agent",
+      "subtitle": "2026.01 — 03 · RAG / Tool-Augmented Planning",
+      "description": "结合外部地图 API、硬规则自动复算与多候选 Rerank 算法，输出可落地的多日行程规划。",
+      "tags": ["FastAPI", "Vue3", "RAG", "ConstraintRerank", "重排", "行程规划", "智能体"],
+      "url": "#workspace",
+      "actionType": "tab",
+      "tab": "projects"
+    },
+    {
+      "category": "projects",
+      "categoryLabel": "⚡ 精选项目",
+      "title": "可持续个人界面 (Personal Interface)",
+      "subtitle": "2026.07 · Web Architecture",
+      "description": "基于 Air 官方设计哲学重塑个人网站架构，划清项目、文章、履历与生活的内容边界。",
+      "tags": ["Jekyll", "Air", "Interface", "Aesthetics", "Web", "前端架构"],
+      "url": "{{ '/projects/personal-interface/' | relative_url }}",
+      "actionType": "link"
+    },
+    {% for post in site.posts %}
+    {
+      "category": "writing",
+      "categoryLabel": "✎ 深度手记",
+      "title": {{ post.title | jsonify }},
+      "subtitle": "{{ post.date | date: '%Y.%m.%d' }} · ESSAY",
+      "description": {{ post.excerpt | strip_html | strip_newlines | truncate: 90 | jsonify }},
+      "tags": ["手记", "Blog", "Essay", "文章", "技术复盘", "个人界面", "系统架构"],
+      "url": "{{ post.url | relative_url }}",
+      "actionType": "link"
+    },
+    {% endfor %}
+    {
+      "category": "pedigree",
+      "categoryLabel": "🎓 学术履历",
+      "title": "杭州电子科技大学 · 计算机技术硕士",
+      "subtitle": "2024.09 — 2027.06 · HDU Master of CS",
+      "description": "研究与实践方向聚焦 AI Agent、RAG 与大模型应用工程。在读期间两次获得研究生学业奖学金。",
+      "tags": ["杭电", "HDU", "硕士", "计算机技术", "奖学金", "教育背景"],
+      "url": "#workspace",
+      "actionType": "tab",
+      "tab": "pedigree"
+    },
+    {
+      "category": "pedigree",
+      "categoryLabel": "🎓 学术履历",
+      "title": "青岛大学 · 计算机科学与技术学士",
+      "subtitle": "2020.09 — 2024.06 · QDU B.S. in CS",
+      "description": "系统学习计算机科学基础理论、数据结构与系统底层算法，在校期间多次获得优秀学业奖学金。",
+      "tags": ["青岛大学", "青大", "QDU", "本科", "学士", "计算机", "教育背景"],
+      "url": "#workspace",
+      "actionType": "tab",
+      "tab": "pedigree"
+    },
+    {
+      "category": "pages",
+      "categoryLabel": "📄 站点页面",
+      "title": "完整履历与奖学金证明 (Resume PDF)",
+      "subtitle": "Academic & Engineering Resume",
+      "description": "学术背景、竞赛获奖、工程经验与 PDF 下载预览。",
+      "tags": ["简历", "Resume", "PDF", "履历", "求职"],
+      "url": "{{ '/resume/' | relative_url }}",
+      "actionType": "link"
+    },
+    {
+      "category": "pages",
+      "categoryLabel": "📄 站点页面",
+      "title": "全部公开文章与手记 (Writing)",
+      "subtitle": "All Essays & Notes Archive",
+      "description": "沉淀完整思考：技术实践复盘、Agent 架构设计与公开手记。",
+      "tags": ["文章", "手记", "Blog", "Writing", "归档"],
+      "url": "{{ '/blog/' | relative_url }}",
+      "actionType": "link"
+    },
+    {
+      "category": "pages",
+      "categoryLabel": "📄 站点页面",
+      "title": "全部工程案例总览 (Projects)",
+      "subtitle": "All Engineering Projects",
+      "description": "收录所有可运行、经得起生产检验的真实工程项目。",
+      "tags": ["项目", "Projects", "代码", "工程"],
+      "url": "{{ '/projects/' | relative_url }}",
+      "actionType": "link"
+    },
+    {
+      "category": "pages",
+      "categoryLabel": "📄 站点页面",
+      "title": "生活切片与摄影随拍 (Life)",
+      "subtitle": "Moments & Photography",
+      "description": "西湖晨雾、代码之余的观察与日常随笔。",
+      "tags": ["生活", "Life", "摄影", "西湖", "日常"],
+      "url": "{{ '/life/' | relative_url }}",
+      "actionType": "link"
+    },
+    {
+      "category": "pages",
+      "categoryLabel": "📄 站点页面",
+      "title": "关于作者 (About GotYoo)",
+      "subtitle": "About, Principles & Values",
+      "description": "了解 GotYoo 的技术追求、工程哲学与个人信息。",
+      "tags": ["关于", "About", "GotYoo", "理念"],
+      "url": "{{ '/about/' | relative_url }}",
+      "actionType": "link"
+    }
+  ]
+  </script>
+
+  <!-- Air Frosted Glass Email Contact Dialog -->
+  <div id="air-contact-modal" class="air-modal-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-contact-title">
+    <div class="air-modal-dialog">
+      <div class="air-modal-head">
+        <div class="air-modal-title" id="modal-contact-title">
+          <span class="brand-cursive" style="font-size: 20px; color: #2563eb;">GotYoo</span>
+          <span style="font-size: 14px; font-weight: 700; color: #0f172a;">/ 联系作者</span>
+        </div>
+        <button type="button" class="air-modal-close" id="air-modal-close-btn" aria-label="关闭窗口">✕</button>
+      </div>
+
+      <div class="air-modal-badge">
+        <span class="contact-dot-pulse"></span>
+        <span>已自动复制邮箱地址到剪贴板</span>
+      </div>
+
+      <div class="air-modal-copybox">
+        <code id="modal-email-text">{{ site.email }}</code>
+        <button type="button" id="modal-copy-again-btn" class="air-modal-copy-btn">再次复制</button>
+      </div>
+
+      <p class="air-modal-desc">
+        您可以直接在任意邮件客户端、微信或网页邮箱（如 QQ 邮箱、Gmail）中粘贴发送，我会在收到后尽快回复。
+      </p>
+
+      <div class="air-modal-actions">
+        <a href="https://mail.qq.com" target="_blank" rel="noopener" class="air-modal-btn-primary">
+          前往 QQ 邮箱网页版 ↗
+        </a>
+        <a href="mailto:{{ site.email }}" class="air-modal-btn-subtle" id="modal-native-mail-link">
+          在本地邮件客户端中打开
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightweight Global Toast -->
+  <div id="air-toast" class="air-toast" role="status" aria-live="polite">
+    <span class="toast-check">✓</span>
+    <span id="air-toast-message">已复制邮箱：{{ site.email }}</span>
   </div>
 
 </body>

@@ -145,6 +145,126 @@
     });
   }
 
+  // 5. Contact Modal & Email Copy Interaction
+  var modal = doc.getElementById('air-contact-modal');
+  var closeBtn = doc.getElementById('air-modal-close-btn');
+  var copyAgainBtn = doc.getElementById('modal-copy-again-btn');
+  var emailTextEl = doc.getElementById('modal-email-text');
+  var toast = doc.getElementById('air-toast');
+  var toastMsg = doc.getElementById('air-toast-message');
+  var toastTimer = null;
+  var defaultEmail = '654601458@qq.com';
+  if (emailTextEl && emailTextEl.textContent.trim()) {
+    defaultEmail = emailTextEl.textContent.trim();
+  }
+
+  function showToast(message) {
+    if (!toast) return;
+    if (toastMsg) toastMsg.textContent = message;
+    toast.classList.add('is-active');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () {
+      toast.classList.remove('is-active');
+    }, 3000);
+  }
+
+  function openModal() {
+    if (modal) {
+      modal.classList.add('is-active');
+      modal.setAttribute('aria-hidden', 'false');
+    }
+  }
+
+  function closeModal() {
+    if (modal) {
+      modal.classList.remove('is-active');
+      modal.setAttribute('aria-hidden', 'true');
+    }
+  }
+
+  function copyToClipboard(text, onSuccess) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () {
+        if (onSuccess) onSuccess();
+      }).catch(function () {
+        fallbackCopy(text, onSuccess);
+      });
+    } else {
+      fallbackCopy(text, onSuccess);
+    }
+  }
+
+  function fallbackCopy(text, onSuccess) {
+    try {
+      var ta = doc.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.top = '-9999px';
+      ta.style.left = '-9999px';
+      doc.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      var successful = doc.execCommand('copy');
+      doc.body.removeChild(ta);
+      if (successful && onSuccess) onSuccess();
+    } catch (err) {
+      console.error('Fallback copy error:', err);
+    }
+  }
+
+  var contactTriggers = doc.querySelectorAll('[data-contact-btn], a[href^="mailto:"]');
+  contactTriggers.forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      var email = btn.getAttribute('data-email') || defaultEmail;
+      copyToClipboard(email, function () {
+        var originalContent = btn.innerHTML;
+        btn.classList.add('is-copied');
+        if (originalContent.length <= 25) {
+          btn.innerHTML = '已复制 ' + email + ' ✓';
+        }
+        setTimeout(function () {
+          btn.classList.remove('is-copied');
+          btn.innerHTML = originalContent;
+        }, 2400);
+
+        showToast('已复制邮箱：' + email);
+        openModal();
+      });
+    });
+  });
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeModal);
+  }
+
+  if (modal) {
+    modal.addEventListener('click', function (e) {
+      if (e.target === modal) closeModal();
+    });
+  }
+
+  if (copyAgainBtn) {
+    copyAgainBtn.addEventListener('click', function () {
+      copyToClipboard(defaultEmail, function () {
+        var original = copyAgainBtn.textContent;
+        copyAgainBtn.textContent = '已复制 ✓';
+        copyAgainBtn.style.color = '#047857';
+        showToast('已复制邮箱：' + defaultEmail);
+        setTimeout(function () {
+          copyAgainBtn.textContent = original;
+          copyAgainBtn.style.color = '';
+        }, 1800);
+      });
+    });
+  }
+
+  doc.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && modal && modal.classList.contains('is-active')) {
+      closeModal();
+    }
+  });
+
   // Remove no-js flag
   root.classList.remove('no-js');
   root.classList.add('js');

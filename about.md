@@ -59,7 +59,7 @@ permalink: /about/
         <p>欢迎就 AI Agent 架构、RAG 系统落地或技术合作展开探讨与交流。</p>
       </div>
       <div class="air-connect-box__actions">
-        <a href="mailto:654601458@qq.com" class="air-btn air-btn--primary">发送邮件 ↗</a>
+        <a href="mailto:654601458@qq.com" class="air-btn air-btn--primary" data-contact-btn data-email="654601458@qq.com">发送邮件 ↗</a>
         <a href="https://github.com/GotYoo" target="_blank" rel="noopener" class="air-btn air-btn--outline">访问 GitHub ↗</a>
       </div>
     </div>

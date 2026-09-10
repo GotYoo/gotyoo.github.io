@@ -40,7 +40,7 @@
         <a data-nav="about" href="{{ '/about/' | relative_url }}">关于</a>
       </nav>
       <div class="air-header__actions">
-        <a class="air-btn air-btn--contact" href="mailto:654601458@qq.com">联系作者 ↗</a>
+        <a class="air-btn air-btn--contact" href="mailto:654601458@qq.com" data-contact-btn data-email="654601458@qq.com">联系作者 ↗</a>
       </div>
     </div>
   </header>
@@ -73,5 +73,48 @@
       </div>
     </div>
   </footer>
+
+  <!-- Air Frosted Glass Email Contact Dialog -->
+  <div id="air-contact-modal" class="air-modal-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-contact-title">
+    <div class="air-modal-dialog">
+      <div class="air-modal-head">
+        <div class="air-modal-title" id="modal-contact-title">
+          <span class="air-brand__logo" style="width:24px;height:24px;font-size:11px;">GY</span>
+          <span style="font-size: 14px; font-weight: 700; color: #0f172a;">/ 联系作者</span>
+        </div>
+        <button type="button" class="air-modal-close" id="air-modal-close-btn" aria-label="关闭窗口">✕</button>
+      </div>
+
+      <div class="air-modal-badge">
+        <span class="contact-dot-pulse"></span>
+        <span>已自动复制邮箱地址到剪贴板</span>
+      </div>
+
+      <div class="air-modal-copybox">
+        <code id="modal-email-text">654601458@qq.com</code>
+        <button type="button" id="modal-copy-again-btn" class="air-modal-copy-btn">再次复制</button>
+      </div>
+
+      <p class="air-modal-desc">
+        您可以直接在任意邮件客户端、微信或网页邮箱（如 QQ 邮箱、Gmail）中粘贴发送，我会在收到后尽快回复。
+      </p>
+
+      <div class="air-modal-actions">
+        <a href="https://mail.qq.com" target="_blank" rel="noopener" class="air-modal-btn-primary">
+          前往 QQ 邮箱网页版 ↗
+        </a>
+        <a href="mailto:654601458@qq.com" class="air-modal-btn-subtle" id="modal-native-mail-link">
+          在本地邮件客户端中打开
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightweight Global Toast -->
+  <div id="air-toast" class="air-toast" role="status" aria-live="polite">
+    <span class="toast-check">✓</span>
+    <span id="air-toast-message">已复制邮箱：654601458@qq.com</span>
+  </div>
+
 </body>
 </html>
