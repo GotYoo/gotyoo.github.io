@@ -522,26 +522,58 @@
     updateHeader();
   }
 
-  // ================= 5. CLOUD ENTRANCE LIFECYCLE =================
+  // ================= 5. CLOUD ENTRANCE LIFECYCLE (Click to Part) =================
   function initCloudEntrance() {
     var entrance = document.getElementById('cloud-entrance');
-    if (!entrance) return;
+    var siteWrap = document.querySelector('.site-wrap');
+    if (!entrance) {
+      if (siteWrap) siteWrap.classList.add('is-revealed');
+      return;
+    }
 
     // Respect reduced motion preference
     var mediaQuery = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
     if (mediaQuery && mediaQuery.matches) {
       entrance.classList.add('is-ended');
       entrance.style.display = 'none';
+      if (siteWrap) siteWrap.classList.add('is-revealed');
       return;
     }
 
-    // After CSS animation completes (1.35s), hide and clean up to release GPU layers
-    setTimeout(function () {
-      if (entrance) {
+    var isParted = false;
+
+    function partClouds() {
+      if (isParted) return;
+      isParted = true;
+      entrance.classList.add('is-parting');
+      if (siteWrap) {
+        siteWrap.classList.add('is-revealed');
+      }
+
+      // Cleanup GPU composite layers after animation completes (1.45s)
+      setTimeout(function () {
         entrance.classList.add('is-ended');
         entrance.style.display = 'none';
+      }, 1450);
+    }
+
+    // Trigger on user click, tap, or keyboard Enter/Space
+    entrance.addEventListener('click', partClouds);
+    entrance.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+        e.preventDefault();
+        partClouds();
       }
-    }, 1350);
+    });
+
+    // Expose replay function globally in case needed
+    window.replayCloudEntrance = function () {
+      isParted = false;
+      entrance.style.display = 'block';
+      entrance.classList.remove('is-ended', 'is-parting');
+      if (siteWrap) siteWrap.classList.remove('is-revealed');
+      void entrance.offsetWidth; // force reflow
+    };
   }
 
   // ================= INITIALIZE ON LOAD =================

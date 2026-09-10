@@ -23,32 +23,62 @@ sitemap:
   <link rel="icon" href="{{ '/assets/icon/favicon-32x32.png' | relative_url }}?v=3" sizes="32x32">
   <link rel="apple-touch-icon" href="{{ '/assets/icon/apple-touch-icon.png' | relative_url }}?v=3">
   <link rel="preload" href="{{ '/images/air-sky.jpg' | relative_url }}" as="image" fetchpriority="high">
-  <link rel="stylesheet" href="{{ '/assets/css/air-home.css' | relative_url }}?v=1.7.0">
-  <script src="{{ '/assets/js/air-home.js' | relative_url }}?v=1.7.0" defer></script>
+  <link rel="stylesheet" href="{{ '/assets/css/air-home.css' | relative_url }}?v=1.8.0">
+  <script src="{{ '/assets/js/air-home.js' | relative_url }}?v=1.8.0" defer></script>
   <title>{{ page.title }}</title>
 </head>
 <body id="top">
 
-  <!-- CLOUD ENTRANCE OVERLAY (Air Bilateral Parting · 拨云见日) -->
-  <div id="cloud-entrance" class="cloud-entrance" aria-hidden="true">
-    <!-- Ambient Fog & Sunlight Veil -->
-    <div class="cloud-veil"></div>
-    <div class="cloud-sunbeam"></div>
+  <!-- CLOUD ENTRANCE OVERLAY (Layered Cloud Sea · Click to Part · 拨云见日) -->
+  <div id="cloud-entrance" class="cloud-entrance" role="button" tabindex="0" aria-label="点击拨开云雾进入主页">
+    <!-- Base dense sky mist background -->
+    <div class="cloud-base-mist"></div>
 
-    <!-- Left Cloud Curtain -->
-    <div class="cloud-curtain cloud-curtain--left">
-      <div class="cloud-puff cloud-puff--l1"></div>
-      <div class="cloud-puff cloud-puff--l2"></div>
-      <div class="cloud-puff cloud-puff--l3"></div>
-      <div class="cloud-puff cloud-puff--l4"></div>
+    <!-- Sun flare burst when parted -->
+    <div class="sun-burst" aria-hidden="true"></div>
+
+    <!-- LAYER 1: Deep Soft Cloud Banks (Background) -->
+    <div class="cloud-layer cloud-layer--deep-left">
+      <div class="puff puff--deep-l1"></div>
+      <div class="puff puff--deep-l2"></div>
+    </div>
+    <div class="cloud-layer cloud-layer--deep-right">
+      <div class="puff puff--deep-r1"></div>
+      <div class="puff puff--deep-r2"></div>
     </div>
 
-    <!-- Right Cloud Curtain -->
-    <div class="cloud-curtain cloud-curtain--right">
-      <div class="cloud-puff cloud-puff--r1"></div>
-      <div class="cloud-puff cloud-puff--r2"></div>
-      <div class="cloud-puff cloud-puff--r3"></div>
-      <div class="cloud-puff cloud-puff--r4"></div>
+    <!-- LAYER 2: Midground Sculpted Billowing Clouds (Overlapping) -->
+    <div class="cloud-layer cloud-layer--mid-left anim-idle-float-1">
+      <div class="puff puff--mid-l1"></div>
+      <div class="puff puff--mid-l2"></div>
+      <div class="puff puff--mid-l3"></div>
+      <div class="puff puff--mid-l4"></div>
+    </div>
+    <div class="cloud-layer cloud-layer--mid-right anim-idle-float-2">
+      <div class="puff puff--mid-r1"></div>
+      <div class="puff puff--mid-r2"></div>
+      <div class="puff puff--mid-r3"></div>
+      <div class="puff puff--mid-r4"></div>
+    </div>
+
+    <!-- LAYER 3: Foreground Billowing Cumulus Puffs (Dense & Soft) -->
+    <div class="cloud-layer cloud-layer--front-left">
+      <div class="puff puff--front-l1"></div>
+      <div class="puff puff--front-l2"></div>
+    </div>
+    <div class="cloud-layer cloud-layer--front-right">
+      <div class="puff puff--front-r1"></div>
+      <div class="puff puff--front-r2"></div>
+    </div>
+
+    <!-- CENTER INTERACTIVE HINT BADGE -->
+    <div class="cloud-hint-box">
+      <div class="cloud-hint-btn hint-pulse">
+        <span class="cloud-hint-icon">⛅</span>
+        <span class="cloud-hint-text">点击拨开云雾</span>
+        <span class="cloud-hint-sub">TOUCH TO ENTER</span>
+      </div>
+      <p class="cloud-hint-subtip">轻点屏幕任意位置亦可开启</p>
     </div>
   </div>
 
@@ -56,7 +86,7 @@ sitemap:
   <div class="sky-bg" aria-hidden="true"></div>
   <div class="sky-gradient-mask" aria-hidden="true"></div>
 
-  <div class="site-wrap air-content-enter">
+  <div class="site-wrap">
     
     <!-- PROGRESSIVE AIR STICKY HEADER (Morphing from Open Typography to Floating Capsule) -->
     <header id="air-sticky-header" class="air-header-morph" data-header>
@@ -91,6 +121,7 @@ sitemap:
 
     <!-- RIGHT FLOATING DOCK (Air Style) -->
     <aside class="side-dock" aria-label="快速操作">
+      <button type="button" id="replay-cloud-btn" title="重温拨云见日" onclick="window.replayCloudEntrance &amp;&amp; window.replayCloudEntrance()" style="background:none;border:none;cursor:pointer;font-size:12px;color:inherit;padding:2px 0;">☁️</button>
       <a href="https://github.com/GotYoo" target="_blank" rel="noopener" title="GitHub">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
       </a>
