@@ -1,4 +1,4 @@
-﻿backend:
+backend:
   name: github
   repo: GotYoo/gotyoo.github.io
   branch: main
@@ -8,7 +8,7 @@ public_folder: "/images"
 
 site_url: "https://lxmhappy.live"
 display_url: "https://lxmhappy.live"
-logo_url: "https://lxmhappy.live/assets/icon/apple-touch-icon.png"
+logo_url: "/assets/icon/apple-touch-icon.png"
 
 locale: "zh_Hans"
 
