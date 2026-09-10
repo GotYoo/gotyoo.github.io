@@ -347,6 +347,7 @@ sitemap:
         <a href="mailto:{{ site.email }}" data-contact-btn data-email="{{ site.email }}">Email</a>
         <a href="{{ '/resume/' | relative_url }}">Resume</a>
         <a href="{{ '/life/' | relative_url }}">Life</a>
+        <a href="{{ '/admin/' | relative_url }}" title="内容管理后台">Admin</a>
       </div>
     </footer>
 
@@ -469,6 +470,16 @@ sitemap:
       "description": "了解 GotYoo 的技术追求、工程哲学与个人信息。",
       "tags": ["关于", "About", "GotYoo", "理念"],
       "url": "{{ '/about/' | relative_url }}",
+      "actionType": "link"
+    },
+    {
+      "category": "pages",
+      "categoryLabel": "⚙️ 管理后台",
+      "title": "内容管理后台 (CMS Admin)",
+      "subtitle": "Visual Editor & Publishing System",
+      "description": "可视化文章发布、相册更新与生活时间线管理后台。",
+      "tags": ["后台", "Admin", "CMS", "发布", "写文章", "管理"],
+      "url": "{{ '/admin/' | relative_url }}",
       "actionType": "link"
     }
   ]

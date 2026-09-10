@@ -28,38 +28,20 @@ permalink: /life/
     </div>
 
     <div class="air-photo-grid">
-      <figure class="air-photo-card">
-        <div class="air-photo-card__img-wrap">
-          <img src="{{ '/images/pic01.jpg' | relative_url }}" alt="秋日湖面与山林" loading="lazy">
-        </div>
-        <figcaption class="air-photo-card__caption">
-          <span class="air-photo-num">01 / STILL WATER</span>
-          <h3>湖面把秋天留了一会儿</h3>
-          <p>安静的自然倒影与树林清晨薄雾。</p>
-        </figcaption>
-      </figure>
-
-      <figure class="air-photo-card">
-        <div class="air-photo-card__img-wrap">
-          <img src="{{ '/images/bg.jpg' | relative_url }}" alt="划过深色水面的人" loading="lazy">
-        </div>
-        <figcaption class="air-photo-card__caption">
-          <span class="air-photo-num">02 / INTO THE BLUE</span>
-          <h3>向水面更深处出发</h3>
-          <p>开阔水域与日光映射下的前行片刻。</p>
-        </figcaption>
-      </figure>
-
-      <figure class="air-photo-card">
-        <div class="air-photo-card__img-wrap">
-          <img src="{{ '/images/pic02.jpg' | relative_url }}" alt="在旷野中拍照的人" loading="lazy">
-        </div>
-        <figcaption class="air-photo-card__caption">
-          <span class="air-photo-num">03 / ON THE ROAD</span>
-          <h3>把日常换一种光线</h3>
-          <p>旷野、公路与拿起相机的瞬间。</p>
-        </figcaption>
-      </figure>
+      {% if site.data.life_photos.items.size > 0 %}
+        {% for photo in site.data.life_photos.items %}
+        <figure class="air-photo-card">
+          <div class="air-photo-card__img-wrap">
+            <img src="{{ photo.image | relative_url }}" alt="{{ photo.title }}" loading="lazy">
+          </div>
+          <figcaption class="air-photo-card__caption">
+            <span class="air-photo-num">{{ photo.tag | default: "FRAME" }}</span>
+            <h3>{{ photo.title }}</h3>
+            <p>{{ photo.desc }}</p>
+          </figcaption>
+        </figure>
+        {% endfor %}
+      {% endif %}
     </div>
 
     <div class="air-section-label" style="margin-top: 60px;">
@@ -68,32 +50,18 @@ permalink: /life/
     </div>
 
     <div class="air-timeline">
-      <div class="air-timeline-item">
-        <div class="air-timeline-time">2026.09</div>
-        <div class="air-timeline-card">
-          <span class="air-pill air-pill--blue">AIR AESTHETIC</span>
-          <h3>重塑个人站点至 Air 官方美学</h3>
-          <p>全站引入纯净云天全景与毛玻璃视窗设计规范，让工程与审美达到高度统一。</p>
+      {% if site.data.life_timeline.items.size > 0 %}
+        {% for item in site.data.life_timeline.items %}
+        <div class="air-timeline-item">
+          <div class="air-timeline-time">{{ item.time }}</div>
+          <div class="air-timeline-card">
+            <span class="air-pill air-pill--{{ item.pill | downcase | default: 'blue' }}">{{ item.pill | default: "MOMENT" }}</span>
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.desc }}</p>
+          </div>
         </div>
-      </div>
-
-      <div class="air-timeline-item">
-        <div class="air-timeline-time">2026.07</div>
-        <div class="air-timeline-card">
-          <span class="air-pill air-pill--teal">PERSONAL INTERFACE</span>
-          <h3>把项目、文章与生活清晰拆分</h3>
-          <p>主干专注技术与架构沉淀，Life 成为一个独立、真实而轻盈的日常角落。</p>
-        </div>
-      </div>
-
-      <div class="air-timeline-item">
-        <div class="air-timeline-time">2025 冬</div>
-        <div class="air-timeline-card">
-          <span class="air-pill air-pill--purple">INTERACTION</span>
-          <h3>Beautiful Christmas Tree</h3>
-          <p>用三维点云与光影交互保存的一份特别冬日记忆。</p>
-        </div>
-      </div>
+        {% endfor %}
+      {% endif %}
     </div>
 
   </div>

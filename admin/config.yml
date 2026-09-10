@@ -1,0 +1,61 @@
+﻿backend:
+  name: github
+  repo: GotYoo/gotyoo.github.io
+  branch: main
+
+media_folder: "images"
+public_folder: "/images"
+
+site_url: "https://lxmhappy.live"
+display_url: "https://lxmhappy.live"
+logo_url: "https://lxmhappy.live/assets/icon/apple-touch-icon.png"
+
+locale: "zh_Hans"
+
+collections:
+  - name: "posts"
+    label: "深度手记 (Writing)"
+    label_singular: "手记文章"
+    folder: "_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{title}} ({{date | date('YYYY.MM.DD')}})"
+    sortable_fields: ["date", "title"]
+    fields:
+      - { label: "布局模板", name: "layout", widget: "hidden", default: "article" }
+      - { label: "页面标识", name: "page_key", widget: "hidden", default: "blog" }
+      - { label: "文章标题", name: "title", widget: "string", required: true }
+      - { label: "发布日期", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, required: true }
+      - { label: "自定义链接 (Permalink)", name: "permalink", widget: "string", required: false, hint: "例如 /blog/my-post/，若留空系统将按标题自动生成" }
+      - { label: "一句话描述", name: "description", widget: "string", required: false, hint: "用于 SEO 与列表页预览" }
+      - { label: "文章摘要 (Excerpt)", name: "excerpt", widget: "text", required: false, hint: "在首页和文章卡片展示的简短导读" }
+      - { label: "特色配图", name: "image", widget: "image", required: false, default: "/images/bg.jpg" }
+      - { label: "正文内容", name: "body", widget: "markdown", required: true }
+
+  - name: "life"
+    label: "生活与片刻 (Life)"
+    files:
+      - label: "生活相册与照片 (Selected Frames)"
+        name: "photos"
+        file: "_data/life_photos.yml"
+        fields:
+          - label: "照片列表"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "照片序号/标签", name: "tag", widget: "string", default: "SELECTED FRAME" }
+              - { label: "照片标题", name: "title", widget: "string", required: true }
+              - { label: "照片配文/描述", name: "desc", widget: "text", required: true }
+              - { label: "图片文件", name: "image", widget: "image", required: true }
+      - label: "生活轨迹时间线 (Timeline)"
+        name: "timeline"
+        file: "_data/life_timeline.yml"
+        fields:
+          - label: "时间线节点"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "时间标记", name: "time", widget: "string", required: true, hint: "例如：2026.09 或 2025 冬" }
+              - { label: "标签分类", name: "pill", widget: "string", default: "MOMENT" }
+              - { label: "事件标题", name: "title", widget: "string", required: true }
+              - { label: "详细描述", name: "desc", widget: "text", required: true }
