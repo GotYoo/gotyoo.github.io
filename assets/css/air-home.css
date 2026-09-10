@@ -1434,3 +1434,235 @@ body {
   }
 }
 
+/* ==========================================================================
+   CLOUD ENTRANCE ANIMATION (Air Bilateral Parting · 拨云见日)
+   ========================================================================== */
+.cloud-entrance {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999;
+  pointer-events: none;
+  overflow: hidden;
+  will-change: opacity, transform;
+}
+
+.cloud-entrance.is-ended {
+  display: none !important;
+}
+
+/* Ambient Fog Layer */
+.cloud-veil {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 38%, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.92) 50%, rgba(235, 243, 253, 0.98) 100%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  animation: cloudVeilFade 1.15s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: opacity, filter;
+}
+
+/* Soft Sun Flare piercing through */
+.cloud-sunbeam {
+  position: absolute;
+  top: -10vw;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60vw;
+  height: 60vw;
+  max-width: 700px;
+  max-height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.4) 40%, transparent 70%);
+  filter: blur(36px);
+  animation: cloudSunbeamGlow 1.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: opacity, transform;
+}
+
+/* Left & Right Cloud Curtains */
+.cloud-curtain {
+  position: absolute;
+  top: -5vh;
+  height: 110vh;
+  width: 65vw;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.cloud-curtain--left {
+  left: -5vw;
+  background: linear-gradient(to right, #ffffff 40%, rgba(255, 255, 255, 0.96) 75%, transparent 100%);
+  filter: blur(8px);
+  animation: cloudPartLeft 1.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.cloud-curtain--right {
+  right: -5vw;
+  background: linear-gradient(to left, #ffffff 40%, rgba(255, 255, 255, 0.96) 75%, transparent 100%);
+  filter: blur(8px);
+  animation: cloudPartRight 1.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Billowing organic cloud puffs on curtains */
+.cloud-puff {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffffff 35%, rgba(255, 255, 255, 0.92) 65%, transparent 100%);
+  filter: blur(20px);
+}
+
+/* Left Curtain Puffs */
+.cloud-puff--l1 {
+  width: 38vw;
+  height: 38vw;
+  max-width: 440px;
+  max-height: 440px;
+  top: -5%;
+  right: -15%;
+}
+.cloud-puff--l2 {
+  width: 44vw;
+  height: 44vw;
+  max-width: 520px;
+  max-height: 520px;
+  top: 25%;
+  right: -20%;
+}
+.cloud-puff--l3 {
+  width: 40vw;
+  height: 40vw;
+  max-width: 480px;
+  max-height: 480px;
+  top: 60%;
+  right: -16%;
+}
+.cloud-puff--l4 {
+  width: 32vw;
+  height: 32vw;
+  max-width: 380px;
+  max-height: 380px;
+  bottom: -8%;
+  right: -10%;
+}
+
+/* Right Curtain Puffs */
+.cloud-puff--r1 {
+  width: 38vw;
+  height: 38vw;
+  max-width: 440px;
+  max-height: 440px;
+  top: -6%;
+  left: -15%;
+}
+.cloud-puff--r2 {
+  width: 44vw;
+  height: 44vw;
+  max-width: 520px;
+  max-height: 520px;
+  top: 28%;
+  left: -20%;
+}
+.cloud-puff--r3 {
+  width: 42vw;
+  height: 42vw;
+  max-width: 500px;
+  max-height: 500px;
+  top: 62%;
+  left: -18%;
+}
+.cloud-puff--r4 {
+  width: 34vw;
+  height: 34vw;
+  max-width: 400px;
+  max-height: 400px;
+  bottom: -8%;
+  left: -10%;
+}
+
+/* Keyframes */
+@keyframes cloudPartLeft {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 1;
+  }
+  45% {
+    opacity: 0.98;
+  }
+  100% {
+    transform: translate3d(-118%, 0, 0) scale(1.12);
+    opacity: 0;
+  }
+}
+
+@keyframes cloudPartRight {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 1;
+  }
+  45% {
+    opacity: 0.98;
+  }
+  100% {
+    transform: translate3d(118%, 0, 0) scale(1.12);
+    opacity: 0;
+  }
+}
+
+@keyframes cloudVeilFade {
+  0% {
+    opacity: 0.85;
+    filter: blur(14px);
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+    filter: blur(36px);
+  }
+}
+
+@keyframes cloudSunbeamGlow {
+  0% {
+    opacity: 0.4;
+    transform: translateX(-50%) scale(0.85);
+  }
+  50% {
+    opacity: 0.95;
+    transform: translateX(-50%) scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) scale(1.45);
+  }
+}
+
+/* Atmospheric page content entrance */
+.air-content-enter {
+  animation: airContentReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+
+@keyframes airContentReveal {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Reduced Motion for Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .cloud-entrance {
+    display: none !important;
+  }
+  .air-content-enter {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+

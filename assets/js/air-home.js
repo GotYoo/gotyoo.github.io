@@ -522,12 +522,35 @@
     updateHeader();
   }
 
+  // ================= 5. CLOUD ENTRANCE LIFECYCLE =================
+  function initCloudEntrance() {
+    var entrance = document.getElementById('cloud-entrance');
+    if (!entrance) return;
+
+    // Respect reduced motion preference
+    var mediaQuery = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (mediaQuery && mediaQuery.matches) {
+      entrance.classList.add('is-ended');
+      entrance.style.display = 'none';
+      return;
+    }
+
+    // After CSS animation completes (1.35s), hide and clean up to release GPU layers
+    setTimeout(function () {
+      if (entrance) {
+        entrance.classList.add('is-ended');
+        entrance.style.display = 'none';
+      }
+    }, 1350);
+  }
+
   // ================= INITIALIZE ON LOAD =================
   function init() {
     initTabs();
     initSearch();
     initContactModal();
     initMorphHeader();
+    initCloudEntrance();
   }
 
   if (document.readyState === 'loading') {

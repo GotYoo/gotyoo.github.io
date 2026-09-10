@@ -23,17 +23,40 @@ sitemap:
   <link rel="icon" href="{{ '/assets/icon/favicon-32x32.png' | relative_url }}?v=3" sizes="32x32">
   <link rel="apple-touch-icon" href="{{ '/assets/icon/apple-touch-icon.png' | relative_url }}?v=3">
   <link rel="preload" href="{{ '/images/air-sky.jpg' | relative_url }}" as="image" fetchpriority="high">
-  <link rel="stylesheet" href="{{ '/assets/css/air-home.css' | relative_url }}?v=1.6.0">
-  <script src="{{ '/assets/js/air-home.js' | relative_url }}?v=1.6.0" defer></script>
+  <link rel="stylesheet" href="{{ '/assets/css/air-home.css' | relative_url }}?v=1.7.0">
+  <script src="{{ '/assets/js/air-home.js' | relative_url }}?v=1.7.0" defer></script>
   <title>{{ page.title }}</title>
 </head>
 <body id="top">
+
+  <!-- CLOUD ENTRANCE OVERLAY (Air Bilateral Parting · 拨云见日) -->
+  <div id="cloud-entrance" class="cloud-entrance" aria-hidden="true">
+    <!-- Ambient Fog & Sunlight Veil -->
+    <div class="cloud-veil"></div>
+    <div class="cloud-sunbeam"></div>
+
+    <!-- Left Cloud Curtain -->
+    <div class="cloud-curtain cloud-curtain--left">
+      <div class="cloud-puff cloud-puff--l1"></div>
+      <div class="cloud-puff cloud-puff--l2"></div>
+      <div class="cloud-puff cloud-puff--l3"></div>
+      <div class="cloud-puff cloud-puff--l4"></div>
+    </div>
+
+    <!-- Right Cloud Curtain -->
+    <div class="cloud-curtain cloud-curtain--right">
+      <div class="cloud-puff cloud-puff--r1"></div>
+      <div class="cloud-puff cloud-puff--r2"></div>
+      <div class="cloud-puff cloud-puff--r3"></div>
+      <div class="cloud-puff cloud-puff--r4"></div>
+    </div>
+  </div>
 
   <!-- Sky Canvas Background & Gradient Mask -->
   <div class="sky-bg" aria-hidden="true"></div>
   <div class="sky-gradient-mask" aria-hidden="true"></div>
 
-  <div class="site-wrap">
+  <div class="site-wrap air-content-enter">
     
     <!-- PROGRESSIVE AIR STICKY HEADER (Morphing from Open Typography to Floating Capsule) -->
     <header id="air-sticky-header" class="air-header-morph" data-header>
