@@ -351,6 +351,50 @@ sitemap:
       </div>
     </footer>
 
+    <!-- SEMI-HIDDEN FLOATING BOTTOM DOCK (AIR DOCK) -->
+    <nav id="air-bottom-dock" class="air-bottom-dock" aria-label="底部浮动快捷导航">
+      <div class="dock-inner">
+        <!-- Brand/Home -->
+        <a href="#top" class="dock-brand" title="返回顶部">
+          <span class="dock-logo">Go</span>
+          <span class="dock-name">GotYoo</span>
+        </a>
+
+        <div class="dock-divider" aria-hidden="true"></div>
+
+        <!-- Navigation Links -->
+        <div class="dock-links">
+          <a href="{{ '/projects/' | relative_url }}" class="dock-link">
+            <span>⚡</span> 项目
+          </a>
+          <a href="{{ '/blog/' | relative_url }}" class="dock-link">
+            <span>✎</span> 手记
+          </a>
+          <a href="{{ '/life/' | relative_url }}" class="dock-link">
+            <span>🌿</span> 生活
+          </a>
+          <a href="{{ '/resume/' | relative_url }}" class="dock-link">
+            <span>📄</span> 简历
+          </a>
+          <a href="{{ '/about/' | relative_url }}" class="dock-link">
+            <span>👤</span> 关于
+          </a>
+        </div>
+
+        <div class="dock-divider" aria-hidden="true"></div>
+
+        <!-- Actions -->
+        <div class="dock-actions">
+          <button type="button" class="dock-btn-contact" data-contact-btn data-email="{{ site.email }}" title="快捷联系">
+            ✉ 联系
+          </button>
+          <button type="button" id="dock-btn-top" class="dock-btn-top" title="回到顶部" aria-label="回到顶部">
+            ▲
+          </button>
+        </div>
+      </div>
+    </nav>
+
   </div>
 
   <!-- Search Database for Client-Side Instant Search -->

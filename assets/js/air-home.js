@@ -489,11 +489,60 @@
     });
   }
 
+  // ================= 4. SEMI-HIDDEN BOTTOM DOCK CONTROLLER =================
+  function initBottomDock() {
+    var dock = document.getElementById('air-bottom-dock');
+    var topBtn = document.getElementById('dock-btn-top');
+    if (!dock) return;
+
+    var ticking = false;
+
+    function checkDockVisibility() {
+      var scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+      var windowHeight = window.innerHeight;
+      var docHeight = Math.max(
+        document.body.scrollHeight,
+        document.documentElement.scrollHeight,
+        document.body.offsetHeight,
+        document.documentElement.offsetHeight
+      );
+
+      // Distance to page bottom
+      var distanceToBottom = docHeight - (scrollY + windowHeight);
+
+      // Only appear when scrolled down near the very bottom (within 260px of page bottom)
+      if (distanceToBottom <= 260 && scrollY > 250) {
+        dock.classList.add('is-visible');
+      } else {
+        dock.classList.remove('is-visible');
+      }
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', function () {
+      if (!ticking) {
+        requestAnimationFrame(checkDockVisibility);
+        ticking = true;
+      }
+    }, { passive: true });
+
+    window.addEventListener('resize', checkDockVisibility, { passive: true });
+    checkDockVisibility();
+
+    if (topBtn) {
+      topBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+  }
+
   // ================= INITIALIZE ON LOAD =================
   function init() {
     initTabs();
     initSearch();
     initContactModal();
+    initBottomDock();
   }
 
   if (document.readyState === 'loading') {
