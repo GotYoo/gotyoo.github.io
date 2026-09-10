@@ -551,12 +551,40 @@
     }
   }
 
+  // ================= 5. PROGRESSIVE AIR MORPHING HEADER =================
+  function initMorphHeader() {
+    var header = document.querySelector('[data-header]');
+    if (!header) return;
+
+    var ticking = false;
+
+    function updateHeader() {
+      var scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+      if (scrollY > 40) {
+        header.classList.add('is-scrolled');
+      } else {
+        header.classList.remove('is-scrolled');
+      }
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', function () {
+      if (!ticking) {
+        requestAnimationFrame(updateHeader);
+        ticking = true;
+      }
+    }, { passive: true });
+
+    updateHeader();
+  }
+
   // ================= INITIALIZE ON LOAD =================
   function init() {
     initTabs();
     initSearch();
     initContactModal();
     initBottomDock();
+    initMorphHeader();
   }
 
   if (document.readyState === 'loading') {

@@ -23,8 +23,8 @@ sitemap:
   <link rel="icon" href="{{ '/assets/icon/favicon-32x32.png' | relative_url }}?v=3" sizes="32x32">
   <link rel="apple-touch-icon" href="{{ '/assets/icon/apple-touch-icon.png' | relative_url }}?v=3">
   <link rel="preload" href="{{ '/images/air-sky.jpg' | relative_url }}" as="image" fetchpriority="high">
-  <link rel="stylesheet" href="{{ '/assets/css/air-home.css' | relative_url }}?v=1.2.1">
-  <script src="{{ '/assets/js/air-home.js' | relative_url }}?v=1.2.1" defer></script>
+  <link rel="stylesheet" href="{{ '/assets/css/air-home.css' | relative_url }}?v=1.3.0">
+  <script src="{{ '/assets/js/air-home.js' | relative_url }}?v=1.3.0" defer></script>
   <style>
     /* Critical Inline CSS: Prevent FOUC & enforce fixed dock layout */
     .air-bottom-dock {
@@ -53,30 +53,34 @@ sitemap:
 
   <div class="site-wrap">
     
-    <!-- TOP NAVIGATION (Air Style) -->
-    <header class="site-header">
-      <div style="display: flex; align-items: center; gap: 36px;">
-        <a href="{{ '/' | relative_url }}" class="brand-cursive" aria-label="GotYoo 首页">
-          GotYoo
+    <!-- PROGRESSIVE AIR STICKY HEADER (Morphing from Open Typography to Floating Capsule) -->
+    <header id="air-sticky-header" class="air-header-morph" data-header>
+      <div class="air-header-morph__inner">
+        <!-- Brand -->
+        <a class="morph-brand" href="{{ '/' | relative_url }}" title="GotYoo 首页">
+          <span class="morph-brand__logo">Go</span>
+          <span class="morph-brand__name">GotYoo <small class="morph-brand__tag">sys</small></span>
         </a>
-        <nav class="header-nav" aria-label="主导航">
-          <a href="{{ '/projects/' | relative_url }}" class="nav-link">Projects</a>
-          <a href="{{ '/blog/' | relative_url }}" class="nav-link">Writing</a>
-          <a href="{{ '/about/' | relative_url }}" class="nav-link">About</a>
-          <a href="{{ '/life/' | relative_url }}" class="nav-link">Life</a>
-        </nav>
-      </div>
 
-      <div class="header-actions">
-        <a href="https://github.com/GotYoo" target="_blank" rel="noopener" class="nav-link" style="display: inline-block;">
-          GitHub @GotYoo ↗
-        </a>
-        <a href="mailto:{{ site.email }}" class="btn-white-pill" data-contact-btn data-email="{{ site.email }}">
-          Contact Me
-        </a>
-        <a href="{{ '/resume/' | relative_url }}" class="btn-glass-pill">
-          Resume (PDF)
-        </a>
+        <!-- Main Navigation Links (Unified Chinese) -->
+        <nav class="morph-nav" aria-label="主导航">
+          <a data-nav="home" class="is-active" href="{{ '/' | relative_url }}">首页</a>
+          <a data-nav="projects" href="{{ '/projects/' | relative_url }}">项目</a>
+          <a data-nav="blog" href="{{ '/blog/' | relative_url }}">文章</a>
+          <a data-nav="life" href="{{ '/life/' | relative_url }}">生活</a>
+          <a data-nav="resume" href="{{ '/resume/' | relative_url }}">简历</a>
+          <a data-nav="about" href="{{ '/about/' | relative_url }}">关于</a>
+        </nav>
+
+        <!-- Right Actions -->
+        <div class="morph-actions">
+          <a href="https://github.com/GotYoo" target="_blank" rel="noopener" class="morph-btn-github" title="GitHub 个人主页">
+            GitHub ↗
+          </a>
+          <a class="morph-btn-contact" href="mailto:{{ site.email }}" data-contact-btn data-email="{{ site.email }}">
+            联系作者 ↗
+          </a>
+        </div>
       </div>
     </header>
 
@@ -91,7 +95,7 @@ sitemap:
     </aside>
 
     <!-- HERO SECTION -->
-    <main id="top" class="hero-section">
+    <main class="hero-section">
       <!-- Cursive Mark -->
       <div class="hero-mark">
         GotYoo
@@ -371,8 +375,8 @@ sitemap:
 
   </div>
 
-  <!-- SEMI-HIDDEN FLOATING BOTTOM DOCK (AIR DOCK) -->
-  <nav id="air-bottom-dock" class="air-bottom-dock" aria-label="底部浮动快捷导航">
+  <!-- SEMI-HIDDEN FLOATING BOTTOM NAV (OPEN BORDERLESS TYPOGRAPHY) -->
+  <nav id="air-bottom-dock" class="air-bottom-dock" aria-label="底部快捷导航">
     <div class="dock-inner">
       <!-- Brand/Home -->
       <a href="#top" class="dock-brand" title="返回顶部">
@@ -380,36 +384,26 @@ sitemap:
         <span class="dock-name">GotYoo</span>
       </a>
 
-      <div class="dock-divider" aria-hidden="true"></div>
+      <span class="dock-sep" aria-hidden="true">/</span>
 
       <!-- Navigation Links -->
       <div class="dock-links">
-        <a href="{{ '/projects/' | relative_url }}" class="dock-link">
-          <span>⚡</span> 项目
-        </a>
-        <a href="{{ '/blog/' | relative_url }}" class="dock-link">
-          <span>✎</span> 手记
-        </a>
-        <a href="{{ '/life/' | relative_url }}" class="dock-link">
-          <span>🌿</span> 生活
-        </a>
-        <a href="{{ '/resume/' | relative_url }}" class="dock-link">
-          <span>📄</span> 简历
-        </a>
-        <a href="{{ '/about/' | relative_url }}" class="dock-link">
-          <span>👤</span> 关于
-        </a>
+        <a href="{{ '/projects/' | relative_url }}" class="dock-link">项目</a>
+        <a href="{{ '/blog/' | relative_url }}" class="dock-link">文章</a>
+        <a href="{{ '/life/' | relative_url }}" class="dock-link">生活</a>
+        <a href="{{ '/resume/' | relative_url }}" class="dock-link">简历</a>
+        <a href="{{ '/about/' | relative_url }}" class="dock-link">关于</a>
       </div>
 
-      <div class="dock-divider" aria-hidden="true"></div>
+      <span class="dock-sep" aria-hidden="true">/</span>
 
       <!-- Actions -->
       <div class="dock-actions">
         <button type="button" class="dock-btn-contact" data-contact-btn data-email="{{ site.email }}" title="快捷联系">
-          ✉ 联系
+          联系作者 ↗
         </button>
         <button type="button" id="dock-btn-top" class="dock-btn-top" title="回到顶部" aria-label="回到顶部">
-          ▲
+          回到顶部 ↑
         </button>
       </div>
     </div>
