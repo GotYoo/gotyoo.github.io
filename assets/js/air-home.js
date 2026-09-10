@@ -435,7 +435,9 @@
 
           // If button has simple text, give quick text confirmation
           var hasLongText = originalContent.length > 25;
-          if (!hasLongText) {
+          if (btn.classList.contains('dock-btn-contact')) {
+            btn.innerHTML = '已复制 ✓';
+          } else if (!hasLongText) {
             btn.innerHTML = '已复制 ' + email + ' ✓';
           }
 
@@ -466,23 +468,27 @@
     }
 
     // Copy again button inside modal
-    if (copyAgainBtn) {
+    if (copyAgainBtn && emailTextEl) {
       copyAgainBtn.addEventListener('click', function () {
-        copyToClipboard(defaultEmail, function () {
-          var original = copyAgainBtn.textContent;
+        var email = emailTextEl.textContent.trim();
+        copyToClipboard(email, function () {
           copyAgainBtn.textContent = '已复制 ✓';
-          copyAgainBtn.style.color = '#047857';
-          showToast('已复制邮箱：' + defaultEmail);
+          copyAgainBtn.style.background = '#059669';
+          copyAgainBtn.style.borderColor = '#059669';
+          copyAgainBtn.style.color = '#ffffff';
+          showToast('已复制邮箱：' + email);
           setTimeout(function () {
-            copyAgainBtn.textContent = original;
+            copyAgainBtn.textContent = '再次复制';
+            copyAgainBtn.style.background = '';
+            copyAgainBtn.style.borderColor = '';
             copyAgainBtn.style.color = '';
-          }, 1800);
+          }, 2000);
         });
       });
     }
 
     // Escape key to close modal
-    document.addEventListener('keydown', function (e) {
+    window.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && modal && modal.classList.contains('is-active')) {
         closeModal();
       }
@@ -493,6 +499,7 @@
   function initBottomDock() {
     var dock = document.getElementById('air-bottom-dock');
     var topBtn = document.getElementById('dock-btn-top');
+    var brandBtn = dock ? dock.querySelector('.dock-brand') : null;
     if (!dock) return;
 
     var ticking = false;
@@ -510,8 +517,8 @@
       // Distance to page bottom
       var distanceToBottom = docHeight - (scrollY + windowHeight);
 
-      // Only appear when scrolled down near the very bottom (within 260px of page bottom)
-      if (distanceToBottom <= 260 && scrollY > 250) {
+      // Only appear when scrolled down near the very bottom (within 160px of page bottom) and scrolled down
+      if (distanceToBottom <= 160 && scrollY > 60) {
         dock.classList.add('is-visible');
       } else {
         dock.classList.remove('is-visible');
@@ -531,6 +538,13 @@
 
     if (topBtn) {
       topBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    if (brandBtn) {
+      brandBtn.addEventListener('click', function (e) {
         e.preventDefault();
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });

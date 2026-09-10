@@ -1316,7 +1316,7 @@ body {
   border-radius: 7px;
   background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
   color: #ffffff;
-  font-family: var(--font-main);
+  font-family: var(--font-sans);
   font-weight: 800;
   font-size: 11px;
   display: flex;
