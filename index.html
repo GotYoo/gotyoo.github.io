@@ -23,26 +23,8 @@ sitemap:
   <link rel="icon" href="{{ '/assets/icon/favicon-32x32.png' | relative_url }}?v=3" sizes="32x32">
   <link rel="apple-touch-icon" href="{{ '/assets/icon/apple-touch-icon.png' | relative_url }}?v=3">
   <link rel="preload" href="{{ '/images/air-sky.jpg' | relative_url }}" as="image" fetchpriority="high">
-  <link rel="stylesheet" href="{{ '/assets/css/air-home.css' | relative_url }}?v=1.3.0">
-  <script src="{{ '/assets/js/air-home.js' | relative_url }}?v=1.3.0" defer></script>
-  <style>
-    /* Critical Inline CSS: Prevent FOUC & enforce fixed dock layout */
-    .air-bottom-dock {
-      position: fixed !important;
-      bottom: 24px !important;
-      left: 50% !important;
-      transform: translate(-50%, 60px) scale(0.95);
-      opacity: 0;
-      pointer-events: none;
-      z-index: 120;
-      transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.38s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .air-bottom-dock.is-visible {
-      transform: translate(-50%, 0) scale(1) !important;
-      opacity: 1 !important;
-      pointer-events: auto !important;
-    }
-  </style>
+  <link rel="stylesheet" href="{{ '/assets/css/air-home.css' | relative_url }}?v=1.4.0">
+  <script src="{{ '/assets/js/air-home.js' | relative_url }}?v=1.4.0" defer></script>
   <title>{{ page.title }}</title>
 </head>
 <body id="top">
@@ -374,40 +356,6 @@ sitemap:
     </footer>
 
   </div>
-
-  <!-- SEMI-HIDDEN FLOATING BOTTOM NAV (OPEN BORDERLESS TYPOGRAPHY) -->
-  <nav id="air-bottom-dock" class="air-bottom-dock" aria-label="底部快捷导航">
-    <div class="dock-inner">
-      <!-- Brand/Home -->
-      <a href="#top" class="dock-brand" title="返回顶部">
-        <span class="dock-logo">Go</span>
-        <span class="dock-name">GotYoo</span>
-      </a>
-
-      <span class="dock-sep" aria-hidden="true">/</span>
-
-      <!-- Navigation Links -->
-      <div class="dock-links">
-        <a href="{{ '/projects/' | relative_url }}" class="dock-link">项目</a>
-        <a href="{{ '/blog/' | relative_url }}" class="dock-link">文章</a>
-        <a href="{{ '/life/' | relative_url }}" class="dock-link">生活</a>
-        <a href="{{ '/resume/' | relative_url }}" class="dock-link">简历</a>
-        <a href="{{ '/about/' | relative_url }}" class="dock-link">关于</a>
-      </div>
-
-      <span class="dock-sep" aria-hidden="true">/</span>
-
-      <!-- Actions -->
-      <div class="dock-actions">
-        <button type="button" class="dock-btn-contact" data-contact-btn data-email="{{ site.email }}" title="快捷联系">
-          联系作者 ↗
-        </button>
-        <button type="button" id="dock-btn-top" class="dock-btn-top" title="回到顶部" aria-label="回到顶部">
-          回到顶部 ↑
-        </button>
-      </div>
-    </div>
-  </nav>
 
   <!-- Search Database for Client-Side Instant Search -->
   <script id="search-data" type="application/json">

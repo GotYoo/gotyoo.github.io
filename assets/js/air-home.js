@@ -495,63 +495,7 @@
     });
   }
 
-  // ================= 4. SEMI-HIDDEN BOTTOM DOCK CONTROLLER =================
-  function initBottomDock() {
-    var dock = document.getElementById('air-bottom-dock');
-    var topBtn = document.getElementById('dock-btn-top');
-    var brandBtn = dock ? dock.querySelector('.dock-brand') : null;
-    if (!dock) return;
-
-    var ticking = false;
-
-    function checkDockVisibility() {
-      var scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
-      var windowHeight = window.innerHeight;
-      var docHeight = Math.max(
-        document.body.scrollHeight,
-        document.documentElement.scrollHeight,
-        document.body.offsetHeight,
-        document.documentElement.offsetHeight
-      );
-
-      // Distance to page bottom
-      var distanceToBottom = docHeight - (scrollY + windowHeight);
-
-      // Only appear when scrolled down near the very bottom (within 160px of page bottom) and scrolled down
-      if (distanceToBottom <= 160 && scrollY > 60) {
-        dock.classList.add('is-visible');
-      } else {
-        dock.classList.remove('is-visible');
-      }
-      ticking = false;
-    }
-
-    window.addEventListener('scroll', function () {
-      if (!ticking) {
-        requestAnimationFrame(checkDockVisibility);
-        ticking = true;
-      }
-    }, { passive: true });
-
-    window.addEventListener('resize', checkDockVisibility, { passive: true });
-    checkDockVisibility();
-
-    if (topBtn) {
-      topBtn.addEventListener('click', function (e) {
-        e.preventDefault();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-    }
-
-    if (brandBtn) {
-      brandBtn.addEventListener('click', function (e) {
-        e.preventDefault();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-    }
-  }
-
-  // ================= 5. PROGRESSIVE AIR MORPHING HEADER =================
+  // ================= 4. PROGRESSIVE AIR MORPHING HEADER =================
   function initMorphHeader() {
     var header = document.querySelector('[data-header]');
     if (!header) return;
@@ -583,7 +527,6 @@
     initTabs();
     initSearch();
     initContactModal();
-    initBottomDock();
     initMorphHeader();
   }
 
