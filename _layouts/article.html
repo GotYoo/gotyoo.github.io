@@ -1,8 +1,48 @@
 ---
 layout: interface
 ---
-<article class="reading-page">
-  <header class="reading-hero"><div class="reading-hero__inner"><a href="{{ '/blog/' | relative_url }}">← WRITING INDEX</a><p>{{ page.date | date: "%Y.%m.%d" }} · DESIGN & ENGINEERING</p><h1>{{ page.title }}</h1><div><span data-reading-time>READING</span><button type="button" data-copy-url>复制文章链接</button></div></div></header>
-  <div class="reading-layout"><aside class="reading-toc"><p>ON THIS PAGE</p><nav data-article-toc></nav></aside><div class="reading-content" data-article-content>{{ content }}</div><aside class="reading-meter" aria-hidden="true"><i data-reading-meter></i><span>READ</span></aside></div>
-  <footer class="reading-end"><p>END OF NOTE</p><h2>写清楚选择，<br>也是工程的一部分。</h2><a href="{{ '/blog/' | relative_url }}">返回文章列表 ↗</a></footer>
+<article class="air-article-page">
+  <header class="air-article-hero">
+    <div class="air-article-hero__inner">
+      <div class="air-breadcrumb">
+        <a href="{{ '/blog/' | relative_url }}">← 文章归档</a>
+        <span>/</span>
+        <span>{{ page.category | default: "TECH NOTE" }}</span>
+      </div>
+      <h1 class="air-article-title">{{ page.title }}</h1>
+      <div class="air-article-meta">
+        <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y年%m月%d日" }}</time>
+        <span class="air-dot">•</span>
+        <span data-reading-time>5 MIN READ</span>
+        <span class="air-dot">•</span>
+        <button type="button" class="air-btn-text" data-copy-url>复制文章链接</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="air-article-layout">
+    <aside class="air-article-sidebar">
+      <div class="air-toc-card">
+        <p class="air-toc-title">目录导航</p>
+        <nav class="air-toc" data-article-toc></nav>
+      </div>
+    </aside>
+
+    <div class="air-article-card">
+      <div class="air-markdown-content" data-article-content>
+        {{ content }}
+      </div>
+
+      <footer class="air-article-card__footer">
+        <div class="air-article-card__quote">
+          <p class="air-quote-en">Engineering ideas. <em>AI</em> reality.</p>
+          <p class="air-quote-cn">把真实的思考与工程选择记录下来，持续迭代。</p>
+        </div>
+        <div class="air-article-card__actions">
+          <a href="{{ '/blog/' | relative_url }}" class="air-btn air-btn--outline">返回文章列表</a>
+          <button type="button" class="air-btn air-btn--primary" data-copy-url>分享此文 ↗</button>
+        </div>
+      </footer>
+    </div>
+  </div>
 </article>

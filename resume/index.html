@@ -1,18 +1,37 @@
 ---
 layout: interface
 page_key: resume
-title: Resume
-description: 吴汉卿的原始 PDF 简历。
+title: 个人简历 · Resume
+description: 吴汉卿的原始 PDF 简历与学术背景。
 permalink: /resume/
 ---
-<section class="resume-viewer">
-  <header class="resume-viewer__head">
-    <div><p>ORIGINAL PDF · UPLOADED RESUME</p><h1>个人简历</h1><span>以下内容为本人上传的原始 PDF，不使用网页重写版本。</span></div>
-    <div class="resume-viewer__actions"><a href="{{ '/assets/resume/wu-hanqing-resume.pdf' | relative_url }}" target="_blank" rel="noopener">新窗口打开</a><a href="{{ '/assets/resume/wu-hanqing-resume.pdf' | relative_url }}" download="吴汉卿-个人简历.pdf">下载 PDF</a></div>
-  </header>
-  <div class="resume-frame">
-    <object data="{{ '/assets/resume/wu-hanqing-resume.pdf' | relative_url }}#view=FitH" type="application/pdf">
-      <p>当前浏览器不能直接预览 PDF。<a href="{{ '/assets/resume/wu-hanqing-resume.pdf' | relative_url }}" target="_blank" rel="noopener">点击打开原始简历</a>。</p>
-    </object>
+<section class="air-sub-hero">
+  <div class="air-sub-hero__inner">
+    <div class="air-badge">04 / CURRICULUM VITAE &amp; BACKGROUND</div>
+    <h1 class="air-sub-title">Personal <em>Resume</em></h1>
+    <p class="air-sub-desc">以下内容为本人上传的原始 PDF 简历，真实呈现学术背景、竞赛经历与工程项目实践。</p>
+  </div>
+</section>
+
+<section class="air-sub-section">
+  <div class="air-shell">
+    <div class="air-window-card air-resume-window">
+      <div class="air-window-card__bar">
+        <div class="air-window-dots"><span></span><span></span><span></span></div>
+        <span class="air-window-title">wu-hanqing-resume.pdf (Original Document)</span>
+        <div class="air-resume-actions">
+          <a href="{{ '/assets/resume/wu-hanqing-resume.pdf' | relative_url }}" target="_blank" rel="noopener" class="air-btn air-btn--sm air-btn--outline">新窗口预览 ↗</a>
+          <a href="{{ '/assets/resume/wu-hanqing-resume.pdf' | relative_url }}" download="吴汉卿-个人简历.pdf" class="air-btn air-btn--sm air-btn--primary">下载 PDF ⤓</a>
+        </div>
+      </div>
+      <div class="air-resume-frame-wrap">
+        <object class="air-resume-embed" data="{{ '/assets/resume/wu-hanqing-resume.pdf' | relative_url }}#view=FitH" type="application/pdf">
+          <div class="air-resume-fallback">
+            <p>当前浏览器无法直接内嵌预览 PDF 文档。</p>
+            <a href="{{ '/assets/resume/wu-hanqing-resume.pdf' | relative_url }}" target="_blank" rel="noopener" class="air-btn air-btn--primary">点击直接打开原始简历 ↗</a>
+          </div>
+        </object>
+      </div>
+    </div>
   </div>
 </section>

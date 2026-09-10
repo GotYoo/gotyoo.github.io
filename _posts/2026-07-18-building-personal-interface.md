@@ -3,6 +3,7 @@ layout: article
 page_key: blog
 title: "把个人网站从展示页变成可持续的个人界面"
 date: 2026-07-18
+permalink: /blog/building-personal-interface/
 description: "一次关于个人网站信息架构、动态边界和静态部署的真实改版记录。"
 excerpt: "这次改版没有继续堆叠首页效果，而是先重新划分项目、文章、简历与 Life 的边界。"
 image: "/images/bg.jpg"

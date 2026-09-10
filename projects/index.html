@@ -1,14 +1,130 @@
 ---
 layout: interface
 page_key: projects
-title: Projects
-description: GotYoo 的项目与技术案例。
+title: 项目与工程实践 · Projects
+description: GotYoo 的精选工程项目、AI Agent 实践与开源作品。
 permalink: /projects/
 ---
-<section class="inner-hero"><div class="inner-hero__content"><p class="inner-hero__eyebrow reveal" data-reveal>01 / SELECTED & EXPERIMENTAL WORK</p><h1 data-title><span>Pro<em>jects</em></span></h1><p class="inner-hero__desc reveal" data-reveal>项目不是技术名词的陈列，而是一组可以被解释、验证和继续迭代的选择。</p><div class="inner-hero__count"><span>REAL WORK ONLY</span><br><span>UPDATED CONTINUOUSLY</span></div></div></section>
-<section class="page-section"><div class="section-shell"><div class="section-index reveal" data-reveal><span>INDEX</span><i></i><p>PROJECT ARCHIVE · HOVER TO PREVIEW</p></div><div class="project-index">
-  <a class="case-card reveal spotlight" data-reveal data-preview="code" data-preview-title="MiniCodeAgent" data-preview-meta="Agent Harness · 2026" href="https://github.com/GotYoo/MiniCodeAgent" target="_blank" rel="noopener"><div class="case-card__top"><span>01 / AI AGENT</span><span>2026.03 — 06</span></div><div><h2>MiniCode<br>Agent</h2><p>面向代码仓库长链路任务的本地代码 Agent Harness，围绕长上下文、结构化记忆、任务恢复与可评测运行构建完整执行链路。</p><div class="tags"><span>Tool Calling</span><span>Layered Memory</span><span>Checkpoint</span></div></div><i>↗</i></a>
-  <a class="case-card reveal spotlight" data-reveal data-preview="interface" data-preview-title="Travel Planning Agent" data-preview-meta="RAG · Planning · 2026" href="{{ '/resume/' | relative_url }}"><div class="case-card__top"><span>02 / AGENT SYSTEM</span><span>2026.01 — 03</span></div><div><h2>Travel<br>Planning Agent</h2><p>通过结构化规划、地图工具校验、多候选 Rerank 与 RAG 扩展，生成更可信、预算可复算的多日旅行方案。</p><div class="tags"><span>FastAPI</span><span>Vue 3</span><span>RAG</span><span>SFT / DPO</span></div></div><i>↗</i></a>
-  <a class="case-card reveal spotlight" data-reveal data-preview="code" data-preview-title="CommandBox" data-preview-meta="Python · PyQt5 · Open Source" href="https://github.com/GotYoo/CommandBox" target="_blank" rel="noopener"><div class="case-card__top"><span>03 / OPEN SOURCE</span><span>GITHUB</span></div><div><h2>Command<br>Box</h2><p>面向高频命令复用的 Windows 桌面工具，以搜索优先、分类归档和快速复制降低查找与操作成本。</p><div class="tags"><span>Python</span><span>PyQt5</span><span>Desktop</span></div></div><i>↗</i></a>
-  <a class="case-card reveal spotlight" data-reveal data-preview="interface" data-preview-title="Personal Interface" data-preview-meta="GitHub Pages · 2026" href="https://github.com/GotYoo/gotyoo.github.io" target="_blank" rel="noopener"><div class="case-card__top"><span>04 / PERSONAL SYSTEM</span><span>GITHUB</span></div><div><h2>Personal<br>Interface</h2><p>以静态架构组织作品、文章与 Life，并用渐进增强实现项目预览、跨页面转场与响应式交互。</p><div class="tags"><span>Jekyll</span><span>Motion</span><span>Responsive</span></div></div><i>↗</i></a>
-</div><div class="content-status reveal" data-reveal><span>CASE STUDY STANDARD</span><p>项目按照“背景—职责—关键问题—技术方案—验证—复盘”展开；当前先提供简历式摘要，后续逐项扩展为完整案例页。</p></div></div></section>
+<section class="air-sub-hero">
+  <div class="air-sub-hero__inner">
+    <div class="air-badge">01 / SELECTED WORK &amp; SYSTEMS</div>
+    <h1 class="air-sub-title">Selected <em>Projects</em></h1>
+    <p class="air-sub-desc">项目不是名词的堆叠，而是一组可以被解释、验证和持续演进的工程选择。</p>
+  </div>
+</section>
+
+<section class="air-sub-section">
+  <div class="air-shell">
+    <div class="air-project-grid">
+
+      <div class="air-window-card">
+        <div class="air-window-card__bar">
+          <div class="air-window-dots"><span></span><span></span><span></span></div>
+          <span class="air-window-title">MiniCodeAgent / Agent Harness</span>
+          <span class="air-window-tag">2026</span>
+        </div>
+        <div class="air-window-card__body">
+          <div class="air-window-card__top">
+            <span class="air-pill air-pill--blue">AI AGENT</span>
+            <span class="air-date-mono">2026.03 — 06</span>
+          </div>
+          <h2 class="air-window-card__heading">MiniCodeAgent</h2>
+          <p class="air-window-card__text">面向代码仓库长链路任务的本地 Agent Harness，围绕长上下文压缩、分层记忆调度、异常状态恢复与 SWE-bench 评测构建端到端执行链路。</p>
+          <div class="air-window-tags">
+            <span>Tool Calling</span>
+            <span>Layered Memory</span>
+            <span>Checkpoint</span>
+            <span>Python</span>
+          </div>
+          <div class="air-window-card__action">
+            <a href="https://github.com/GotYoo/MiniCodeAgent" target="_blank" rel="noopener" class="air-btn air-btn--outline">查看开源仓库 ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="air-window-card">
+        <div class="air-window-card__bar">
+          <div class="air-window-dots"><span></span><span></span><span></span></div>
+          <span class="air-window-title">TravelPlanning / Multi-Agent</span>
+          <span class="air-window-tag">2026</span>
+        </div>
+        <div class="air-window-card__body">
+          <div class="air-window-card__top">
+            <span class="air-pill air-pill--teal">RAG SYSTEM</span>
+            <span class="air-date-mono">2026.01 — 03</span>
+          </div>
+          <h2 class="air-window-card__heading">Travel Planning Agent</h2>
+          <p class="air-window-card__text">通过结构化约束规划、高德地图 API 地理拓扑校验、Rerank 多候选重排序与 RAG 知识检索，生成可执行、时间预算闭环的多日旅行路线方案。</p>
+          <div class="air-window-tags">
+            <span>FastAPI</span>
+            <span>Vue 3</span>
+            <span>Hybrid RAG</span>
+            <span>SFT / DPO</span>
+          </div>
+          <div class="air-window-card__action">
+            <a href="{{ '/resume/' | relative_url }}" class="air-btn air-btn--outline">简历详细说明 ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="air-window-card">
+        <div class="air-window-card__bar">
+          <div class="air-window-dots"><span></span><span></span><span></span></div>
+          <span class="air-window-title">CommandBox / Desktop Util</span>
+          <span class="air-window-tag">TOOL</span>
+        </div>
+        <div class="air-window-card__body">
+          <div class="air-window-card__top">
+            <span class="air-pill air-pill--purple">OPEN SOURCE</span>
+            <span class="air-date-mono">GITHUB</span>
+          </div>
+          <h2 class="air-window-card__heading">CommandBox</h2>
+          <p class="air-window-card__text">面向高频开发命令复用的轻量桌面工具，以快捷全局唤醒、模糊搜索优先、多维度标签归档与一键复制大幅降低日常操作心智负担。</p>
+          <div class="air-window-tags">
+            <span>Python</span>
+            <span>PyQt5</span>
+            <span>Desktop</span>
+            <span>SQLite</span>
+          </div>
+          <div class="air-window-card__action">
+            <a href="https://github.com/GotYoo/CommandBox" target="_blank" rel="noopener" class="air-btn air-btn--outline">查看开源仓库 ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="air-window-card">
+        <div class="air-window-card__bar">
+          <div class="air-window-dots"><span></span><span></span><span></span></div>
+          <span class="air-window-title">GotYoo Systems / Personal Web</span>
+          <span class="air-window-tag">AIR STYLE</span>
+        </div>
+        <div class="air-window-card__body">
+          <div class="air-window-card__top">
+            <span class="air-pill air-pill--blue">WEB SYSTEM</span>
+            <span class="air-date-mono">2026.09</span>
+          </div>
+          <h2 class="air-window-card__heading">Air Personal Interface</h2>
+          <p class="air-window-card__text">基于 Air.inc 官方审美重构的高品质个人界面体系，以纯净晨曦天幕、双层高透毛玻璃卡片、流畅排版与 Jekyll 静态引擎实现高质感体验。</p>
+          <div class="air-window-tags">
+            <span>Air Aesthetic</span>
+            <span>Glassmorphism</span>
+            <span>Jekyll</span>
+            <span>Vanilla JS</span>
+          </div>
+          <div class="air-window-card__action">
+            <a href="https://github.com/GotYoo/gotyoo.github.io" target="_blank" rel="noopener" class="air-btn air-btn--outline">查看站点仓库 ↗</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="air-banner-card">
+      <div class="air-banner-card__content">
+        <h3>工程评价准则</h3>
+        <p>所有项目按照“真实背景 — 核心职责 — 关键瓶颈 — 技术选型 — 验证指标 — 阶段反思”展开，拒绝空洞概念拼凑，保持真实与克制。</p>
+      </div>
+      <a href="{{ '/resume/' | relative_url }}" class="air-btn air-btn--primary">查看完整简历 ↗</a>
+    </div>
+  </div>
+</section>
