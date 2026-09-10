@@ -576,31 +576,51 @@
     };
   }
 
-  // ================= 6. TIME SWITCHER (☀️ 🌅 🌙) =================
+  // ================= 6. 4-STATE TIME SWITCHER (🌄 ☀️ 🌅 🌙) =================
   function initTimeSwitcher() {
     var body = document.body;
-    var dayBtn = document.getElementById('btn-sky-day');
-    var sunsetBtn = document.getElementById('btn-sky-sunset');
-    var nightBtn = document.getElementById('btn-sky-night');
-    if (!dayBtn || !sunsetBtn || !nightBtn) return;
+    var slider = document.getElementById('timeDockSlider');
+    var badge = document.getElementById('dockActiveBadge');
 
     var modes = [
-      { el: dayBtn, theme: 'theme-day' },
-      { el: sunsetBtn, theme: 'theme-sunset' },
-      { el: nightBtn, theme: 'theme-night' }
+      { id: 'btn-sky-dawn', theme: 'theme-dawn', slot: 0 },
+      { id: 'btn-sky-day', theme: 'theme-day', slot: 1 },
+      { id: 'btn-sky-sunset', theme: 'theme-sunset', slot: 2 },
+      { id: 'btn-sky-night', theme: 'theme-night', slot: 3 }
     ];
 
+    var allBtns = [];
+    modes.forEach(function (m) {
+      m.el = document.getElementById(m.id);
+      if (m.el) allBtns.push(m);
+    });
+
+    if (allBtns.length === 0) return;
+
     function setSkyTheme(themeClass) {
-      body.classList.remove('theme-day', 'theme-sunset', 'theme-night');
+      body.classList.remove('theme-dawn', 'theme-day', 'theme-sunset', 'theme-night');
       body.classList.add(themeClass);
 
+      var activeMode = null;
       modes.forEach(function (m) {
+        if (!m.el) return;
         if (m.theme === themeClass) {
           m.el.classList.add('is-active');
+          activeMode = m;
         } else {
           m.el.classList.remove('is-active');
         }
       });
+
+      if (activeMode) {
+        var offsetPx = activeMode.slot * 44;
+        if (slider) {
+          slider.style.transform = 'translateY(' + offsetPx + 'px)';
+        }
+        if (badge) {
+          badge.style.transform = 'translateY(' + offsetPx + 'px)';
+        }
+      }
 
       try {
         localStorage.setItem('gotyoo-sky-theme', themeClass);
@@ -608,9 +628,11 @@
     }
 
     modes.forEach(function (m) {
-      m.el.addEventListener('click', function () {
-        setSkyTheme(m.theme);
-      });
+      if (m.el) {
+        m.el.addEventListener('click', function () {
+          setSkyTheme(m.theme);
+        });
+      }
     });
 
     // Restore saved or daytime default
@@ -621,28 +643,95 @@
     setSkyTheme(saved);
   }
 
-  // ================= 7. SCROLL-SCALING DYNAMIC AIR LOGO =================
+  // ================= 7. 3-CARD INTERACTIVE SHOWCASE (Understand · Organize · Scale) =================
+  function initAirCards() {
+    var cards = document.querySelectorAll('.air-card-item');
+    var promptTextEl = document.getElementById('promptText');
+    var promptCapsule = document.getElementById('heroPromptCapsule');
+    if (!cards || cards.length === 0) return;
+
+    function activateCard(card) {
+      cards.forEach(function (c) {
+        c.classList.remove('is-active');
+      });
+      card.classList.add('is-active');
+
+      var prompt = card.getAttribute('data-prompt');
+      if (promptTextEl && prompt && promptTextEl.textContent !== prompt) {
+        promptTextEl.style.opacity = '0';
+        promptTextEl.style.transform = 'translateY(4px)';
+        setTimeout(function () {
+          promptTextEl.textContent = prompt;
+          promptTextEl.style.opacity = '1';
+          promptTextEl.style.transform = 'translateY(0)';
+        }, 140);
+      }
+    }
+
+    cards.forEach(function (card) {
+      card.addEventListener('mouseenter', function () {
+        activateCard(card);
+      });
+
+      card.addEventListener('click', function () {
+        activateCard(card);
+        var tab = card.getAttribute('data-tab');
+        if (tab && window.switchAirTab) {
+          window.switchAirTab(tab);
+          var ws = document.getElementById('workspace');
+          if (ws) {
+            ws.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      });
+    });
+
+    if (promptCapsule) {
+      promptCapsule.addEventListener('click', function () {
+        var activeCard = document.querySelector('.air-card-item.is-active') || cards[0];
+        var tab = activeCard ? activeCard.getAttribute('data-tab') : 'projects';
+        if (window.switchAirTab) {
+          window.switchAirTab(tab);
+        }
+        var ws = document.getElementById('workspace');
+        if (ws) {
+          ws.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    }
+  }
+
+  // ================= 8. SCROLL-SCALING DYNAMIC AIR LOGO (Hero to Navbar Migration) =================
   function initScrollScalingLogo() {
     var logoWrap = document.getElementById('heroScrollLogoWrap');
-    if (!logoWrap) return;
+    var headerCenterLogo = document.getElementById('headerCenterLogo');
+    if (!logoWrap && !headerCenterLogo) return;
 
     var ticking = false;
 
     function updateLogoScale() {
       var scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
-      var maxScroll = 380; // Scroll distance to complete scaling
-      var progress = Math.min(Math.max(scrollY / maxScroll, 0), 1);
 
-      // Smooth cubic ease curve: easeOutQuad
-      var easeProgress = progress * (2 - progress);
+      // Hero logo shrinks & drifts up during initial scroll (0 -> 240px)
+      var heroMaxScroll = 240;
+      var heroProgress = Math.min(Math.max(scrollY / heroMaxScroll, 0), 1);
+      var heroEase = heroProgress * (2 - heroProgress);
 
-      // Scale down smoothly from 1.0 to 0.44
-      var scale = 1.0 - (easeProgress * 0.56);
-      var translateY = -easeProgress * 28; // Gentle upward drift
-      var opacity = 1.0 - (easeProgress * 0.65); // Subtle fade
+      if (logoWrap) {
+        var scale = 1.0 - (heroEase * 0.58);
+        var translateY = -heroEase * 38;
+        var opacity = 1.0 - (heroEase * 0.92);
+        logoWrap.style.transform = 'translate3d(0, ' + translateY + 'px, 0) scale(' + scale + ')';
+        logoWrap.style.opacity = opacity;
+      }
 
-      logoWrap.style.transform = 'translate3d(0, ' + translateY + 'px, 0) scale(' + scale + ')';
-      logoWrap.style.opacity = opacity;
+      // Navbar center logo fades in smoothly as hero logo disappears (60px -> 180px)
+      if (headerCenterLogo) {
+        var navProgress = Math.min(Math.max((scrollY - 60) / 120, 0), 1);
+        var navEase = navProgress * (2 - navProgress);
+        headerCenterLogo.style.opacity = navEase;
+        headerCenterLogo.style.transform = 'translate(-50%, -50%) scale(' + (0.82 + navEase * 0.18) + ')';
+      }
 
       ticking = false;
     }
@@ -665,6 +754,7 @@
     initMorphHeader();
     initCloudEntrance();
     initTimeSwitcher();
+    initAirCards();
     initScrollScalingLogo();
   }
 
