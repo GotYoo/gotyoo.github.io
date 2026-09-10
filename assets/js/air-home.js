@@ -576,6 +576,87 @@
     };
   }
 
+  // ================= 6. TIME SWITCHER (☀️ 🌅 🌙) =================
+  function initTimeSwitcher() {
+    var body = document.body;
+    var dayBtn = document.getElementById('btn-sky-day');
+    var sunsetBtn = document.getElementById('btn-sky-sunset');
+    var nightBtn = document.getElementById('btn-sky-night');
+    if (!dayBtn || !sunsetBtn || !nightBtn) return;
+
+    var modes = [
+      { el: dayBtn, theme: 'theme-day' },
+      { el: sunsetBtn, theme: 'theme-sunset' },
+      { el: nightBtn, theme: 'theme-night' }
+    ];
+
+    function setSkyTheme(themeClass) {
+      body.classList.remove('theme-day', 'theme-sunset', 'theme-night');
+      body.classList.add(themeClass);
+
+      modes.forEach(function (m) {
+        if (m.theme === themeClass) {
+          m.el.classList.add('is-active');
+        } else {
+          m.el.classList.remove('is-active');
+        }
+      });
+
+      try {
+        localStorage.setItem('gotyoo-sky-theme', themeClass);
+      } catch (e) {}
+    }
+
+    modes.forEach(function (m) {
+      m.el.addEventListener('click', function () {
+        setSkyTheme(m.theme);
+      });
+    });
+
+    // Restore saved or daytime default
+    var saved = 'theme-day';
+    try {
+      saved = localStorage.getItem('gotyoo-sky-theme') || 'theme-day';
+    } catch (e) {}
+    setSkyTheme(saved);
+  }
+
+  // ================= 7. SCROLL-SCALING DYNAMIC AIR LOGO =================
+  function initScrollScalingLogo() {
+    var logoWrap = document.getElementById('heroScrollLogoWrap');
+    if (!logoWrap) return;
+
+    var ticking = false;
+
+    function updateLogoScale() {
+      var scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+      var maxScroll = 380; // Scroll distance to complete scaling
+      var progress = Math.min(Math.max(scrollY / maxScroll, 0), 1);
+
+      // Smooth cubic ease curve: easeOutQuad
+      var easeProgress = progress * (2 - progress);
+
+      // Scale down smoothly from 1.0 to 0.44
+      var scale = 1.0 - (easeProgress * 0.56);
+      var translateY = -easeProgress * 28; // Gentle upward drift
+      var opacity = 1.0 - (easeProgress * 0.65); // Subtle fade
+
+      logoWrap.style.transform = 'translate3d(0, ' + translateY + 'px, 0) scale(' + scale + ')';
+      logoWrap.style.opacity = opacity;
+
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', function () {
+      if (!ticking) {
+        requestAnimationFrame(updateLogoScale);
+        ticking = true;
+      }
+    }, { passive: true });
+
+    updateLogoScale();
+  }
+
   // ================= INITIALIZE ON LOAD =================
   function init() {
     initTabs();
@@ -583,6 +664,8 @@
     initContactModal();
     initMorphHeader();
     initCloudEntrance();
+    initTimeSwitcher();
+    initScrollScalingLogo();
   }
 
   if (document.readyState === 'loading') {
