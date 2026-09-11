@@ -152,7 +152,6 @@ sitemap:
         <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
       </a>
       <a href="#top" class="time-btn time-btn--nav" title="回到顶部" aria-label="回到顶部">▲</a>
-      <a href="#workspace" class="time-btn time-btn--nav" title="直达工作台" aria-label="直达工作台">▼</a>
     </aside>
 
     <!-- HERO SECTION -->
@@ -173,463 +172,77 @@ sitemap:
       <!-- Air Subtitle -->
       <p class="hero-subtext">GotYoo keeps track. So you keep building.</p>
 
-      <!-- Pill CTA Button -->
-      <div class="hero-cta-wrap">
-        <a href="#workspace" class="hero-pill-btn">
-          Explore Workspace ▾
-        </a>
-      </div>
-
-      <!-- Frosted Prompt Capsule (Dynamic to Active Showcase Card) -->
+      <!-- Frosted Dynamic Prompt Capsule -->
       <div class="hero-prompt-container">
-        <div class="prompt-capsule" id="heroPromptCapsule" role="button" tabindex="0" title="探索工作台智能体能力">
-          <span class="prompt-sparkle">✦</span>
-          <span class="prompt-text" id="promptText">Organize my engineering projects &amp; essays</span>
-          <span class="prompt-arrow">↗</span>
+        <div class="prompt-capsule" id="heroPromptCapsule" role="button" tabindex="0" title="Explore Projects ↗" data-target-url="{{ '/projects/' | relative_url }}">
+          <span class="prompt-sparkle" aria-hidden="true">✦</span>
+          <span class="prompt-text-wrapper">
+            <span class="prompt-text" id="promptText">Explore production-grade AI agents and systems</span>
+            <span class="prompt-cursor" id="promptCursor" aria-hidden="true"></span>
+          </span>
+          <span class="prompt-arrow" aria-hidden="true">↗</span>
         </div>
+        <!-- Hidden text ruler for accurate width calculation -->
+        <span class="prompt-text-ruler" id="promptTextRuler" aria-hidden="true"></span>
       </div>
 
-      <!-- 3-CARD INTERACTIVE SHOWCASE (1:1 Video Replica with Authentic Assets) -->
+      <!-- 3-CARD INTERACTIVE SHOWCASE (Projects · Writing · Life) -->
       <div class="air-cards-container" id="airCardsContainer">
-        <!-- Card 1: Understand -->
-        <div class="air-card-item" id="airCardUnderstand" data-card="understand" data-prompt="What’s going on in this workspace?" data-tab="writing">
+        <!-- Card 1: Projects (Active by Default) -->
+        <div class="air-card-item is-active" id="airCardProjects" data-card="projects" data-prompt="Explore production-grade AI agents and systems" data-url="{{ '/projects/' | relative_url }}">
           <div class="air-card-media">
-            <img src="{{ '/assets/air/thumb_understand.jpg' | relative_url }}" alt="Understand - Workflow & Brand Intelligence" class="air-card-img" loading="lazy">
+            <img src="{{ '/assets/air/thumb_organize.jpg' | relative_url }}" alt="Projects - Production AI Agents &amp; Systems" class="air-card-img" loading="lazy">
           </div>
           <div class="air-card-caption">
-            <h3 class="air-card-title">Understand</h3>
-            <p class="air-card-desc">GotYoo learns your workflow from everything you build.</p>
+            <h3 class="air-card-title">Projects</h3>
+            <p class="air-card-desc">Production-grade AI agents, autonomous harnesses, and verifiable engineering systems.</p>
           </div>
         </div>
 
-        <!-- Card 2: Organize (Active by Default) -->
-        <div class="air-card-item is-active" id="airCardOrganize" data-card="organize" data-prompt="Organize my engineering projects &amp; essays" data-tab="projects">
+        <!-- Card 2: Writing -->
+        <div class="air-card-item" id="airCardWriting" data-card="writing" data-prompt="Read long-form architectural essays and system notes" data-url="{{ '/blog/' | relative_url }}">
           <div class="air-card-media">
-            <img src="{{ '/assets/air/thumb_organize.jpg' | relative_url }}" alt="Organize - Structured Systems & Reviews" class="air-card-img" loading="lazy">
+            <img src="{{ '/assets/air/thumb_understand.jpg' | relative_url }}" alt="Writing - Architectural Essays &amp; Technical Notes" class="air-card-img" loading="lazy">
           </div>
           <div class="air-card-caption">
-            <h3 class="air-card-title">Organize</h3>
-            <p class="air-card-desc">Your systems, structured and current. Reviews and sign-offs live in one place.</p>
+            <h3 class="air-card-title">Writing</h3>
+            <p class="air-card-desc">Deep architectural reflections, system breakdowns, and public engineering notes.</p>
           </div>
         </div>
 
-        <!-- Card 3: Scale -->
-        <div class="air-card-item" id="airCardScale" data-card="scale" data-prompt="Scale into multi-agent production pipelines" data-tab="projects">
+        <!-- Card 3: Life -->
+        <div class="air-card-item" id="airCardLife" data-card="life" data-prompt="Wander through quiet lake mist, travel frames, and daily life" data-url="{{ '/life/' | relative_url }}">
           <div class="air-card-media">
-            <img src="{{ '/assets/air/thumb_scale.jpg' | relative_url }}" alt="Scale - Multi-Format Generation & Agent Deployment" class="air-card-img" loading="lazy">
+            <img src="{{ '/assets/air/thumb_scale.jpg' | relative_url }}" alt="Life - Photography &amp; Quiet Moments" class="air-card-img" loading="lazy">
           </div>
           <div class="air-card-caption">
-            <h3 class="air-card-title">Scale</h3>
-            <p class="air-card-desc">One finished architecture becomes multi-format, verified production agents.</p>
+            <h3 class="air-card-title">Life</h3>
+            <p class="air-card-desc">Photography slices, travel reflections, and quiet moments outside the terminal.</p>
           </div>
         </div>
       </div>
-
-      <!-- ================= AIR WORKSPACE WINDOW ================= -->
-      <section id="workspace" class="workspace-window" aria-label="GotYoo 工作台">
-
-        <!-- Window Topbar -->
-        <div class="window-topbar">
-          <div class="window-brand">
-            <span class="status-dot-active" aria-hidden="true"></span>
-            <span class="window-title">GotYoo Systems Lab</span>
-            <span style="color: #cbd5e1;">/</span>
-            <span class="window-meta">Hangzhou · CST</span>
-          </div>
-
-          <div class="window-search-container">
-            <div class="window-search" id="workspace-search-box">
-              <span class="search-icon" aria-hidden="true">🔍</span>
-              <input type="text" id="workspace-search-input" placeholder="搜索项目、手记、履历... ( / 键聚焦)" autocomplete="off" spellcheck="false" aria-label="搜索项目、手记与履历">
-              <button type="button" id="workspace-search-clear" class="search-clear-btn" aria-label="清空搜索" style="display:none;">✕</button>
-            </div>
-            <!-- Instant Search Dropdown Palette -->
-            <div id="workspace-search-dropdown" class="search-dropdown is-hidden" role="listbox" aria-label="搜索结果建议"></div>
-          </div>
-
-          <div class="window-actions">
-            <a href="mailto:{{ site.email }}" class="btn-outline" data-contact-btn data-email="{{ site.email }}">
-              ✉ 邮件联系
-            </a>
-            <a href="https://github.com/GotYoo" target="_blank" rel="noopener" class="btn-primary">
-              ▷ GitHub ↗
-            </a>
-          </div>
-        </div>
-
-        <!-- Window Body -->
-        <div class="window-body">
-
-          <!-- Sidebar -->
-          <aside class="window-sidebar">
-            <div>
-              <div class="sidebar-label">NAVIGATION</div>
-              <div class="sidebar-nav">
-                <button type="button" id="nav-tab-projects" class="sidebar-btn is-active">
-                  <span>⚡ 精选项目 (Projects)</span>
-                  <span class="badge-count">2</span>
-                </button>
-                <button type="button" id="nav-tab-writing" class="sidebar-btn">
-                  <span>✎ 深度手记 (Writing)</span>
-                  <span class="badge-count badge-gray">{{ site.posts.size }}</span>
-                </button>
-                <button type="button" id="nav-tab-pedigree" class="sidebar-btn">
-                  <span>🎓 学术履历 (Pedigree)</span>
-                  <span class="badge-count badge-gray" style="background:#ecfdf5; color:#047857;">HDU</span>
-                </button>
-              </div>
-            </div>
-
-            <div>
-              <div class="sidebar-label">RESEARCH FOCUS</div>
-              <div class="focus-list">
-                <div class="focus-item">
-                  <span>Agent Harness 架构</span>
-                  <span class="dot-indicator" style="background:#2563eb;"></span>
-                </div>
-                <div class="focus-item">
-                  <span>分层记忆治理 (Memory)</span>
-                  <span class="dot-indicator" style="background:#10b981;"></span>
-                </div>
-                <div class="focus-item">
-                  <span>约束规划与多候选 Rerank</span>
-                  <span class="dot-indicator" style="background:#f59e0b;"></span>
-                </div>
-              </div>
-            </div>
-          </aside>
-
-          <!-- Content Panels -->
-          <div class="window-content">
-
-            <!-- TAB 1: PROJECTS -->
-            <div id="pane-projects" class="tab-pane">
-              <div class="panel-head">
-                <div>
-                  <h3>核心工程案例 (Core Projects)</h3>
-                  <p>代码可运行、经得起生产检验的长链路真实项目</p>
-                </div>
-                <a href="{{ '/projects/' | relative_url }}" class="nav-link" style="color: #2563eb; font-size: 12px; font-weight: 600; text-shadow:none;">
-                  浏览全部项目 →
-                </a>
-              </div>
-
-              <!-- Project 1 -->
-              <article class="project-card">
-                <div class="card-top">
-                  <div class="card-title-group">
-                    <div style="display:flex; align-items:center; gap:8px;">
-                      <h4>MiniCodeAgent</h4>
-                      <span class="tag-status">Production</span>
-                    </div>
-                    <div class="card-sub">2026.03 — 06 · AI Agent Engineering</div>
-                  </div>
-                  <a href="https://github.com/GotYoo/MiniCodeAgent" target="_blank" rel="noopener" style="font-size: 12px; color: #2563eb; font-weight: 600; text-decoration: none;">
-                    GitHub ↗
-                  </a>
-                </div>
-                <p class="card-desc">
-                  面向代码仓库长链路复杂任务，构建统一的工具执行沙箱、分层记忆调度与断点恢复（Checkpoint / Resume）机制。有效解决长上下文溢出、幻觉累积与不可逆破坏难题。
-                </p>
-                <div class="card-tags">
-                  <span>#Python</span>
-                  <span>#AgentHarness</span>
-                  <span>#LayeredMemory</span>
-                  <span>#ToolCalling</span>
-                </div>
-              </article>
-
-              <!-- Project 2 -->
-              <article class="project-card">
-                <div class="card-top">
-                  <div class="card-title-group">
-                    <div style="display:flex; align-items:center; gap:8px;">
-                      <h4>Travel Planning Agent</h4>
-                      <span class="tag-status tag-verified">Verified</span>
-                    </div>
-                    <div class="card-sub">2026.01 — 03 · RAG / Tool-Augmented Planning</div>
-                  </div>
-                  <a href="{{ '/resume/' | relative_url }}" style="font-size: 12px; color: #2563eb; font-weight: 600; text-decoration: none;">
-                    Details ↗
-                  </a>
-                </div>
-                <p class="card-desc">
-                  针对生成式行程规划不可控、易超预算缺陷，结合外部地图 API、硬规则自动复算与多候选 Rerank 算法，输出真正可落地、可验证的多日行程规划。
-                </p>
-                <div class="card-tags">
-                  <span>#FastAPI</span>
-                  <span>#Vue3</span>
-                  <span>#RAG</span>
-                  <span>#ConstraintRerank</span>
-                </div>
-              </article>
-            </div>
-
-            <!-- TAB 2: WRITING -->
-            <div id="pane-writing" class="tab-pane is-hidden">
-              <div class="panel-head">
-                <div>
-                  <h3>公开手记与技术复盘 (Writing)</h3>
-                  <p>沉淀系统设计认知、算法实验与阶段性思考</p>
-                </div>
-                <a href="{{ '/blog/' | relative_url }}" class="nav-link" style="color: #2563eb; font-size: 12px; font-weight: 600; text-shadow:none;">
-                  查看所有文章 ({{ site.posts.size }}) →
-                </a>
-              </div>
-
-              <div class="article-stack" id="writing-article-stack">
-                {% for post in site.posts %}
-                <a href="{{ post.url | relative_url }}" class="article-row" data-searchable-item data-category="writing" data-title="{{ post.title }}">
-                  <div class="article-meta">
-                    <span>{{ post.date | date: "%Y.%m.%d" }} · ESSAY</span>
-                    <span>阅读正文 ↗</span>
-                  </div>
-                  <h4>{{ post.title }}</h4>
-                  {% if post.excerpt %}
-                  <p class="article-row-excerpt" style="font-size: 12px; color: #64748b; margin-top: 6px; line-height: 1.55;">
-                    {{ post.excerpt | strip_html | strip_newlines | truncate: 110 }}
-                  </p>
-                  {% endif %}
-                </a>
-                {% endfor %}
-
-                <!-- Ongoing Writing In-Progress Card -->
-                <div class="article-upcoming-card">
-                  <div class="upcoming-indicator">
-                    <span class="upcoming-pulse-dot"></span>
-                    <span class="upcoming-label">IN PROGRESS · 持续沉淀中</span>
-                  </div>
-                  <div class="upcoming-content">
-                    <div class="upcoming-title">工业级 RAG 检索校验与 Agent 状态自愈实践</div>
-                    <p class="upcoming-desc">关于多候选二次重排（Rerank）、向量相似度欺骗与自愈型 Agent 调度管线的实战总结正在整理撰写中，完成后将自动同步至此处。</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- TAB 3: PEDIGREE -->
-            <div id="pane-pedigree" class="tab-pane is-hidden">
-              <div class="panel-head">
-                <div>
-                  <h3>教育背景与履历 (Academic Pedigree)</h3>
-                  <p>系统计算机科学学术背景与学业奖学金证明</p>
-                </div>
-                <span style="font-family: var(--font-mono); font-size: 11px; color: #047857; font-weight: 700;">
-                  VERIFIED
-                </span>
-              </div>
-
-              <div class="pedigree-grid">
-                <div class="pedigree-card">
-                  <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <span class="pedigree-meta">2024.09 — 2027.06</span>
-                    <span style="font-size:11px; font-weight:700; color:#047857;">在读硕士</span>
-                  </div>
-                  <h4>杭州电子科技大学</h4>
-                  <div class="pedigree-meta">计算机技术硕士 (Master of CS)</div>
-                  <p>
-                    研究与实践方向聚焦 AI Agent、RAG 与大模型应用工程。在读期间两次获得研究生学业奖学金。
-                  </p>
-                </div>
-
-                <div class="pedigree-card">
-                  <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <span class="pedigree-meta">2020.09 — 2024.06</span>
-                    <span style="font-size:11px; font-weight:600; color:#64748b;">本科毕业</span>
-                  </div>
-                  <h4>青岛大学</h4>
-                  <div class="pedigree-meta">计算机科学与技术 (B.S.)</div>
-                  <p>
-                    系统学习计算机科学基础理论、数据结构与系统底层算法，在校期间多次获得优秀学业奖学金。
-                  </p>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- Window Bottom Switcher Tabs (Air Signature) -->
-        <div class="window-footer">
-          <button type="button" id="btn-tab-projects" class="footer-tab-btn is-active">
-            <span>✓</span> 01 / Projects
-          </button>
-          <button type="button" id="btn-tab-writing" class="footer-tab-btn">
-            <span>✓</span> 02 / Writing
-          </button>
-          <button type="button" id="btn-tab-pedigree" class="footer-tab-btn">
-            <span>⚡</span> 03 / Pedigree
-          </button>
-        </div>
-
-      </section>
 
     </main>
-
-    <!-- SIGNATURE AIR NIGHT MEADOW SHOWCASE -->
-    <section class="air-meadow-section" id="airMeadowSection" aria-label="GotYoo & Air Meadow Experience">
-      <div class="air-meadow-card">
-        <img src="{{ '/assets/air/meadow_clean.jpg' | relative_url }}" alt="GotYoo Air Meadow at Night" class="meadow-bg-img" loading="lazy">
-        <div class="meadow-overlay-glow"></div>
-        <div class="meadow-content-overlay">
-          <span class="meadow-tag">THE AIR PHILOSOPHY</span>
-          <h2 class="meadow-title">Air keeps track. So you keep building.</h2>
-          <p class="meadow-subtitle">Autonomous agent harness, layered memory governance, and verified production systems.</p>
-          <div class="meadow-actions">
-            <a href="#workspace" class="meadow-btn-primary">进入核心工作台 ▾</a>
-            <a href="https://github.com/GotYoo" target="_blank" rel="noopener" class="meadow-btn-subtle">查看 GitHub 源码 ↗</a>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <!-- MINIMALIST FOOTER -->
     <footer class="site-footer">
       <div>
-        GOTYOO © {{ site.time | date: '%Y' }} · BUILT WITH AIR AESTHETIC & CLARITY
+        GOTYOO © {{ site.time | date: '%Y' }} · BUILT WITH AIR AESTHETIC &amp; CLARITY
       </div>
       <div>
         <a href="https://github.com/GotYoo" target="_blank" rel="noopener">GitHub</a>
         <a href="mailto:{{ site.email }}" data-contact-btn data-email="{{ site.email }}">Email</a>
-        <a href="{{ '/resume/' | relative_url }}">Resume</a>
+        <a href="{{ '/projects/' | relative_url }}">Projects</a>
+        <a href="{{ '/blog/' | relative_url }}">Writing</a>
         <a href="{{ '/life/' | relative_url }}">Life</a>
+        <a href="{{ '/resume/' | relative_url }}">Resume</a>
         <a href="{{ '/admin/' | relative_url }}" title="内容管理后台">Admin</a>
       </div>
     </footer>
 
   </div>
 
-  <!-- Search Database for Client-Side Instant Search -->
-  <script id="search-data" type="application/json">
-  [
-    {
-      "category": "projects",
-      "categoryLabel": "⚡ 精选项目",
-      "title": "MiniCodeAgent",
-      "subtitle": "2026.03 — 06 · AI Agent Engineering",
-      "description": "面向代码仓库长链路复杂任务，构建统一工具执行沙箱、分层记忆调度与断点恢复（Checkpoint / Resume）。",
-      "tags": ["Python", "AgentHarness", "LayeredMemory", "ToolCalling", "沙箱", "记忆治理", "智能体"],
-      "url": "https://github.com/GotYoo/MiniCodeAgent",
-      "target": "_blank",
-      "actionType": "link"
-    },
-    {
-      "category": "projects",
-      "categoryLabel": "⚡ 精选项目",
-      "title": "Travel Planning Agent",
-      "subtitle": "2026.01 — 03 · RAG / Tool-Augmented Planning",
-      "description": "结合外部地图 API、硬规则自动复算与多候选 Rerank 算法，输出可落地的多日行程规划。",
-      "tags": ["FastAPI", "Vue3", "RAG", "ConstraintRerank", "重排", "行程规划", "智能体"],
-      "url": "#workspace",
-      "actionType": "tab",
-      "tab": "projects"
-    },
-    {
-      "category": "projects",
-      "categoryLabel": "⚡ 精选项目",
-      "title": "可持续个人界面 (Personal Interface)",
-      "subtitle": "2026.07 · Web Architecture",
-      "description": "基于 Air 官方设计哲学重塑个人网站架构，划清项目、文章、履历与生活的内容边界。",
-      "tags": ["Jekyll", "Air", "Interface", "Aesthetics", "Web", "前端架构"],
-      "url": "{{ '/projects/personal-interface/' | relative_url }}",
-      "actionType": "link"
-    },
-    {% for post in site.posts %}
-    {
-      "category": "writing",
-      "categoryLabel": "✎ 深度手记",
-      "title": {{ post.title | jsonify }},
-      "subtitle": "{{ post.date | date: '%Y.%m.%d' }} · ESSAY",
-      "description": {{ post.excerpt | strip_html | strip_newlines | truncate: 90 | jsonify }},
-      "tags": ["手记", "Blog", "Essay", "文章", "技术复盘", "个人界面", "系统架构"],
-      "url": "{{ post.url | relative_url }}",
-      "actionType": "link"
-    },
-    {% endfor %}
-    {
-      "category": "pedigree",
-      "categoryLabel": "🎓 学术履历",
-      "title": "杭州电子科技大学 · 计算机技术硕士",
-      "subtitle": "2024.09 — 2027.06 · HDU Master of CS",
-      "description": "研究与实践方向聚焦 AI Agent、RAG 与大模型应用工程。在读期间两次获得研究生学业奖学金。",
-      "tags": ["杭电", "HDU", "硕士", "计算机技术", "奖学金", "教育背景"],
-      "url": "#workspace",
-      "actionType": "tab",
-      "tab": "pedigree"
-    },
-    {
-      "category": "pedigree",
-      "categoryLabel": "🎓 学术履历",
-      "title": "青岛大学 · 计算机科学与技术学士",
-      "subtitle": "2020.09 — 2024.06 · QDU B.S. in CS",
-      "description": "系统学习计算机科学基础理论、数据结构与系统底层算法，在校期间多次获得优秀学业奖学金。",
-      "tags": ["青岛大学", "青大", "QDU", "本科", "学士", "计算机", "教育背景"],
-      "url": "#workspace",
-      "actionType": "tab",
-      "tab": "pedigree"
-    },
-    {
-      "category": "pages",
-      "categoryLabel": "📄 站点页面",
-      "title": "完整履历与奖学金证明 (Resume PDF)",
-      "subtitle": "Academic & Engineering Resume",
-      "description": "学术背景、竞赛获奖、工程经验与 PDF 下载预览。",
-      "tags": ["简历", "Resume", "PDF", "履历", "求职"],
-      "url": "{{ '/resume/' | relative_url }}",
-      "actionType": "link"
-    },
-    {
-      "category": "pages",
-      "categoryLabel": "📄 站点页面",
-      "title": "全部公开文章与手记 (Writing)",
-      "subtitle": "All Essays & Notes Archive",
-      "description": "沉淀完整思考：技术实践复盘、Agent 架构设计与公开手记。",
-      "tags": ["文章", "手记", "Blog", "Writing", "归档"],
-      "url": "{{ '/blog/' | relative_url }}",
-      "actionType": "link"
-    },
-    {
-      "category": "pages",
-      "categoryLabel": "📄 站点页面",
-      "title": "全部工程案例总览 (Projects)",
-      "subtitle": "All Engineering Projects",
-      "description": "收录所有可运行、经得起生产检验的真实工程项目。",
-      "tags": ["项目", "Projects", "代码", "工程"],
-      "url": "{{ '/projects/' | relative_url }}",
-      "actionType": "link"
-    },
-    {
-      "category": "pages",
-      "categoryLabel": "📄 站点页面",
-      "title": "生活切片与摄影随拍 (Life)",
-      "subtitle": "Moments & Photography",
-      "description": "西湖晨雾、代码之余的观察与日常随笔。",
-      "tags": ["生活", "Life", "摄影", "西湖", "日常"],
-      "url": "{{ '/life/' | relative_url }}",
-      "actionType": "link"
-    },
-    {
-      "category": "pages",
-      "categoryLabel": "📄 站点页面",
-      "title": "关于作者 (About GotYoo)",
-      "subtitle": "About, Principles & Values",
-      "description": "了解 GotYoo 的技术追求、工程哲学与个人信息。",
-      "tags": ["关于", "About", "GotYoo", "理念"],
-      "url": "{{ '/about/' | relative_url }}",
-      "actionType": "link"
-    },
-    {
-      "category": "pages",
-      "categoryLabel": "⚙️ 管理后台",
-      "title": "内容管理后台 (CMS Admin)",
-      "subtitle": "Visual Editor & Publishing System",
-      "description": "可视化文章发布、相册更新与生活时间线管理后台。",
-      "tags": ["后台", "Admin", "CMS", "发布", "写文章", "管理"],
-      "url": "{{ '/admin/' | relative_url }}",
-      "actionType": "link"
-    }
-  ]
-  </script>
+
 
   <!-- Air Frosted Glass Email Contact Dialog -->
   <div id="air-contact-modal" class="air-modal-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-contact-title">

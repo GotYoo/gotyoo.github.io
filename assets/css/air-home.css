@@ -1839,42 +1839,138 @@ body.theme-night .time-dock-divider {
 /* ==========================================================================
    PROMPT CAPSULE & 3-CARD INTERACTIVE SHOWCASE (1:1 from Video Demo)
    ========================================================================== */
+.hero-prompt-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto 34px;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
 .prompt-capsule {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.22);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(255, 255, 255, 0.55);
-  box-shadow: 0 16px 36px -8px rgba(0, 50, 140, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.3) inset;
+  box-shadow: 0 16px 36px -8px rgba(0, 50, 140, 0.22), 0 0 0 1px rgba(255, 255, 255, 0.3) inset;
   border-radius: 9999px;
-  padding: 12px 28px;
+  padding: 12px 26px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
   color: #ffffff;
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.25s ease;
-  max-width: 580px;
-  width: 100%;
+  transition: width 0.42s cubic-bezier(0.16, 1, 0.3, 1), background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  will-change: width, transform;
+  width: auto;
+  max-width: min(92vw, 840px);
+  box-sizing: border-box;
+  text-decoration: none;
+  user-select: none;
 }
+
 .prompt-capsule:hover {
   background: rgba(255, 255, 255, 0.35);
   transform: translateY(-2px);
-  box-shadow: 0 20px 45px -8px rgba(0, 50, 140, 0.35);
+  box-shadow: 0 20px 45px -8px rgba(0, 50, 140, 0.35), 0 0 0 1.5px rgba(255, 255, 255, 0.45) inset;
 }
+
 .prompt-sparkle {
   font-size: 16px;
+  line-height: 1;
+  flex-shrink: 0;
 }
+
+.prompt-text-wrapper {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+  min-height: 20px;
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+.prompt-text {
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+  font-size: 15px;
+  line-height: 1.35;
+  transition: opacity 0.15s ease;
+}
+
+.prompt-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 15px;
+  background-color: #ffffff;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-radius: 1px;
+  animation: promptCursorBlink 0.75s ease-in-out infinite;
+  transition: opacity 0.2s ease;
+  flex-shrink: 0;
+}
+
+.prompt-cursor.is-hidden {
+  opacity: 0;
+  animation: none;
+}
+
+.prompt-text-ruler {
+  position: absolute;
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  pointer-events: none;
+  top: -9999px;
+  left: -9999px;
+  font-family: inherit;
+}
+
+@keyframes promptCursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
 .prompt-arrow {
   font-size: 14px;
+  line-height: 1;
   opacity: 0.85;
-  transition: transform 0.25s ease;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  flex-shrink: 0;
 }
+
 .prompt-capsule:hover .prompt-arrow {
   transform: translate(2px, -2px);
   opacity: 1;
+}
+
+@media (max-width: 640px) {
+  .prompt-capsule {
+    padding: 10px 18px;
+    gap: 8px;
+    font-size: 13px;
+  }
+  .prompt-text {
+    font-size: 13px;
+  }
+  .prompt-text-ruler {
+    font-size: 13px;
+  }
+  .prompt-cursor {
+    height: 13px;
+  }
 }
 
 /* 3-Card Interactive Showcase */
@@ -2403,6 +2499,26 @@ body.theme-night .site-footer {
 }
 body.theme-night .site-footer a {
   color: #cbd5e1;
+}
+
+body.theme-night .prompt-capsule {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+}
+body.theme-night .prompt-capsule:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.45);
+}
+body.theme-night .air-card-item {
+  background: rgba(15, 23, 42, 0.45);
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 20px 48px -12px rgba(0, 0, 0, 0.4);
+}
+body.theme-night .air-card-item.is-active {
+  background: rgba(30, 41, 59, 0.65);
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 28px 64px -12px rgba(0, 0, 0, 0.6), 0 0 0 1.5px rgba(255, 255, 255, 0.25) inset;
 }
 
 @media (max-width: 768px) {

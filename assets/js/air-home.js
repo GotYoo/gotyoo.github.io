@@ -643,61 +643,216 @@
     setSkyTheme(saved);
   }
 
-  // ================= 7. 3-CARD INTERACTIVE SHOWCASE (Understand · Organize · Scale) =================
+  // ================= 7. 3-CARD INTERACTIVE SHOWCASE (Projects · Writing · Life) =================
   function initAirCards() {
     var cards = document.querySelectorAll('.air-card-item');
-    var promptTextEl = document.getElementById('promptText');
     var promptCapsule = document.getElementById('heroPromptCapsule');
-    if (!cards || cards.length === 0) return;
+    var promptTextEl = document.getElementById('promptText');
+    var promptCursorEl = document.getElementById('promptCursor');
+    var promptRulerEl = document.getElementById('promptTextRuler');
+    if (!cards || cards.length === 0 || !promptTextEl || !promptCapsule) return;
 
-    function activateCard(card) {
+    var currentText = (promptTextEl.textContent || '').trim();
+    var targetText = currentText;
+    var typingTimer = null;
+    var cursorTimer = null;
+    var isErasing = false;
+
+    function stopTimers() {
+      if (typingTimer) {
+        clearTimeout(typingTimer);
+        typingTimer = null;
+      }
+      if (cursorTimer) {
+        clearTimeout(cursorTimer);
+        cursorTimer = null;
+      }
+    }
+
+    function showCursor() {
+      if (promptCursorEl) {
+        promptCursorEl.classList.remove('is-hidden');
+      }
+    }
+
+    function hideCursorWithDelay(delay) {
+      if (cursorTimer) clearTimeout(cursorTimer);
+      cursorTimer = setTimeout(function () {
+        if (promptCursorEl && !typingTimer) {
+          promptCursorEl.classList.add('is-hidden');
+        }
+      }, delay || 750);
+    }
+
+    function calcCapsuleWidth(text) {
+      if (!promptCapsule) return 0;
+      var textW = 0;
+      if (promptRulerEl) {
+        promptRulerEl.textContent = text;
+        textW = promptRulerEl.getBoundingClientRect().width;
+      } else {
+        textW = text.length * 8.6;
+      }
+
+      var accessories = 114;
+      try {
+        var sparkle = promptCapsule.querySelector('.prompt-sparkle');
+        var arrow = promptCapsule.querySelector('.prompt-arrow');
+        var sw = sparkle ? sparkle.getBoundingClientRect().width : 16;
+        var aw = arrow ? arrow.getBoundingClientRect().width : 14;
+        var comp = window.getComputedStyle(promptCapsule);
+        var pl = parseFloat(comp.paddingLeft) || 26;
+        var pr = parseFloat(comp.paddingRight) || 26;
+        var g = parseFloat(comp.gap) || 12;
+        var bl = parseFloat(comp.borderLeftWidth) || 1;
+        var br = parseFloat(comp.borderRightWidth) || 1;
+        accessories = pl + pr + bl + br + (g * 2) + sw + aw + 6;
+      } catch (e) {}
+
+      var total = Math.ceil(textW + accessories);
+      var maxViewport = Math.floor(window.innerWidth * 0.92);
+      return Math.min(total, maxViewport);
+    }
+
+    function updateCapsuleWidth(text) {
+      if (!promptCapsule) return;
+      var targetW = calcCapsuleWidth(text);
+      if (targetW > 0) {
+        promptCapsule.style.width = targetW + 'px';
+      }
+    }
+
+    function typeToTarget() {
+      stopTimers();
+      showCursor();
+
+      // Immediately initiate smooth capsule width expansion/lengthening to match target text length
+      updateCapsuleWidth(targetText);
+
+      function step() {
+        if (currentText === targetText) {
+          isErasing = false;
+          hideCursorWithDelay(850);
+          return;
+        }
+
+        // Check if currentText is a prefix of targetText
+        var isPrefix = (targetText.indexOf(currentText) === 0);
+
+        if (!isPrefix && currentText.length > 0) {
+          isErasing = true;
+          // Rapidly erase in larger chunks (max 5 or 20% of length) so bubble smoothly expands without delay
+          var deleteCount = Math.max(4, Math.ceil(currentText.length / 5));
+          currentText = currentText.slice(0, Math.max(0, currentText.length - deleteCount));
+          promptTextEl.textContent = currentText;
+          typingTimer = setTimeout(step, 12);
+          return;
+        }
+
+        // Type forward one character at a time synchronized with capsule smooth lengthening
+        isErasing = false;
+        var nextLen = currentText.length + 1;
+        currentText = targetText.slice(0, nextLen);
+        promptTextEl.textContent = currentText;
+
+        var charJustTyped = currentText.charAt(currentText.length - 1);
+        var delay = (charJustTyped === ' ' || charJustTyped === ',') ? 12 : 16;
+        typingTimer = setTimeout(step, delay);
+      }
+
+      step();
+    }
+
+    function setPromptText(newPrompt) {
+      if (newPrompt === targetText && !isErasing && currentText === targetText) {
+        return;
+      }
+      targetText = newPrompt || '';
+      typeToTarget();
+    }
+
+    function activateCard(card, triggerTyping) {
+      if (!card) return;
       cards.forEach(function (c) {
         c.classList.remove('is-active');
       });
       card.classList.add('is-active');
 
-      var prompt = card.getAttribute('data-prompt');
-      if (promptTextEl && prompt && promptTextEl.textContent !== prompt) {
-        promptTextEl.style.opacity = '0';
-        promptTextEl.style.transform = 'translateY(4px)';
-        setTimeout(function () {
-          promptTextEl.textContent = prompt;
-          promptTextEl.style.opacity = '1';
-          promptTextEl.style.transform = 'translateY(0)';
-        }, 140);
+      var prompt = card.getAttribute('data-prompt') || '';
+      var url = card.getAttribute('data-url') || '';
+      var title = card.querySelector('.air-card-title');
+      var titleText = title ? title.textContent.trim() : 'Page';
+
+      if (promptCapsule) {
+        promptCapsule.setAttribute('title', 'Explore ' + titleText + ' ↗');
+        if (url) {
+          promptCapsule.setAttribute('data-target-url', url);
+        }
+      }
+
+      if (triggerTyping !== false) {
+        setPromptText(prompt);
+      }
+    }
+
+    function navigateCard(card) {
+      var url = card.getAttribute('data-url');
+      if (url) {
+        window.location.href = url;
       }
     }
 
     cards.forEach(function (card) {
       card.addEventListener('mouseenter', function () {
-        activateCard(card);
+        activateCard(card, true);
       });
 
       card.addEventListener('click', function () {
-        activateCard(card);
-        var tab = card.getAttribute('data-tab');
-        if (tab && window.switchAirTab) {
-          window.switchAirTab(tab);
-          var ws = document.getElementById('workspace');
-          if (ws) {
-            ws.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
+        var wasActive = card.classList.contains('is-active');
+        activateCard(card, true);
+        if (wasActive || window.matchMedia('(hover: hover)').matches) {
+          navigateCard(card);
         }
       });
     });
 
     if (promptCapsule) {
       promptCapsule.addEventListener('click', function () {
-        var activeCard = document.querySelector('.air-card-item.is-active') || cards[0];
-        var tab = activeCard ? activeCard.getAttribute('data-tab') : 'projects';
-        if (window.switchAirTab) {
-          window.switchAirTab(tab);
+        var targetUrl = promptCapsule.getAttribute('data-target-url');
+        if (!targetUrl) {
+          var activeCard = document.querySelector('.air-card-item.is-active') || cards[0];
+          targetUrl = activeCard ? activeCard.getAttribute('data-url') : '';
         }
-        var ws = document.getElementById('workspace');
-        if (ws) {
-          ws.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (targetUrl) {
+          window.location.href = targetUrl;
         }
       });
+
+      promptCapsule.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          promptCapsule.click();
+        }
+      });
+    }
+
+    // Window resize handler: adapt capsule width seamlessly on viewport resizing
+    window.addEventListener('resize', function () {
+      if (targetText) {
+        updateCapsuleWidth(targetText);
+      }
+    }, { passive: true });
+
+    // Initial activation on page load
+    var defaultCard = document.querySelector('.air-card-item.is-active') || cards[0];
+    if (defaultCard) {
+      activateCard(defaultCard, false);
+      var initialPrompt = defaultCard.getAttribute('data-prompt') || currentText || '';
+      currentText = initialPrompt;
+      targetText = initialPrompt;
+      promptTextEl.textContent = initialPrompt;
+      updateCapsuleWidth(initialPrompt);
+      hideCursorWithDelay(850);
     }
   }
 
@@ -712,8 +867,8 @@
     function updateLogoScale() {
       var scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
 
-      // Hero logo shrinks & drifts up during initial scroll (0 -> 240px)
-      var heroMaxScroll = 240;
+      // Hero logo shrinks & drifts up during initial scroll (0 -> 160px)
+      var heroMaxScroll = 160;
       var heroProgress = Math.min(Math.max(scrollY / heroMaxScroll, 0), 1);
       var heroEase = heroProgress * (2 - heroProgress);
 
@@ -725,9 +880,9 @@
         logoWrap.style.opacity = opacity;
       }
 
-      // Navbar center logo fades in smoothly as hero logo disappears (60px -> 180px)
+      // Navbar center logo fades in smoothly as hero logo disappears (30px -> 120px)
       if (headerCenterLogo) {
-        var navProgress = Math.min(Math.max((scrollY - 60) / 120, 0), 1);
+        var navProgress = Math.min(Math.max((scrollY - 30) / 90, 0), 1);
         var navEase = navProgress * (2 - navProgress);
         headerCenterLogo.style.opacity = navEase;
         headerCenterLogo.style.transform = 'translate(-50%, -50%) scale(' + (0.82 + navEase * 0.18) + ')';
