@@ -497,29 +497,10 @@
 
   // ================= 4. PROGRESSIVE AIR MORPHING HEADER =================
   function initMorphHeader() {
+    // Header stays permanently in authentic Image 1 layout with full-bleed frosted glass blur
     var header = document.querySelector('[data-header]');
     if (!header) return;
-
-    var ticking = false;
-
-    function updateHeader() {
-      var scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
-      if (scrollY > 40) {
-        header.classList.add('is-scrolled');
-      } else {
-        header.classList.remove('is-scrolled');
-      }
-      ticking = false;
-    }
-
-    window.addEventListener('scroll', function () {
-      if (!ticking) {
-        requestAnimationFrame(updateHeader);
-        ticking = true;
-      }
-    }, { passive: true });
-
-    updateHeader();
+    header.classList.remove('is-scrolled');
   }
 
   // ================= 5. CLOUD ENTRANCE LIFECYCLE (Click to Part) =================
@@ -819,11 +800,10 @@
     }
   }
 
-  // ================= 8. SCROLL-SCALING DYNAMIC AIR LOGO (Hero to Navbar Migration) =================
+  // ================= 8. SCROLL-SCALING DYNAMIC AIR LOGO (Hero Inflatable Logo) =================
   function initScrollScalingLogo() {
     var logoWrap = document.getElementById('heroScrollLogoWrap');
-    var headerCenterLogo = document.getElementById('headerCenterLogo');
-    if (!logoWrap && !headerCenterLogo) return;
+    if (!logoWrap) return;
 
     var ticking = false;
 
@@ -835,21 +815,11 @@
       var heroProgress = Math.min(Math.max(scrollY / heroMaxScroll, 0), 1);
       var heroEase = heroProgress * (2 - heroProgress);
 
-      if (logoWrap) {
-        var scale = 1.0 - (heroEase * 0.58);
-        var translateY = -heroEase * 38;
-        var opacity = 1.0 - (heroEase * 0.92);
-        logoWrap.style.transform = 'translate3d(0, ' + translateY + 'px, 0) scale(' + scale + ')';
-        logoWrap.style.opacity = opacity;
-      }
-
-      // Navbar center logo fades in smoothly as hero logo disappears (30px -> 120px)
-      if (headerCenterLogo) {
-        var navProgress = Math.min(Math.max((scrollY - 30) / 90, 0), 1);
-        var navEase = navProgress * (2 - navProgress);
-        headerCenterLogo.style.opacity = navEase;
-        headerCenterLogo.style.transform = 'translate(-50%, -50%) scale(' + (0.82 + navEase * 0.18) + ')';
-      }
+      var scale = 1.0 - (heroEase * 0.58);
+      var translateY = -heroEase * 38;
+      var opacity = 1.0 - (heroEase * 0.92);
+      logoWrap.style.transform = 'translate3d(0, ' + translateY + 'px, 0) scale(' + scale + ')';
+      logoWrap.style.opacity = opacity;
 
       ticking = false;
     }

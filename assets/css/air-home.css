@@ -116,43 +116,72 @@ body.theme-night .sky-gradient-mask {
   top: 0;
   z-index: 900;
   width: 100%;
-  padding: 24px 36px;
-  transition: padding 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              background 0.35s ease;
+  height: 64px;
+  padding: 0 36px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.05);
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.theme-night .air-header-morph {
+  background: rgba(15, 23, 42, 0.55);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.35);
+}
+
+body.theme-sunset .air-header-morph {
+  background: rgba(255, 255, 255, 0.10);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+body.theme-dawn .air-header-morph {
+  background: rgba(255, 255, 255, 0.12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+body.theme-day .air-header-morph {
+  background: rgba(255, 255, 255, 0.14);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.20);
 }
 
 .air-header-morph__inner {
-  max-width: 1280px;
+  max-width: 1360px;
+  width: 100%;
   margin: 0 auto;
-  height: 60px;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 12px;
+  padding: 0;
   background: transparent;
-  border: 1px solid transparent;
+  border: none;
   box-shadow: none;
-  border-radius: 9999px;
-  transition: all 0.38s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Brand */
 .morph-brand {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   text-decoration: none;
+  flex-shrink: 0;
 }
 
 .morph-brand__logo {
-  width: 32px;
-  height: 32px;
-  background: rgba(255, 255, 255, 0.22);
+  width: 30px;
+  height: 30px;
+  background: rgba(255, 255, 255, 0.24);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 9px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -160,8 +189,13 @@ body.theme-night .sky-gradient-mask {
   font-weight: 800;
   font-size: 13px;
   letter-spacing: -0.05em;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.25s ease;
+}
+
+.morph-brand:hover .morph-brand__logo {
+  background: rgba(255, 255, 255, 0.35);
+  transform: translateY(-1px);
 }
 
 .morph-brand__name {
@@ -174,34 +208,32 @@ body.theme-night .sky-gradient-mask {
   display: flex;
   align-items: baseline;
   gap: 6px;
-  transition: all 0.35s ease;
 }
 
 .morph-brand__tag {
   font-family: var(--font-cursive);
-  font-size: 17px;
+  font-size: 16px;
   color: rgba(255, 255, 255, 0.85);
   font-weight: 600;
-  transition: all 0.35s ease;
 }
 
-/* Navigation Links (Initial: Open, Wide, Pure White) */
+/* Navigation Links (Center, Always Clean & Pure) */
 .morph-nav {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .morph-nav a {
   position: relative;
-  padding: 8px 18px;
-  font-size: 15px;
+  padding: 7px 16px;
+  font-size: 14.5px;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.92);
   text-decoration: none;
   border-radius: 9999px;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .morph-nav a:hover {
@@ -212,10 +244,11 @@ body.theme-night .sky-gradient-mask {
 
 .morph-nav a.is-active {
   color: #ffffff;
-  font-weight: 700;
-  background: rgba(255, 255, 255, 0.22);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.24);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.25) inset;
 }
 
 /* Actions */
@@ -223,6 +256,7 @@ body.theme-night .sky-gradient-mask {
   display: flex;
   align-items: center;
   gap: 14px;
+  flex-shrink: 0;
 }
 
 .morph-btn-github {
@@ -230,10 +264,10 @@ body.theme-night .sky-gradient-mask {
   font-size: 14px;
   font-weight: 500;
   text-decoration: none;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
   padding: 6px 12px;
   border-radius: 9999px;
-  transition: all 0.25s ease;
+  transition: all 0.22s ease;
 }
 
 .morph-btn-github:hover {
@@ -242,137 +276,25 @@ body.theme-night .sky-gradient-mask {
 }
 
 .morph-btn-contact {
-  background: rgba(255, 255, 255, 0.92);
+  background: #ffffff;
   color: #0f172a;
   border: 1px solid rgba(255, 255, 255, 0.9);
   border-radius: 9999px;
-  padding: 8px 20px;
-  font-size: 13px;
+  padding: 8px 18px;
+  font-size: 13.5px;
   font-weight: 600;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
 }
 
 .morph-btn-contact:hover {
-  background: #ffffff;
+  background: #f8fafc;
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
-}
-
-/* ----------------- Scrolled State: Morphs to Floating Capsule Pill ----------------- */
-.air-header-morph.is-scrolled {
-  padding: 10px 24px;
-}
-
-.air-header-morph.is-scrolled .air-header-morph__inner {
-  max-width: 1080px;
-  height: 52px;
-  padding: 0 16px 0 20px;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(24px) saturate(140%);
-  -webkit-backdrop-filter: blur(24px) saturate(140%);
-  border-color: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 16px 40px -10px rgba(25, 45, 75, 0.12),
-              0 0 0 1px rgba(255, 255, 255, 0.9) inset;
-}
-
-.air-header-morph.is-scrolled .morph-brand__logo {
-  background: #0f172a;
-  color: #ffffff;
-  border-color: transparent;
-  box-shadow: 0 3px 8px rgba(15, 23, 42, 0.2);
-}
-
-.air-header-morph.is-scrolled .morph-brand__name {
-  color: #0f172a;
-  text-shadow: none;
-  font-size: 15px;
-}
-
-.air-header-morph.is-scrolled .morph-brand__tag {
-  color: #0284c7;
-}
-
-.air-header-morph.is-scrolled .morph-nav a {
-  color: #475569;
-  font-size: 13.5px;
-  padding: 7px 14px;
-  text-shadow: none;
-}
-
-.air-header-morph.is-scrolled .morph-nav a:hover {
-  color: #0f172a;
-  background: rgba(0, 0, 0, 0.05);
-  text-shadow: none;
-}
-
-.air-header-morph.is-scrolled .morph-nav a.is-active {
-  color: #0284c7;
-  font-weight: 600;
-  background: rgba(2, 132, 199, 0.08);
-}
-
-.air-header-morph.is-scrolled .morph-btn-github {
-  display: none;
-}
-
-.air-header-morph.is-scrolled .morph-btn-contact {
-  background: #0f172a;
-  color: #ffffff;
-  border-color: #0f172a;
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
-  padding: 7px 16px;
-}
-
-.air-header-morph.is-scrolled .morph-btn-contact:hover {
-  background: #1e293b;
-}
-
-/* Centered Air Cursive Logo (Dynamic Inflatable Migration) */
-.air-header-center-logo {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%) scale(0.85);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-}
-
-.header-center-logo-svg {
-  height: 24px;
-  width: auto;
-  fill: none;
-  stroke: #ffffff;
-  stroke-width: 70;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  transition: stroke 0.3s ease;
-}
-.header-center-logo-svg circle {
-  fill: #ffffff;
-  transition: fill 0.3s ease;
-}
-
-.air-header-morph.is-scrolled .header-center-logo-svg {
-  stroke: #0f172a;
-}
-.air-header-morph.is-scrolled .header-center-logo-svg circle {
-  fill: #0f172a;
-}
-body.theme-night .air-header-morph.is-scrolled .header-center-logo-svg {
-  stroke: #ffffff;
-}
-body.theme-night .air-header-morph.is-scrolled .header-center-logo-svg circle {
-  fill: #ffffff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
 }
 
 /* Pill Buttons */
@@ -1523,9 +1445,26 @@ body.theme-night .air-header-morph.is-scrolled .header-center-logo-svg circle {
   }
 }
 
+@media (max-width: 960px) {
+  .air-header-morph {
+    padding: 0 20px;
+  }
+  .morph-nav {
+    gap: 4px;
+  }
+  .morph-nav a {
+    padding: 6px 10px;
+    font-size: 13.5px;
+  }
+  .morph-btn-github {
+    display: none;
+  }
+}
+
 @media (max-width: 640px) {
   .air-header-morph {
-    padding: 12px 16px;
+    padding: 0 16px;
+    height: 56px;
   }
   .morph-nav {
     display: none;
