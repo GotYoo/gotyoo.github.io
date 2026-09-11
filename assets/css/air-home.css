@@ -1865,8 +1865,7 @@ body.theme-night .time-dock-divider {
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  transition: width 0.42s cubic-bezier(0.16, 1, 0.3, 1), background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
-  will-change: width, transform;
+  transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
   width: auto;
   max-width: min(92vw, 840px);
   box-sizing: border-box;
@@ -1902,7 +1901,6 @@ body.theme-night .time-dock-divider {
   letter-spacing: -0.01em;
   font-size: 15px;
   line-height: 1.35;
-  transition: opacity 0.15s ease;
 }
 
 .prompt-cursor {
@@ -1921,21 +1919,6 @@ body.theme-night .time-dock-divider {
 .prompt-cursor.is-hidden {
   opacity: 0;
   animation: none;
-}
-
-.prompt-text-ruler {
-  position: absolute;
-  visibility: hidden;
-  height: 0;
-  overflow: hidden;
-  white-space: nowrap;
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  pointer-events: none;
-  top: -9999px;
-  left: -9999px;
-  font-family: inherit;
 }
 
 @keyframes promptCursorBlink {

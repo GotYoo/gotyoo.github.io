@@ -649,14 +649,16 @@
     var promptCapsule = document.getElementById('heroPromptCapsule');
     var promptTextEl = document.getElementById('promptText');
     var promptCursorEl = document.getElementById('promptCursor');
-    var promptRulerEl = document.getElementById('promptTextRuler');
     if (!cards || cards.length === 0 || !promptTextEl || !promptCapsule) return;
 
-    var currentText = (promptTextEl.textContent || '').trim();
-    var targetText = currentText;
+    var currentText = '';
+    var targetText = '';
     var typingTimer = null;
     var cursorTimer = null;
     var isErasing = false;
+
+    // Ensure capsule width is purely determined by content (never locked to a rigid inline width)
+    promptCapsule.style.width = '';
 
     function stopTimers() {
       if (typingTimer) {
@@ -684,50 +686,9 @@
       }, delay || 750);
     }
 
-    function calcCapsuleWidth(text) {
-      if (!promptCapsule) return 0;
-      var textW = 0;
-      if (promptRulerEl) {
-        promptRulerEl.textContent = text;
-        textW = promptRulerEl.getBoundingClientRect().width;
-      } else {
-        textW = text.length * 8.6;
-      }
-
-      var accessories = 114;
-      try {
-        var sparkle = promptCapsule.querySelector('.prompt-sparkle');
-        var arrow = promptCapsule.querySelector('.prompt-arrow');
-        var sw = sparkle ? sparkle.getBoundingClientRect().width : 16;
-        var aw = arrow ? arrow.getBoundingClientRect().width : 14;
-        var comp = window.getComputedStyle(promptCapsule);
-        var pl = parseFloat(comp.paddingLeft) || 26;
-        var pr = parseFloat(comp.paddingRight) || 26;
-        var g = parseFloat(comp.gap) || 12;
-        var bl = parseFloat(comp.borderLeftWidth) || 1;
-        var br = parseFloat(comp.borderRightWidth) || 1;
-        accessories = pl + pr + bl + br + (g * 2) + sw + aw + 6;
-      } catch (e) {}
-
-      var total = Math.ceil(textW + accessories);
-      var maxViewport = Math.floor(window.innerWidth * 0.92);
-      return Math.min(total, maxViewport);
-    }
-
-    function updateCapsuleWidth(text) {
-      if (!promptCapsule) return;
-      var targetW = calcCapsuleWidth(text);
-      if (targetW > 0) {
-        promptCapsule.style.width = targetW + 'px';
-      }
-    }
-
     function typeToTarget() {
       stopTimers();
       showCursor();
-
-      // Immediately initiate smooth capsule width expansion/lengthening to match target text length
-      updateCapsuleWidth(targetText);
 
       function step() {
         if (currentText === targetText) {
@@ -736,27 +697,34 @@
           return;
         }
 
-        // Check if currentText is a prefix of targetText
+        // If currentText is not a prefix of targetText, smoothly erase
         var isPrefix = (targetText.indexOf(currentText) === 0);
 
         if (!isPrefix && currentText.length > 0) {
           isErasing = true;
-          // Rapidly erase in larger chunks (max 5 or 20% of length) so bubble smoothly expands without delay
-          var deleteCount = Math.max(4, Math.ceil(currentText.length / 5));
-          currentText = currentText.slice(0, Math.max(0, currentText.length - deleteCount));
+          // Delete 2 characters at a time for a smooth contraction (~180-220ms total)
+          var stepBack = Math.min(2, currentText.length);
+          currentText = currentText.slice(0, currentText.length - stepBack);
           promptTextEl.textContent = currentText;
-          typingTimer = setTimeout(step, 12);
+          // The capsule width contracts in real time as characters disappear
+          typingTimer = setTimeout(step, 10);
           return;
         }
 
-        // Type forward one character at a time synchronized with capsule smooth lengthening
-        isErasing = false;
+        // If we just finished erasing, take a brief 60ms breath before typing new text
+        if (isErasing) {
+          isErasing = false;
+          typingTimer = setTimeout(step, 60);
+          return;
+        }
+
+        // Type forward one character at a time — capsule visibly lengthens with every typed character!
         var nextLen = currentText.length + 1;
         currentText = targetText.slice(0, nextLen);
         promptTextEl.textContent = currentText;
 
         var charJustTyped = currentText.charAt(currentText.length - 1);
-        var delay = (charJustTyped === ' ' || charJustTyped === ',') ? 12 : 16;
+        var delay = (charJustTyped === ' ' || charJustTyped === ',') ? 18 : 25;
         typingTimer = setTimeout(step, delay);
       }
 
@@ -790,7 +758,7 @@
         }
       }
 
-      if (triggerTyping !== false) {
+      if (triggerTyping) {
         setPromptText(prompt);
       }
     }
@@ -836,23 +804,18 @@
       });
     }
 
-    // Window resize handler: adapt capsule width seamlessly on viewport resizing
-    window.addEventListener('resize', function () {
-      if (targetText) {
-        updateCapsuleWidth(targetText);
-      }
-    }, { passive: true });
-
-    // Initial activation on page load
+    // Initial activation on page load: start compact and smoothly expand with typewriter
     var defaultCard = document.querySelector('.air-card-item.is-active') || cards[0];
     if (defaultCard) {
       activateCard(defaultCard, false);
-      var initialPrompt = defaultCard.getAttribute('data-prompt') || currentText || '';
-      currentText = initialPrompt;
-      targetText = initialPrompt;
-      promptTextEl.textContent = initialPrompt;
-      updateCapsuleWidth(initialPrompt);
-      hideCursorWithDelay(850);
+      var initialPrompt = defaultCard.getAttribute('data-prompt') || 'Explore production-grade AI agents and systems';
+      currentText = '';
+      promptTextEl.textContent = '';
+      showCursor();
+      // Begin typing after 280ms on page load so visitor clearly sees the capsule dynamically lengthening
+      setTimeout(function () {
+        setPromptText(initialPrompt);
+      }, 280);
     }
   }
 
