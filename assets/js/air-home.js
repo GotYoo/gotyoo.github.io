@@ -800,6 +800,71 @@
     }
   }
 
+  // ================= 8. INFLATABLE SVG TITLE & SCROLL DOCKING =================
+  function initInflatableTitle() {
+    var titleWrap = document.getElementById('heroInflatableTitleWrap');
+    if (!titleWrap) return;
+
+    // A) Scroll interaction:
+    // Top of page: larger and slightly lower
+    // As user scrolls down: gradually moves up and scales down until resting at docked position (current position)
+    var ticking = false;
+    var maxScroll = 160;
+
+    function getInitialConfig() {
+      var isMobile = window.innerWidth <= 768;
+      return {
+        scale: isMobile ? 1.15 : 1.25,
+        translateY: isMobile ? 18 : 28
+      };
+    }
+
+    var cfg = getInitialConfig();
+
+    function updateScale() {
+      var scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+      var progress = Math.min(Math.max(scrollY / maxScroll, 0), 1);
+      // Smooth easeOutCubic
+      var ease = 1 - Math.pow(1 - progress, 3);
+
+      var currentScale = cfg.scale - (ease * (cfg.scale - 1.0));
+      var currentTranslateY = cfg.translateY - (ease * cfg.translateY);
+
+      titleWrap.style.transform = 'translate3d(0, ' + currentTranslateY + 'px, 0) scale(' + currentScale + ')';
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', function () {
+      if (!ticking) {
+        requestAnimationFrame(updateScale);
+        ticking = true;
+      }
+    }, { passive: true });
+
+    window.addEventListener('resize', function () {
+      cfg = getInitialConfig();
+      updateScale();
+    }, { passive: true });
+
+    updateScale();
+
+    // B) Click to replay handwriting animation
+    titleWrap.addEventListener('click', function () {
+      var paths = titleWrap.querySelectorAll('.inflatable-path');
+      var spec = titleWrap.querySelector('.specular-layer');
+      paths.forEach(function (p) {
+        p.style.animation = 'none';
+        void p.offsetWidth;
+        p.style.animation = '';
+      });
+      if (spec) {
+        spec.style.animation = 'none';
+        void spec.offsetWidth;
+        spec.style.animation = '';
+      }
+    });
+  }
+
   // ================= INITIALIZE ON LOAD =================
   function init() {
     initTabs();
@@ -809,6 +874,7 @@
     initCloudEntrance();
     initTimeSwitcher();
     initAirCards();
+    initInflatableTitle();
   }
 
   if (document.readyState === 'loading') {

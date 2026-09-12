@@ -417,6 +417,123 @@ body.theme-dawn .air-header-morph::before {
   text-shadow: 0 4px 20px rgba(0, 45, 120, 0.4);
 }
 
+/* ==========================================================================
+   DYNAMIC INFLATABLE SVG ARTISTIC LOGO & HANDWRITING HEADLINE
+   ========================================================================== */
+.hero-inflatable-title-wrap {
+  width: 100%;
+  max-width: clamp(340px, 66vw, 760px);
+  margin: 6px auto 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-origin: center top;
+  will-change: transform;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: filter 0.3s ease;
+}
+
+.hero-inflatable-svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  filter: drop-shadow(0 14px 28px rgba(0, 35, 100, 0.32));
+  transition: filter 0.4s ease;
+}
+
+body.theme-sunset .hero-inflatable-svg {
+  filter: drop-shadow(0 14px 28px rgba(120, 30, 50, 0.42));
+}
+
+body.theme-night .hero-inflatable-svg {
+  filter: drop-shadow(0 16px 36px rgba(0, 0, 0, 0.72));
+}
+
+/* Inflatable handwriting path stroke & puffy fill animation */
+.inflatable-path {
+  fill: #ffffff;
+  stroke: #ffffff;
+  stroke-width: 4.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  fill-opacity: 0;
+  animation: drawInflatablePath 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards,
+             inflateFillBloom 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.15s forwards;
+}
+
+.path-learner {
+  animation-delay: 0.12s, 1.05s;
+}
+
+.path-amp {
+  animation-delay: 0.58s, 1.25s;
+}
+
+.path-builder {
+  animation-delay: 0.80s, 1.40s;
+}
+
+@keyframes drawInflatablePath {
+  0% {
+    stroke-dashoffset: 1000;
+    stroke-width: 2.6;
+  }
+  65% {
+    stroke-width: 5.6;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    stroke-width: 4.8;
+  }
+}
+
+@keyframes inflateFillBloom {
+  0% {
+    fill-opacity: 0;
+    transform: scale(0.98);
+  }
+  50% {
+    transform: scale(1.032);
+  }
+  100% {
+    fill-opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Specular highlight sheen reflection */
+.specular-layer {
+  fill: none;
+  stroke: url(#inflatableSheenGrad);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0;
+  animation: fadeInSpecularSheen 0.6s ease-out 1.42s forwards;
+}
+
+@keyframes fadeInSpecularSheen {
+  from { opacity: 0; }
+  to { opacity: 0.85; }
+}
+
+/* Screen reader only utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
 .hero-title {
   color: #ffffff;
   font-size: clamp(44px, 6.8vw, 84px);
