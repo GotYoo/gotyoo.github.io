@@ -221,50 +221,53 @@ sitemap:
         </svg>
       </div>
 
-      <!-- Frosted Dynamic Prompt Capsule -->
-      <div class="hero-prompt-container">
-        <div class="prompt-capsule" id="heroPromptCapsule" role="button" tabindex="0" title="Explore Projects ↗" data-target-url="{{ '/projects/' | relative_url }}">
-          <span class="prompt-sparkle" aria-hidden="true">✦</span>
-          <span class="prompt-text-wrapper">
-            <span class="prompt-text" id="promptText"></span>
-            <span class="prompt-cursor" id="promptCursor" aria-hidden="true"></span>
-          </span>
-          <span class="prompt-arrow" aria-hidden="true">↗</span>
-        </div>
-      </div>
-
-      <!-- 3-CARD INTERACTIVE SHOWCASE (Projects · Writing · Life) -->
-      <div class="air-cards-container" id="airCardsContainer">
-        <!-- Card 1: Projects (Active by Default) -->
-        <div class="air-card-item is-active" id="airCardProjects" data-card="projects" data-prompt="Explore production-grade AI agents and systems" data-url="{{ '/projects/' | relative_url }}">
-          <div class="air-card-media">
-            <img src="{{ '/assets/air/thumb_organize.jpg' | relative_url }}" alt="Projects - Production AI Agents &amp; Systems" class="air-card-img" loading="lazy">
-          </div>
-          <div class="air-card-caption">
-            <h3 class="air-card-title">Projects</h3>
-            <p class="air-card-desc">Production-grade AI agents, autonomous harnesses, and verifiable engineering systems.</p>
+      <!-- HERO REVEAL WRAPPER (Smoothly fades in & slides up on scroll) -->
+      <div class="hero-reveal-wrap" id="heroRevealWrap">
+        <!-- Frosted Dynamic Prompt Capsule -->
+        <div class="hero-prompt-container">
+          <div class="prompt-capsule" id="heroPromptCapsule" role="button" tabindex="0" title="Explore Projects ↗" data-target-url="{{ '/projects/' | relative_url }}">
+            <span class="prompt-sparkle" aria-hidden="true">✦</span>
+            <span class="prompt-text-wrapper">
+              <span class="prompt-text" id="promptText"></span>
+              <span class="prompt-cursor" id="promptCursor" aria-hidden="true"></span>
+            </span>
+            <span class="prompt-arrow" aria-hidden="true">↗</span>
           </div>
         </div>
 
-        <!-- Card 2: Writing -->
-        <div class="air-card-item" id="airCardWriting" data-card="writing" data-prompt="Read long-form architectural essays and system notes" data-url="{{ '/blog/' | relative_url }}">
-          <div class="air-card-media">
-            <img src="{{ '/assets/air/thumb_understand.jpg' | relative_url }}" alt="Writing - Architectural Essays &amp; Technical Notes" class="air-card-img" loading="lazy">
+        <!-- 3-CARD INTERACTIVE SHOWCASE (Projects · Writing · Life) -->
+        <div class="air-cards-container" id="airCardsContainer">
+          <!-- Card 1: Projects (Active by Default) -->
+          <div class="air-card-item is-active" id="airCardProjects" data-card="projects" data-prompt="Explore production-grade AI agents and systems" data-url="{{ '/projects/' | relative_url }}">
+            <div class="air-card-media">
+              <img src="{{ '/assets/air/thumb_organize.jpg' | relative_url }}" alt="Projects - Production AI Agents &amp; Systems" class="air-card-img" loading="lazy">
+            </div>
+            <div class="air-card-caption">
+              <h3 class="air-card-title">Projects</h3>
+              <p class="air-card-desc">Production-grade AI agents, autonomous harnesses, and verifiable engineering systems.</p>
+            </div>
           </div>
-          <div class="air-card-caption">
-            <h3 class="air-card-title">Writing</h3>
-            <p class="air-card-desc">Deep architectural reflections, system breakdowns, and public engineering notes.</p>
-          </div>
-        </div>
 
-        <!-- Card 3: Life -->
-        <div class="air-card-item" id="airCardLife" data-card="life" data-prompt="Wander through quiet lake mist, travel frames, and daily life" data-url="{{ '/life/' | relative_url }}">
-          <div class="air-card-media">
-            <img src="{{ '/assets/air/thumb_scale.jpg' | relative_url }}" alt="Life - Photography &amp; Quiet Moments" class="air-card-img" loading="lazy">
+          <!-- Card 2: Writing -->
+          <div class="air-card-item" id="airCardWriting" data-card="writing" data-prompt="Read long-form architectural essays and system notes" data-url="{{ '/blog/' | relative_url }}">
+            <div class="air-card-media">
+              <img src="{{ '/assets/air/thumb_understand.jpg' | relative_url }}" alt="Writing - Architectural Essays &amp; Technical Notes" class="air-card-img" loading="lazy">
+            </div>
+            <div class="air-card-caption">
+              <h3 class="air-card-title">Writing</h3>
+              <p class="air-card-desc">Deep architectural reflections, system breakdowns, and public engineering notes.</p>
+            </div>
           </div>
-          <div class="air-card-caption">
-            <h3 class="air-card-title">Life</h3>
-            <p class="air-card-desc">Photography slices, travel reflections, and quiet moments outside the terminal.</p>
+
+          <!-- Card 3: Life -->
+          <div class="air-card-item" id="airCardLife" data-card="life" data-prompt="Wander through quiet lake mist, travel frames, and daily life" data-url="{{ '/life/' | relative_url }}">
+            <div class="air-card-media">
+              <img src="{{ '/assets/air/thumb_scale.jpg' | relative_url }}" alt="Life - Photography &amp; Quiet Moments" class="air-card-img" loading="lazy">
+            </div>
+            <div class="air-card-caption">
+              <h3 class="air-card-title">Life</h3>
+              <p class="air-card-desc">Photography slices, travel reflections, and quiet moments outside the terminal.</p>
+            </div>
           </div>
         </div>
       </div>

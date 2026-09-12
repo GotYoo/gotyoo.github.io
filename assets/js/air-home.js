@@ -803,20 +803,22 @@
   // ================= 8. INFLATABLE SVG TITLE & SCROLL DOCKING =================
   function initInflatableTitle() {
     var titleWrap = document.getElementById('heroInflatableTitleWrap');
+    var revealWrap = document.getElementById('heroRevealWrap');
     if (!titleWrap) return;
 
-    // A) Scroll-driven scaling & docking:
-    // Initial entrance (scrollY = 0): "Learner & Builder" prominently fills the screen width (~88-90vw desktop, ~84vw mobile)
-    // As user scrolls down (0 -> 200px): title smoothly shrinks and docks into its resting size (scale 1.0)
-    // and exact layout position directly above the prompt capsule.
+    // A) Scroll-driven scaling, sticky docking & content reveal:
+    // Initial entrance (scrollY = 0): "Learner & Builder" prominently fills the screen center alone
+    // As user scrolls down: title smoothly shrinks towards docked size (scale 1.0) under the frosted header,
+    // while other content (prompt capsule + 3 cards) smoothly fades in and slides up into place.
     function getScaleConfig() {
       var vw = window.innerWidth || document.documentElement.clientWidth || 1200;
+      var vh = window.innerHeight || document.documentElement.clientHeight || 900;
       var isMobile = vw <= 768;
 
       var dockedWidth = isMobile ? Math.min(vw * 0.84, 310) : Math.min(Math.max(vw * 0.56, 340), 700);
       var targetFullWidth = vw * (isMobile ? 0.90 : 0.88);
       var maxScale = Math.min(Math.max(targetFullWidth / dockedWidth, 1.40), isMobile ? 1.10 : 1.80);
-      var maxScroll = isMobile ? 130 : 200;
+      var maxScroll = isMobile ? Math.max(vh * 0.45 - 80 - 66 + 60, 180) : Math.max(vh * 0.50 - 110 - 78 + 70, 240);
 
       return {
         maxScale: maxScale,
@@ -826,7 +828,7 @@
 
     var cfg = getScaleConfig();
 
-    function updateScale() {
+    function updateScrollState() {
       var scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
       var progress = Math.min(Math.max(scrollY / cfg.maxScroll, 0), 1);
       // Smooth easeOutCubic
@@ -834,15 +836,24 @@
       var currentScale = cfg.maxScale - (ease * (cfg.maxScale - 1.0));
 
       titleWrap.style.transform = 'scale(' + currentScale.toFixed(4) + ')';
+
+      // Reveal wrapper: smooth fade in & slide up
+      if (revealWrap) {
+        var revealProgress = Math.min(Math.max((progress - 0.15) / 0.75, 0), 1);
+        var revealEase = 1 - Math.pow(1 - revealProgress, 3);
+        revealWrap.style.opacity = revealEase.toFixed(3);
+        revealWrap.style.transform = 'translateY(' + ((1 - revealEase) * 40).toFixed(1) + 'px)';
+        revealWrap.style.pointerEvents = revealProgress >= 0.85 ? 'auto' : 'none';
+      }
     }
 
-    window.addEventListener('scroll', updateScale, { passive: true });
+    window.addEventListener('scroll', updateScrollState, { passive: true });
     window.addEventListener('resize', function () {
       cfg = getScaleConfig();
-      updateScale();
+      updateScrollState();
     }, { passive: true });
 
-    updateScale();
+    updateScrollState();
 
     // B) Click to replay handwriting and inflation animation
     titleWrap.addEventListener('click', function () {

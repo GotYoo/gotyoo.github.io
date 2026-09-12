@@ -101,7 +101,7 @@ body.theme-night .sky-gradient-mask {
   z-index: 10;
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh + 320px);
+  min-height: calc(100vh + 450px);
 }
 
 /* Typography Utilities */
@@ -400,20 +400,20 @@ body.theme-dawn .air-header-morph::before {
 
 /* Hero Section */
 .hero-section {
+  position: relative;
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 270px 24px 80px;
+  padding: 0 24px 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
   box-sizing: border-box;
 }
 
 @media (max-width: 768px) {
   .hero-section {
-    padding: 155px 16px 60px;
+    padding: 0 16px 50px;
   }
 }
 
@@ -430,9 +430,13 @@ body.theme-dawn .air-header-morph::before {
    DYNAMIC INFLATABLE SVG ARTISTIC LOGO & HANDWRITING HEADLINE
    ========================================================================== */
 .hero-inflatable-title-wrap {
+  position: sticky;
+  top: 78px;
+  z-index: 50;
   width: 100%;
   max-width: min(84vw, 310px);
-  margin: 0 auto 22px;
+  margin-top: calc(45vh - 80px);
+  margin-bottom: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -446,9 +450,20 @@ body.theme-dawn .air-header-morph::before {
 
 @media (min-width: 769px) {
   .hero-inflatable-title-wrap {
+    top: 78px;
     max-width: clamp(340px, 56vw, 700px);
-    margin: 0 auto 32px;
+    margin-top: calc(50vh - 110px);
+    margin-bottom: 24px;
   }
+}
+
+/* Hero reveal container (capsule + cards smoothly emerge on scroll) */
+.hero-reveal-wrap {
+  width: 100%;
+  opacity: 0;
+  transform: translateY(40px);
+  pointer-events: none;
+  will-change: opacity, transform;
 }
 
 .hero-inflatable-svg {
@@ -1651,7 +1666,7 @@ body.theme-night .hero-inflatable-svg {
     display: none;
   }
   .hero-section {
-    padding: 150px 16px 50px;
+    padding: 0 16px 40px;
   }
   .hero-title {
     margin-bottom: 32px;
