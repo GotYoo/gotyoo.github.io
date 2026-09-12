@@ -401,7 +401,7 @@ body.theme-dawn .air-header-morph::before {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 32px 24px 56px;
+  padding: 44px 24px 56px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -419,11 +419,12 @@ body.theme-dawn .air-header-morph::before {
 
 .hero-title {
   color: #ffffff;
-  font-size: clamp(40px, 6.2vw, 76px);
+  font-size: clamp(44px, 6.8vw, 84px);
   font-weight: 800;
-  line-height: 1.06;
+  line-height: 1.08;
   letter-spacing: -0.04em;
-  margin-bottom: 12px;
+  margin-top: 8px;
+  margin-bottom: 34px;
   text-shadow: 0 4px 24px rgba(0, 35, 100, 0.35);
 }
 

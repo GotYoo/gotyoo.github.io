@@ -800,40 +800,6 @@
     }
   }
 
-  // ================= 8. SCROLL-SCALING DYNAMIC AIR LOGO (Hero Inflatable Logo) =================
-  function initScrollScalingLogo() {
-    var logoWrap = document.getElementById('heroScrollLogoWrap');
-    if (!logoWrap) return;
-
-    var ticking = false;
-
-    function updateLogoScale() {
-      var scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
-
-      // Hero logo shrinks & drifts up during initial scroll (0 -> 160px)
-      var heroMaxScroll = 160;
-      var heroProgress = Math.min(Math.max(scrollY / heroMaxScroll, 0), 1);
-      var heroEase = heroProgress * (2 - heroProgress);
-
-      var scale = 1.0 - (heroEase * 0.58);
-      var translateY = -heroEase * 38;
-      var opacity = 1.0 - (heroEase * 0.92);
-      logoWrap.style.transform = 'translate3d(0, ' + translateY + 'px, 0) scale(' + scale + ')';
-      logoWrap.style.opacity = opacity;
-
-      ticking = false;
-    }
-
-    window.addEventListener('scroll', function () {
-      if (!ticking) {
-        requestAnimationFrame(updateLogoScale);
-        ticking = true;
-      }
-    }, { passive: true });
-
-    updateLogoScale();
-  }
-
   // ================= INITIALIZE ON LOAD =================
   function init() {
     initTabs();
@@ -843,7 +809,6 @@
     initCloudEntrance();
     initTimeSwitcher();
     initAirCards();
-    initScrollScalingLogo();
   }
 
   if (document.readyState === 'loading') {
