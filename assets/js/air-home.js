@@ -806,10 +806,11 @@
     var revealWrap = document.getElementById('heroRevealWrap');
     if (!titleWrap) return;
 
-    // A) Scroll-driven linear scaling, generous runway & velvety smooth LERP animation:
+    // A) Scroll-driven linear scaling directly aligned with Air.inc pattern:
     // Initial entrance (scrollY = 0): "Learner & Builder" prominently fills the screen center alone.
-    // As user scrolls down: title linearly shrinks towards docked size (scale 1.0) under the frosted header,
-    // while other content (prompt capsule + 3 cards) linearly fades in and slides into place.
+    // As user scrolls down: title linearly scales down to docked size (scale 1.0) under the frosted header,
+    // moving strictly in lockstep with native scroll (zero counter-translate, zero spring bounce).
+    // Prompt capsule + cards smoothly fade in simultaneously.
     // Past the docking threshold, the title naturally scrolls up with the document flow.
     function getScaleConfig() {
       var vw = window.innerWidth || document.documentElement.clientWidth || 1200;
@@ -817,79 +818,53 @@
       var isMobile = vw <= 768;
 
       var dockedWidth = isMobile ? Math.min(vw * 0.84, 310) : Math.min(Math.max(vw * 0.56, 340), 700);
-      var targetFullWidth = vw * (isMobile ? 0.90 : 0.88);
-      var maxScale = Math.min(Math.max(targetFullWidth / dockedWidth, 1.40), isMobile ? 1.15 : 1.75);
+      var targetFullWidth = vw * (isMobile ? 0.92 : 0.88);
+      var maxScale = Math.min(Math.max(targetFullWidth / dockedWidth, 1.25), isMobile ? 1.25 : 1.78);
 
       var startY = isMobile ? (vh * 0.45 - 45) : (vh * 0.50 - 75);
       var dockedY = isMobile ? 86 : 102;
-      var travelDistance = Math.max(startY - dockedY, 100);
-
-      // Generous scroll runway for a luxurious, silky-smooth scroll feel
-      var dockScroll = Math.round(travelDistance * 1.55);
-      var maxCounterY = dockScroll - travelDistance;
+      var travelDistance = Math.max(Math.round(startY - dockedY), isMobile ? 160 : 250);
 
       return {
+        isMobile: isMobile,
         maxScale: maxScale,
-        dockScroll: dockScroll,
-        maxCounterY: maxCounterY
+        dockScroll: travelDistance
       };
     }
 
     var cfg = getScaleConfig();
-    var targetScroll = window.scrollY || 0;
-    var currentScroll = targetScroll;
-    var isRunning = false;
+    var ticking = false;
 
-    function renderState(sY) {
-      // 1) Pure linear progress from 0 to 1
-      var progress = Math.min(Math.max(sY / cfg.dockScroll, 0), 1);
-
-      // 2) Pure linear scale reduction
+    function renderScroll() {
+      var scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+      var progress = Math.min(Math.max(scrollY / cfg.dockScroll, 0), 1);
       var scale = cfg.maxScale - progress * (cfg.maxScale - 1.0);
-      var offset = progress * cfg.maxCounterY;
 
-      titleWrap.style.transform = 'translate3d(0, ' + offset.toFixed(2) + 'px, 0) scale(' + scale.toFixed(4) + ')';
+      titleWrap.style.transform = 'scale(' + scale.toFixed(4) + ')';
 
-      // 3) Pure linear reveal of capsule + cards
       if (revealWrap) {
         revealWrap.style.opacity = progress.toFixed(3);
-        var cardOffset = offset + (1 - progress) * 24;
-        revealWrap.style.transform = 'translate3d(0, ' + cardOffset.toFixed(2) + 'px, 0)';
-        revealWrap.style.pointerEvents = progress >= 0.9 ? 'auto' : 'none';
+        revealWrap.style.transform = 'translate3d(0, ' + ((1 - progress) * 20).toFixed(1) + 'px, 0)';
+        revealWrap.style.pointerEvents = progress >= 0.85 ? 'auto' : 'none';
       }
-    }
 
-    // High-performance LERP damping loop (60fps/120fps/144fps decoupled from discrete mouse wheel notches)
-    function animLoop() {
-      var diff = targetScroll - currentScroll;
-      if (Math.abs(diff) > 0.1) {
-        currentScroll += diff * 0.14;
-        renderState(currentScroll);
-        requestAnimationFrame(animLoop);
-      } else {
-        currentScroll = targetScroll;
-        renderState(currentScroll);
-        isRunning = false;
-      }
+      ticking = false;
     }
 
     function onScroll() {
-      targetScroll = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
-      if (!isRunning) {
-        isRunning = true;
-        requestAnimationFrame(animLoop);
+      if (!ticking) {
+        requestAnimationFrame(renderScroll);
+        ticking = true;
       }
     }
 
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', function () {
       cfg = getScaleConfig();
-      targetScroll = window.scrollY || 0;
-      currentScroll = targetScroll;
-      renderState(currentScroll);
+      renderScroll();
     }, { passive: true });
 
-    renderState(currentScroll);
+    renderScroll();
 
     // B) Click to replay handwriting and inflation animation
     titleWrap.addEventListener('click', function () {
