@@ -806,10 +806,11 @@
     var revealWrap = document.getElementById('heroRevealWrap');
     if (!titleWrap) return;
 
-    // A) Scroll-driven scaling, sticky docking & content reveal:
-    // Initial entrance (scrollY = 0): "Learner & Builder" prominently fills the screen center alone
-    // As user scrolls down: title smoothly shrinks towards docked size (scale 1.0) under the frosted header,
-    // while other content (prompt capsule + 3 cards) smoothly fades in and slides up into place.
+    // A) Scroll-driven linear scaling & natural content reveal:
+    // Initial entrance (scrollY = 0): "Learner & Builder" prominently fills the screen center alone.
+    // As user scrolls down: title linearly shrinks towards docked size (scale 1.0) under the frosted header,
+    // while other content (prompt capsule + 3 cards) linearly fades in and slides into place.
+    // Past the docking threshold, the title naturally scrolls up with the document flow.
     function getScaleConfig() {
       var vw = window.innerWidth || document.documentElement.clientWidth || 1200;
       var vh = window.innerHeight || document.documentElement.clientHeight || 900;
@@ -817,12 +818,16 @@
 
       var dockedWidth = isMobile ? Math.min(vw * 0.84, 310) : Math.min(Math.max(vw * 0.56, 340), 700);
       var targetFullWidth = vw * (isMobile ? 0.90 : 0.88);
-      var maxScale = Math.min(Math.max(targetFullWidth / dockedWidth, 1.40), isMobile ? 1.10 : 1.80);
-      var maxScroll = isMobile ? Math.max(vh * 0.45 - 80 - 66 + 60, 180) : Math.max(vh * 0.50 - 110 - 78 + 70, 240);
+      var maxScale = Math.min(Math.max(targetFullWidth / dockedWidth, 1.40), isMobile ? 1.15 : 1.75);
+
+      // Dock scroll distance matches the travel from initial centered margin-top to top docked position:
+      // Desktop: margin-top is (0.5 * vh - 80), docked top is 80 -> travel = 0.5 * vh - 160
+      // Mobile: margin-top is (0.45 * vh - 50), docked top is 74 -> travel = 0.45 * vh - 124
+      var dockScroll = isMobile ? Math.max(Math.round(vh * 0.45 - 124), 160) : Math.max(Math.round(vh * 0.50 - 160), 220);
 
       return {
         maxScale: maxScale,
-        maxScroll: maxScroll
+        dockScroll: dockScroll
       };
     }
 
@@ -830,20 +835,18 @@
 
     function updateScrollState() {
       var scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
-      var progress = Math.min(Math.max(scrollY / cfg.maxScroll, 0), 1);
-      // Smooth easeOutCubic
-      var ease = 1 - Math.pow(1 - progress, 3);
-      var currentScale = cfg.maxScale - (ease * (cfg.maxScale - 1.0));
+      // 1) Pure linear progress from 0 to 1
+      var progress = Math.min(Math.max(scrollY / cfg.dockScroll, 0), 1);
 
-      titleWrap.style.transform = 'scale(' + currentScale.toFixed(4) + ')';
+      // 2) Pure linear scale reduction
+      var scale = cfg.maxScale - progress * (cfg.maxScale - 1.0);
+      titleWrap.style.transform = 'scale(' + scale.toFixed(4) + ')';
 
-      // Reveal wrapper: smooth fade in & slide up
+      // 3) Pure linear reveal of capsule + cards
       if (revealWrap) {
-        var revealProgress = Math.min(Math.max((progress - 0.15) / 0.75, 0), 1);
-        var revealEase = 1 - Math.pow(1 - revealProgress, 3);
-        revealWrap.style.opacity = revealEase.toFixed(3);
-        revealWrap.style.transform = 'translateY(' + ((1 - revealEase) * 40).toFixed(1) + 'px)';
-        revealWrap.style.pointerEvents = revealProgress >= 0.85 ? 'auto' : 'none';
+        revealWrap.style.opacity = progress.toFixed(3);
+        revealWrap.style.transform = 'translateY(' + ((1 - progress) * 30).toFixed(1) + 'px)';
+        revealWrap.style.pointerEvents = progress >= 0.9 ? 'auto' : 'none';
       }
     }
 

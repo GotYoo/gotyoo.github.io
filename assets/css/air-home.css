@@ -101,7 +101,7 @@ body.theme-night .sky-gradient-mask {
   z-index: 10;
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh + 450px);
+  min-height: calc(100vh + 600px);
 }
 
 /* Typography Utilities */
@@ -404,7 +404,7 @@ body.theme-dawn .air-header-morph::before {
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 24px 60px;
+  padding: 0 24px 80px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -413,7 +413,7 @@ body.theme-dawn .air-header-morph::before {
 
 @media (max-width: 768px) {
   .hero-section {
-    padding: 0 16px 50px;
+    padding: 0 16px 60px;
   }
 }
 
@@ -430,12 +430,12 @@ body.theme-dawn .air-header-morph::before {
    DYNAMIC INFLATABLE SVG ARTISTIC LOGO & HANDWRITING HEADLINE
    ========================================================================== */
 .hero-inflatable-title-wrap {
-  position: sticky;
-  top: 78px;
-  z-index: 50;
+  position: relative;
+  top: auto;
+  z-index: 20;
   width: 100%;
   max-width: min(84vw, 310px);
-  margin-top: calc(45vh - 80px);
+  margin-top: calc(45vh - 50px);
   margin-bottom: 20px;
   display: flex;
   justify-content: center;
@@ -450,9 +450,8 @@ body.theme-dawn .air-header-morph::before {
 
 @media (min-width: 769px) {
   .hero-inflatable-title-wrap {
-    top: 78px;
     max-width: clamp(340px, 56vw, 700px);
-    margin-top: calc(50vh - 110px);
+    margin-top: calc(50vh - 80px);
     margin-bottom: 24px;
   }
 }
@@ -461,7 +460,7 @@ body.theme-dawn .air-header-morph::before {
 .hero-reveal-wrap {
   width: 100%;
   opacity: 0;
-  transform: translateY(40px);
+  transform: translateY(30px);
   pointer-events: none;
   will-change: opacity, transform;
 }
