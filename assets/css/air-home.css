@@ -101,7 +101,7 @@ body.theme-night .sky-gradient-mask {
   z-index: 10;
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh + 600px);
+  min-height: calc(100vh + 800px);
 }
 
 /* Typography Utilities */
@@ -435,13 +435,15 @@ body.theme-dawn .air-header-morph::before {
   z-index: 20;
   width: 100%;
   max-width: min(84vw, 310px);
-  margin-top: calc(45vh - 50px);
+  margin-top: calc(45vh - 45px);
   margin-bottom: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   transform-origin: center center;
   will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   cursor: pointer;
   user-select: none;
   -webkit-user-select: none;
@@ -451,7 +453,7 @@ body.theme-dawn .air-header-morph::before {
 @media (min-width: 769px) {
   .hero-inflatable-title-wrap {
     max-width: clamp(340px, 56vw, 700px);
-    margin-top: calc(50vh - 80px);
+    margin-top: calc(50vh - 75px);
     margin-bottom: 24px;
   }
 }
@@ -460,9 +462,10 @@ body.theme-dawn .air-header-morph::before {
 .hero-reveal-wrap {
   width: 100%;
   opacity: 0;
-  transform: translateY(30px);
   pointer-events: none;
   will-change: opacity, transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .hero-inflatable-svg {

@@ -806,7 +806,7 @@
     var revealWrap = document.getElementById('heroRevealWrap');
     if (!titleWrap) return;
 
-    // A) Scroll-driven linear scaling & natural content reveal:
+    // A) Scroll-driven linear scaling, generous runway & velvety smooth LERP animation:
     // Initial entrance (scrollY = 0): "Learner & Builder" prominently fills the screen center alone.
     // As user scrolls down: title linearly shrinks towards docked size (scale 1.0) under the frosted header,
     // while other content (prompt capsule + 3 cards) linearly fades in and slides into place.
@@ -820,43 +820,76 @@
       var targetFullWidth = vw * (isMobile ? 0.90 : 0.88);
       var maxScale = Math.min(Math.max(targetFullWidth / dockedWidth, 1.40), isMobile ? 1.15 : 1.75);
 
-      // Dock scroll distance matches the travel from initial centered margin-top to top docked position:
-      // Desktop: margin-top is (0.5 * vh - 80), docked top is 80 -> travel = 0.5 * vh - 160
-      // Mobile: margin-top is (0.45 * vh - 50), docked top is 74 -> travel = 0.45 * vh - 124
-      var dockScroll = isMobile ? Math.max(Math.round(vh * 0.45 - 124), 160) : Math.max(Math.round(vh * 0.50 - 160), 220);
+      var startY = isMobile ? (vh * 0.45 - 45) : (vh * 0.50 - 75);
+      var dockedY = isMobile ? 86 : 102;
+      var travelDistance = Math.max(startY - dockedY, 100);
+
+      // Generous scroll runway for a luxurious, silky-smooth scroll feel
+      var dockScroll = Math.round(travelDistance * 1.55);
+      var maxCounterY = dockScroll - travelDistance;
 
       return {
         maxScale: maxScale,
-        dockScroll: dockScroll
+        dockScroll: dockScroll,
+        maxCounterY: maxCounterY
       };
     }
 
     var cfg = getScaleConfig();
+    var targetScroll = window.scrollY || 0;
+    var currentScroll = targetScroll;
+    var isRunning = false;
 
-    function updateScrollState() {
-      var scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+    function renderState(sY) {
       // 1) Pure linear progress from 0 to 1
-      var progress = Math.min(Math.max(scrollY / cfg.dockScroll, 0), 1);
+      var progress = Math.min(Math.max(sY / cfg.dockScroll, 0), 1);
 
       // 2) Pure linear scale reduction
       var scale = cfg.maxScale - progress * (cfg.maxScale - 1.0);
-      titleWrap.style.transform = 'scale(' + scale.toFixed(4) + ')';
+      var offset = progress * cfg.maxCounterY;
+
+      titleWrap.style.transform = 'translate3d(0, ' + offset.toFixed(2) + 'px, 0) scale(' + scale.toFixed(4) + ')';
 
       // 3) Pure linear reveal of capsule + cards
       if (revealWrap) {
         revealWrap.style.opacity = progress.toFixed(3);
-        revealWrap.style.transform = 'translateY(' + ((1 - progress) * 30).toFixed(1) + 'px)';
+        var cardOffset = offset + (1 - progress) * 24;
+        revealWrap.style.transform = 'translate3d(0, ' + cardOffset.toFixed(2) + 'px, 0)';
         revealWrap.style.pointerEvents = progress >= 0.9 ? 'auto' : 'none';
       }
     }
 
-    window.addEventListener('scroll', updateScrollState, { passive: true });
+    // High-performance LERP damping loop (60fps/120fps/144fps decoupled from discrete mouse wheel notches)
+    function animLoop() {
+      var diff = targetScroll - currentScroll;
+      if (Math.abs(diff) > 0.1) {
+        currentScroll += diff * 0.14;
+        renderState(currentScroll);
+        requestAnimationFrame(animLoop);
+      } else {
+        currentScroll = targetScroll;
+        renderState(currentScroll);
+        isRunning = false;
+      }
+    }
+
+    function onScroll() {
+      targetScroll = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+      if (!isRunning) {
+        isRunning = true;
+        requestAnimationFrame(animLoop);
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', function () {
       cfg = getScaleConfig();
-      updateScrollState();
+      targetScroll = window.scrollY || 0;
+      currentScroll = targetScroll;
+      renderState(currentScroll);
     }, { passive: true });
 
-    updateScrollState();
+    renderState(currentScroll);
 
     // B) Click to replay handwriting and inflation animation
     titleWrap.addEventListener('click', function () {
