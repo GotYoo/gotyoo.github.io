@@ -805,50 +805,46 @@
     var titleWrap = document.getElementById('heroInflatableTitleWrap');
     if (!titleWrap) return;
 
-    // A) Scroll interaction:
-    // Top of page: larger and slightly lower
-    // As user scrolls down: gradually moves up and scales down until resting at docked position (current position)
-    var ticking = false;
-    var maxScroll = 160;
+    // A) Scroll-driven scaling & docking:
+    // Initial entrance (scrollY = 0): "Learner & Builder" prominently fills the screen width (~88-90vw desktop, ~84vw mobile)
+    // As user scrolls down (0 -> 200px): title smoothly shrinks and docks into its resting size (scale 1.0)
+    // and exact layout position directly above the prompt capsule.
+    function getScaleConfig() {
+      var vw = window.innerWidth || document.documentElement.clientWidth || 1200;
+      var isMobile = vw <= 768;
 
-    function getInitialConfig() {
-      var isMobile = window.innerWidth <= 768;
+      var dockedWidth = isMobile ? Math.min(vw * 0.84, 310) : Math.min(Math.max(vw * 0.56, 340), 700);
+      var targetFullWidth = vw * (isMobile ? 0.90 : 0.88);
+      var maxScale = Math.min(Math.max(targetFullWidth / dockedWidth, 1.40), isMobile ? 1.10 : 1.80);
+      var maxScroll = isMobile ? 130 : 200;
+
       return {
-        scale: isMobile ? 1.15 : 1.25,
-        translateY: isMobile ? 18 : 28
+        maxScale: maxScale,
+        maxScroll: maxScroll
       };
     }
 
-    var cfg = getInitialConfig();
+    var cfg = getScaleConfig();
 
     function updateScale() {
       var scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
-      var progress = Math.min(Math.max(scrollY / maxScroll, 0), 1);
+      var progress = Math.min(Math.max(scrollY / cfg.maxScroll, 0), 1);
       // Smooth easeOutCubic
       var ease = 1 - Math.pow(1 - progress, 3);
+      var currentScale = cfg.maxScale - (ease * (cfg.maxScale - 1.0));
 
-      var currentScale = cfg.scale - (ease * (cfg.scale - 1.0));
-      var currentTranslateY = cfg.translateY - (ease * cfg.translateY);
-
-      titleWrap.style.transform = 'translate3d(0, ' + currentTranslateY + 'px, 0) scale(' + currentScale + ')';
-      ticking = false;
+      titleWrap.style.transform = 'scale(' + currentScale.toFixed(4) + ')';
     }
 
-    window.addEventListener('scroll', function () {
-      if (!ticking) {
-        requestAnimationFrame(updateScale);
-        ticking = true;
-      }
-    }, { passive: true });
-
+    window.addEventListener('scroll', updateScale, { passive: true });
     window.addEventListener('resize', function () {
-      cfg = getInitialConfig();
+      cfg = getScaleConfig();
       updateScale();
     }, { passive: true });
 
     updateScale();
 
-    // B) Click to replay handwriting animation
+    // B) Click to replay handwriting and inflation animation
     titleWrap.addEventListener('click', function () {
       var paths = titleWrap.querySelectorAll('.inflatable-path');
       var spec = titleWrap.querySelector('.specular-layer');

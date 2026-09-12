@@ -101,7 +101,7 @@ body.theme-night .sky-gradient-mask {
   z-index: 10;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: calc(100vh + 320px);
 }
 
 /* Typography Utilities */
@@ -112,8 +112,10 @@ body.theme-night .sky-gradient-mask {
    PROGRESSIVE AIR MORPHING HEADER (Top Navigation)
 ============================================================ */
 .air-header-morph {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 900;
   width: 100%;
   height: 68px;
@@ -399,13 +401,20 @@ body.theme-dawn .air-header-morph::before {
 /* Hero Section */
 .hero-section {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 44px 24px 56px;
+  padding: 270px 24px 80px;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 155px 16px 60px;
+  }
 }
 
 .hero-mark {
@@ -422,12 +431,12 @@ body.theme-dawn .air-header-morph::before {
    ========================================================================== */
 .hero-inflatable-title-wrap {
   width: 100%;
-  max-width: clamp(340px, 66vw, 760px);
-  margin: 6px auto 38px;
+  max-width: min(84vw, 310px);
+  margin: 0 auto 22px;
   display: flex;
   justify-content: center;
   align-items: center;
-  transform-origin: center top;
+  transform-origin: center center;
   will-change: transform;
   cursor: pointer;
   user-select: none;
@@ -435,11 +444,17 @@ body.theme-dawn .air-header-morph::before {
   transition: filter 0.3s ease;
 }
 
+@media (min-width: 769px) {
+  .hero-inflatable-title-wrap {
+    max-width: clamp(340px, 56vw, 700px);
+    margin: 0 auto 32px;
+  }
+}
+
 .hero-inflatable-svg {
   width: 100%;
   height: auto;
   overflow: visible;
-  filter: drop-shadow(0 14px 28px rgba(0, 35, 100, 0.32));
   transition: filter 0.4s ease;
 }
 
@@ -453,72 +468,66 @@ body.theme-night .hero-inflatable-svg {
 
 /* Inflatable handwriting path stroke & puffy fill animation */
 .inflatable-path {
-  fill: #ffffff;
   stroke: #ffffff;
-  stroke-width: 4.8;
+  stroke-width: 3.8;
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
   fill-opacity: 0;
-  animation: drawInflatablePath 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards,
-             inflateFillBloom 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.15s forwards;
+  animation: drawInflatablePath 1.6s cubic-bezier(0.38, 0, 0.2, 1) forwards,
+             inflateFillBloom 0.7s cubic-bezier(0.16, 1, 0.3, 1) 1.25s forwards;
 }
 
 .path-learner {
-  animation-delay: 0.12s, 1.05s;
+  animation-delay: 0.1s, 1.1s;
 }
 
 .path-amp {
-  animation-delay: 0.58s, 1.25s;
+  animation-delay: 0.6s, 1.25s;
 }
 
 .path-builder {
-  animation-delay: 0.80s, 1.40s;
+  animation-delay: 0.85s, 1.4s;
 }
 
 @keyframes drawInflatablePath {
   0% {
     stroke-dashoffset: 1000;
-    stroke-width: 2.6;
+    stroke-width: 2.5;
   }
-  65% {
-    stroke-width: 5.6;
+  70% {
+    stroke-width: 4.8;
   }
   100% {
     stroke-dashoffset: 0;
-    stroke-width: 4.8;
+    stroke-width: 3.8;
   }
 }
 
 @keyframes inflateFillBloom {
   0% {
     fill-opacity: 0;
-    transform: scale(0.98);
-  }
-  50% {
-    transform: scale(1.032);
   }
   100% {
     fill-opacity: 1;
-    transform: scale(1);
   }
 }
 
 /* Specular highlight sheen reflection */
 .specular-layer {
   fill: none;
-  stroke: url(#inflatableSheenGrad);
-  stroke-width: 2.2;
+  stroke: url(#specularGloss);
+  stroke-width: 2.5;
   stroke-linecap: round;
   stroke-linejoin: round;
   opacity: 0;
-  animation: fadeInSpecularSheen 0.6s ease-out 1.42s forwards;
+  animation: fadeInSpecularSheen 0.6s ease-out 1.5s forwards;
 }
 
 @keyframes fadeInSpecularSheen {
   from { opacity: 0; }
-  to { opacity: 0.85; }
+  to { opacity: 0.92; }
 }
 
 /* Screen reader only utility */
@@ -1642,7 +1651,7 @@ body.theme-night .hero-inflatable-svg {
     display: none;
   }
   .hero-section {
-    padding: 24px 16px 40px;
+    padding: 150px 16px 50px;
   }
   .hero-title {
     margin-bottom: 32px;
