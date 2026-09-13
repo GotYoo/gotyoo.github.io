@@ -184,23 +184,23 @@ sitemap:
             </div>
 
             <!-- Tab Switcher -->
-            <div class="console-tabs" role="tablist">
-              <button type="button" class="console-tab-btn console-tab is-active" data-tab="stream">1. 执行仿真 (Trace)</button>
-              <button type="button" class="console-tab-btn console-tab" data-tab="arch">2. 记忆拓扑 (Arch)</button>
-              <button type="button" class="console-tab-btn console-tab" data-tab="specs">3. 评测指标 (Specs)</button>
+            <div class="console-tabs" role="tablist" aria-label="Workbench Simulation Views">
+              <button type="button" class="console-tab-btn console-tab is-active" role="tab" aria-selected="true" data-tab="stream">1. 执行仿真 (Trace)</button>
+              <button type="button" class="console-tab-btn console-tab" role="tab" aria-selected="false" data-tab="arch">2. 记忆拓扑 (Arch)</button>
+              <button type="button" class="console-tab-btn console-tab" role="tab" aria-selected="false" data-tab="specs">3. 评测指标 (Specs)</button>
             </div>
 
             <!-- Tab Panes -->
             <div class="console-body">
               <!-- Pane 1: Terminal Stream -->
-              <div class="console-pane" data-console-pane="stream">
+              <div class="console-pane" role="tabpanel" data-console-pane="stream">
                 <div class="terminal-stream" id="terminalStream">
                   <!-- Injected via JavaScript with typing sequence -->
                 </div>
               </div>
 
               <!-- Pane 2: Architecture Spec -->
-              <div class="console-pane" data-console-pane="arch" style="display: none;">
+              <div class="console-pane" role="tabpanel" data-console-pane="arch" style="display: none;">
                 <div class="arch-diagram arch-view">
                   <div class="arch-node-row">
                     <div class="arch-box arch-node arch-box--highlight arch-node--highlight">
@@ -224,7 +224,7 @@ sitemap:
               </div>
 
               <!-- Pane 3: Benchmark & Specs -->
-              <div class="console-pane" data-console-pane="specs" style="display: none;">
+              <div class="console-pane" role="tabpanel" data-console-pane="specs" style="display: none;">
                 <div class="benchmark-grid spec-view">
                   <div class="metric-card spec-metric">
                     <div class="metric-num">68<span>%</span></div>

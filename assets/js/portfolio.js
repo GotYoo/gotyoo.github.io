@@ -1,4 +1,4 @@
-﻿/**
+/**
  * GotYoo · Modern Portfolio & Engineering Workbench System
  * Zero-dependency, lightweight, high-performance vanilla JS
  */
@@ -37,6 +37,10 @@
 
   function applyTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
+    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+    if (metaThemeColor) {
+      metaThemeColor.setAttribute('content', theme === 'dark' ? '#07090e' : '#f8fafc');
+    }
     const themeToggleBtns = document.querySelectorAll('[data-theme-toggle]');
     themeToggleBtns.forEach((btn) => {
       btn.setAttribute('aria-label', theme === 'dark' ? '切换为明亮模式' : '切换为暗色模式');
@@ -143,11 +147,17 @@
     tabBtns.forEach((btn) => {
       btn.addEventListener('click', () => {
         const targetTab = btn.getAttribute('data-tab');
-        tabBtns.forEach((b) => b.classList.remove('is-active'));
+        tabBtns.forEach((b) => {
+          b.classList.remove('is-active');
+          b.setAttribute('aria-selected', 'false');
+        });
         btn.classList.add('is-active');
+        btn.setAttribute('aria-selected', 'true');
 
         tabPanes.forEach((pane) => {
-          pane.style.display = pane.getAttribute('data-console-pane') === targetTab ? 'block' : 'none';
+          const isTarget = pane.getAttribute('data-console-pane') === targetTab;
+          pane.style.display = isTarget ? 'block' : 'none';
+          pane.setAttribute('aria-hidden', isTarget ? 'false' : 'true');
         });
 
         // Only start if it hasn't run yet
@@ -159,6 +169,11 @@
 
     if (rerunBtn) {
       rerunBtn.addEventListener('click', () => {
+        // If user is currently on arch or specs tab, switch to stream tab so simulation is visible
+        const streamTabBtn = consoleCard.querySelector('.console-tab-btn[data-tab="stream"]');
+        if (streamTabBtn && !streamTabBtn.classList.contains('is-active')) {
+          streamTabBtn.click();
+        }
         runTerminalStream(true);
       });
     }
@@ -167,6 +182,7 @@
   }
 
   function runTerminalStream(force = false) {
+    const consoleCard = document.getElementById('heroConsole');
     const streamContainer = document.getElementById('terminalStream');
     if (!streamContainer) return;
 
@@ -177,15 +193,35 @@
       activeTerminalInterval = null;
     }
 
+    const statusEl = consoleCard ? consoleCard.querySelector('.console-footer span') : null;
     streamContainer.innerHTML = '';
     let stepIndex = 0;
     hasTerminalRun = true;
+
+    if (statusEl) {
+      statusEl.textContent = 'Status: Executing Agent Loop (0/' + SIMULATED_STEPS.length + ')...';
+    }
 
     function renderNextStep() {
       if (stepIndex >= SIMULATED_STEPS.length) {
         if (activeTerminalInterval) {
           clearInterval(activeTerminalInterval);
           activeTerminalInterval = null;
+        }
+        if (statusEl) {
+          statusEl.textContent = 'Status: Autonomous Loop Active · Zero Drift ✓';
+        }
+        // Append prompt line with blinking cursor
+        if (!streamContainer.querySelector('.term-prompt-line')) {
+          const promptLine = document.createElement('div');
+          promptLine.className = 'term-line term-prompt-line';
+          promptLine.innerHTML = `
+            <span class="term-tag term-tag--prompt">gotyoo@minicode:~$</span>
+            <span class="term-text term-text--dim">ready for review</span>
+            <span class="term-cursor" aria-hidden="true"></span>
+          `;
+          streamContainer.appendChild(promptLine);
+          streamContainer.scrollTop = streamContainer.scrollHeight;
         }
         return;
       }
@@ -200,6 +236,10 @@
       streamContainer.appendChild(lineEl);
       streamContainer.scrollTop = streamContainer.scrollHeight;
       stepIndex++;
+
+      if (statusEl && stepIndex < SIMULATED_STEPS.length) {
+        statusEl.textContent = 'Status: Executing Agent Loop (' + stepIndex + '/' + SIMULATED_STEPS.length + ')...';
+      }
     }
 
     renderNextStep();
