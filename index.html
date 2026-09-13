@@ -179,15 +179,15 @@ sitemap:
                 <span class="console-dot console-dot--yellow"></span>
                 <span class="console-dot console-dot--green"></span>
               </div>
-              <span class="console-title">minicodeagent-v0.4.2 · swe-bench-eval · py3.12</span>
+              <span class="console-title console-path">minicodeagent-v0.4.2 · swe-bench-eval · py3.12</span>
               <span class="meta-chip" style="font-size:10px;padding:2px 6px;">RUNNING</span>
             </div>
 
             <!-- Tab Switcher -->
             <div class="console-tabs" role="tablist">
-              <button type="button" class="console-tab-btn is-active" data-tab="stream">1. 执行仿真 (Trace)</button>
-              <button type="button" class="console-tab-btn" data-tab="arch">2. 记忆拓扑 (Arch)</button>
-              <button type="button" class="console-tab-btn" data-tab="specs">3. 评测指标 (Specs)</button>
+              <button type="button" class="console-tab-btn console-tab is-active" data-tab="stream">1. 执行仿真 (Trace)</button>
+              <button type="button" class="console-tab-btn console-tab" data-tab="arch">2. 记忆拓扑 (Arch)</button>
+              <button type="button" class="console-tab-btn console-tab" data-tab="specs">3. 评测指标 (Specs)</button>
             </div>
 
             <!-- Tab Panes -->
@@ -201,22 +201,22 @@ sitemap:
 
               <!-- Pane 2: Architecture Spec -->
               <div class="console-pane" data-console-pane="arch" style="display: none;">
-                <div class="arch-diagram">
+                <div class="arch-diagram arch-view">
                   <div class="arch-node-row">
-                    <div class="arch-box arch-box--highlight">
+                    <div class="arch-box arch-node arch-box--highlight arch-node--highlight">
                       <div class="arch-box__title">AST Parser</div>
                       <div class="arch-box__desc">Tree-sitter repo token pruning</div>
                     </div>
-                    <div class="arch-box arch-box--highlight">
+                    <div class="arch-box arch-node arch-box--highlight arch-node--highlight">
                       <div class="arch-box__title">Hierarchical Memory</div>
                       <div class="arch-box__desc">L1 Working + L2 Epistemic Vector</div>
                     </div>
-                    <div class="arch-box arch-box--highlight">
+                    <div class="arch-box arch-node arch-box--highlight arch-node--highlight">
                       <div class="arch-box__title">Tool Sandbox</div>
                       <div class="arch-box__desc">Isolated Docker &amp; ast-grep</div>
                     </div>
                   </div>
-                  <div class="arch-box" style="margin-top: 6px;">
+                  <div class="arch-box arch-node" style="margin-top: 6px;">
                     <div class="arch-box__title">Zero-Drift Checkpoint Recovery</div>
                     <div class="arch-box__desc">自动在多步工具链异常、超时或编译失败时进行幂等状态回滚与自修正，保证长链路决策稳定性。</div>
                   </div>
@@ -225,20 +225,20 @@ sitemap:
 
               <!-- Pane 3: Benchmark & Specs -->
               <div class="console-pane" data-console-pane="specs" style="display: none;">
-                <div class="benchmark-grid">
-                  <div class="metric-card">
+                <div class="benchmark-grid spec-view">
+                  <div class="metric-card spec-metric">
                     <div class="metric-num">68<span>%</span></div>
                     <div class="metric-label">上下文压缩率 (Context Pruning)</div>
                   </div>
-                  <div class="metric-card">
+                  <div class="metric-card spec-metric">
                     <div class="metric-num">14.8<span>k</span></div>
                     <div class="metric-label">仓库最大测试行数 (LOC Evaluated)</div>
                   </div>
-                  <div class="metric-card">
+                  <div class="metric-card spec-metric">
                     <div class="metric-num">&lt; 0.45<span>s</span></div>
                     <div class="metric-label">分层记忆检索延迟 (L1/L2 Latency)</div>
                   </div>
-                  <div class="metric-card">
+                  <div class="metric-card spec-metric">
                     <div class="metric-num">100<span>%</span></div>
                     <div class="metric-label">状态检查点恢复率 (Zero State Loss)</div>
                   </div>
