@@ -1425,6 +1425,133 @@ html[data-theme="light"] .console-rerun-btn:hover {
   color: var(--text-primary);
 }
 
+/* --------------------------------------------------------------------------
+   Section 01: Project Showcase Light Mode Refinements
+   -------------------------------------------------------------------------- */
+[data-theme="light"] .filter-btn,
+html[data-theme="light"] .filter-btn {
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  color: #64748b;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
+}
+
+[data-theme="light"] .filter-btn:hover,
+html[data-theme="light"] .filter-btn:hover {
+  background: #f8fafc;
+  color: #0f172a;
+  border-color: rgba(203, 213, 225, 0.95);
+}
+
+[data-theme="light"] .filter-btn.is-active,
+html[data-theme="light"] .filter-btn.is-active {
+  background: #0f172a;
+  color: #ffffff;
+  border-color: #0f172a;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.12);
+}
+
+[data-theme="light"] .project-card,
+html[data-theme="light"] .project-card {
+  background: #ffffff;
+  border-color: rgba(226, 232, 240, 0.85);
+  box-shadow: 0 8px 24px -6px rgba(15, 23, 42, 0.06), 0 1px 3px rgba(15, 23, 42, 0.03);
+}
+
+[data-theme="light"] .project-card:hover,
+html[data-theme="light"] .project-card:hover {
+  border-color: rgba(203, 213, 225, 0.95);
+  box-shadow: 0 16px 36px -8px rgba(15, 23, 42, 0.1), 0 2px 6px rgba(15, 23, 42, 0.04);
+}
+
+[data-theme="light"] .project-card::before,
+html[data-theme="light"] .project-card::before {
+  background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.15), transparent);
+}
+
+[data-theme="light"] .project-badge,
+html[data-theme="light"] .project-badge {
+  background: rgba(37, 99, 235, 0.08);
+  color: #1d4ed8;
+  border: 1px solid rgba(37, 99, 235, 0.22);
+  font-weight: 600;
+}
+
+[data-theme="light"] .project-badge[style*="accent-cyan"],
+html[data-theme="light"] .project-badge[style*="accent-cyan"] {
+  border-color: rgba(8, 145, 178, 0.25) !important;
+}
+
+[data-theme="light"] .project-badge[style*="accent-purple"],
+html[data-theme="light"] .project-badge[style*="accent-purple"] {
+  border-color: rgba(124, 58, 237, 0.25) !important;
+}
+
+[data-theme="light"] .project-badge[style*="accent-emerald"],
+html[data-theme="light"] .project-badge[style*="accent-emerald"] {
+  border-color: rgba(5, 150, 105, 0.25) !important;
+}
+
+[data-theme="light"] .project-specs,
+[data-theme="light"] .project-card__specs,
+html[data-theme="light"] .project-specs,
+html[data-theme="light"] .project-card__specs {
+  background: rgba(241, 245, 249, 0.75);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.02);
+}
+
+[data-theme="light"] .spec-key,
+[data-theme="light"] .project-spec-key,
+html[data-theme="light"] .spec-key,
+html[data-theme="light"] .project-spec-key {
+  color: #64748b;
+  font-weight: 500;
+}
+
+[data-theme="light"] .spec-val,
+[data-theme="light"] .project-spec-val,
+html[data-theme="light"] .spec-val,
+html[data-theme="light"] .project-spec-val {
+  color: #0f172a;
+  font-weight: 600;
+}
+
+[data-theme="light"] .tech-tag,
+[data-theme="light"] .tag-chip,
+[data-theme="light"] .project-tags .tech-tag,
+[data-theme="light"] .project-tags .tag-chip,
+html[data-theme="light"] .tech-tag,
+html[data-theme="light"] .tag-chip,
+html[data-theme="light"] .project-tags .tech-tag,
+html[data-theme="light"] .project-tags .tag-chip {
+  background: #f1f5f9;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  color: #475569;
+  font-weight: 500;
+  transition: all var(--transition-fast);
+}
+
+[data-theme="light"] .tech-tag:hover,
+[data-theme="light"] .tag-chip:hover,
+[data-theme="light"] .project-tags .tech-tag:hover,
+[data-theme="light"] .project-tags .tag-chip:hover,
+html[data-theme="light"] .tech-tag:hover,
+html[data-theme="light"] .tag-chip:hover,
+html[data-theme="light"] .project-tags .tech-tag:hover,
+html[data-theme="light"] .project-tags .tag-chip:hover {
+  background: #ffffff;
+  border-color: rgba(203, 213, 225, 0.95);
+  color: #0f172a;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+  transform: translateY(-1px);
+}
+
+[data-theme="light"] .project-card__footer,
+html[data-theme="light"] .project-card__footer {
+  border-top-color: rgba(226, 232, 240, 0.85);
+}
+
 /* ==========================================================================
    SECTION 02: DEEP PUBLIC WRITING & ESSAYS
    ========================================================================== */
@@ -1553,6 +1680,35 @@ html[data-theme="light"] .console-rerun-btn:hover {
   display: inline-flex;
   align-items: center;
   gap: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   Section 02: Writing & Essays Light Mode Refinements
+   -------------------------------------------------------------------------- */
+[data-theme="light"] .writing-manifesto-card,
+html[data-theme="light"] .writing-manifesto-card {
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  box-shadow: 0 8px 24px -6px rgba(15, 23, 42, 0.06), 0 1px 3px rgba(15, 23, 42, 0.03);
+}
+
+[data-theme="light"] .writing-stats,
+html[data-theme="light"] .writing-stats {
+  border-top-color: rgba(226, 232, 240, 0.85);
+}
+
+[data-theme="light"] .essay-card,
+html[data-theme="light"] .essay-card {
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  box-shadow: 0 4px 16px -4px rgba(15, 23, 42, 0.05);
+}
+
+[data-theme="light"] .essay-card:hover,
+html[data-theme="light"] .essay-card:hover {
+  background: #ffffff;
+  border-color: rgba(203, 213, 225, 0.95);
+  box-shadow: 0 12px 28px -6px rgba(15, 23, 42, 0.09);
 }
 
 /* ==========================================================================
@@ -1693,6 +1849,46 @@ html[data-theme="light"] .console-rerun-btn:hover {
   line-height: 1.6;
 }
 
+/* --------------------------------------------------------------------------
+   Section 03: Life & Photography Light Mode Refinements
+   -------------------------------------------------------------------------- */
+[data-theme="light"] .photo-card,
+html[data-theme="light"] .photo-card {
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  box-shadow: 0 6px 20px -4px rgba(15, 23, 42, 0.06);
+}
+
+[data-theme="light"] .photo-card:hover,
+html[data-theme="light"] .photo-card:hover {
+  box-shadow: 0 16px 32px -8px rgba(15, 23, 42, 0.12);
+  border-color: rgba(203, 213, 225, 0.95);
+}
+
+[data-theme="light"] .photo-card__caption,
+html[data-theme="light"] .photo-card__caption {
+  background: #ffffff;
+}
+
+[data-theme="light"] .timeline-list,
+html[data-theme="light"] .timeline-list {
+  border-left-color: rgba(226, 232, 240, 0.95);
+}
+
+[data-theme="light"] .timeline-dot,
+html[data-theme="light"] .timeline-dot {
+  background: #2563eb;
+  border-color: #f8fafc;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+[data-theme="light"] .timeline-card,
+html[data-theme="light"] .timeline-card {
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  box-shadow: 0 4px 14px -3px rgba(15, 23, 42, 0.05);
+}
+
 /* ==========================================================================
    SECTION 04: ACADEMIC PROFILE & ABOUT
    ========================================================================== */
@@ -1797,6 +1993,30 @@ html[data-theme="light"] .console-rerun-btn:hover {
   display: flex;
   gap: 12px;
   flex-shrink: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Section 04: Academic Background & About Light Mode Refinements
+   -------------------------------------------------------------------------- */
+[data-theme="light"] .about-bio-card,
+html[data-theme="light"] .about-bio-card {
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  box-shadow: 0 8px 24px -6px rgba(15, 23, 42, 0.06);
+}
+
+[data-theme="light"] .principle-item,
+html[data-theme="light"] .principle-item {
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  box-shadow: 0 4px 14px -3px rgba(15, 23, 42, 0.04);
+}
+
+[data-theme="light"] .resume-download-card,
+html[data-theme="light"] .resume-download-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  box-shadow: 0 8px 24px -6px rgba(15, 23, 42, 0.06);
 }
 
 /* ==========================================================================
@@ -1906,6 +2126,33 @@ html[data-theme="light"] .console-rerun-btn:hover {
 
 .contact-channels a:hover {
   color: var(--text-primary);
+}
+
+/* --------------------------------------------------------------------------
+   Section 05: Contact & Email Copy Dock Light Mode Refinements
+   -------------------------------------------------------------------------- */
+[data-theme="light"] .contact-card,
+html[data-theme="light"] .contact-card {
+  background: linear-gradient(135deg, #ffffff 0%, rgba(238, 242, 255, 0.5) 100%);
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  box-shadow: 0 12px 36px -8px rgba(15, 23, 42, 0.07);
+}
+
+[data-theme="light"] .email-copy-dock,
+html[data-theme="light"] .email-copy-dock {
+  background: #f8fafc;
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  box-shadow: 0 6px 20px -4px rgba(15, 23, 42, 0.06);
+}
+
+[data-theme="light"] .contact-channels a,
+html[data-theme="light"] .contact-channels a {
+  color: #475569;
+}
+
+[data-theme="light"] .contact-channels a:hover,
+html[data-theme="light"] .contact-channels a:hover {
+  color: #0f172a;
 }
 
 /* ==========================================================================
@@ -2327,6 +2574,103 @@ html[data-theme="light"] .console-rerun-btn:hover {
   margin: 24px 0;
 }
 
+/* --------------------------------------------------------------------------
+   Global UI Tokens & Components Light Mode Polish
+   -------------------------------------------------------------------------- */
+[data-theme="light"] .meta-chip,
+html[data-theme="light"] .meta-chip {
+  background: rgba(37, 99, 235, 0.08);
+  color: #1d4ed8;
+  border-color: rgba(37, 99, 235, 0.22);
+}
+
+[data-theme="light"] .meta-chip--neutral,
+html[data-theme="light"] .meta-chip--neutral {
+  background: #f1f5f9;
+  color: #475569;
+  border-color: rgba(226, 232, 240, 0.9);
+}
+
+[data-theme="light"] .meta-chip--accent,
+html[data-theme="light"] .meta-chip--accent {
+  background: rgba(124, 58, 237, 0.08);
+  color: #6d28d9;
+  border-color: rgba(124, 58, 237, 0.22);
+}
+
+[data-theme="light"] .btn-copy-email,
+html[data-theme="light"] .btn-copy-email {
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  color: #0f172a;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
+}
+
+[data-theme="light"] .btn-copy-email:hover,
+html[data-theme="light"] .btn-copy-email:hover {
+  background: #f8fafc;
+  border-color: rgba(203, 213, 225, 0.95);
+}
+
+[data-theme="light"] .btn-ghost-action,
+html[data-theme="light"] .btn-ghost-action {
+  color: #64748b;
+}
+
+[data-theme="light"] .btn-ghost-action:hover,
+html[data-theme="light"] .btn-ghost-action:hover {
+  color: #0f172a;
+}
+
+[data-theme="light"] .markdown-content code,
+html[data-theme="light"] .markdown-content code {
+  background: #f1f5f9;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  color: #0f172a;
+}
+
+[data-theme="light"] .markdown-content pre,
+html[data-theme="light"] .markdown-content pre {
+  background: #f8fafc;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
+}
+
+[data-theme="light"] .markdown-content pre code,
+html[data-theme="light"] .markdown-content pre code {
+  background: none;
+  border: none;
+}
+
+[data-theme="light"] .resume-embed-container,
+html[data-theme="light"] .resume-embed-container {
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  box-shadow: 0 8px 24px -6px rgba(15, 23, 42, 0.06);
+}
+
+[data-theme="light"] .cmd-palette-dialog,
+html[data-theme="light"] .cmd-palette-dialog {
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  box-shadow: 0 25px 70px rgba(15, 23, 42, 0.12);
+}
+
+[data-theme="light"] .cmd-item:hover,
+[data-theme="light"] .cmd-item.is-selected,
+html[data-theme="light"] .cmd-item:hover,
+html[data-theme="light"] .cmd-item.is-selected {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+[data-theme="light"] .kbd-badge,
+html[data-theme="light"] .kbd-badge {
+  background: #f1f5f9;
+  border-color: rgba(226, 232, 240, 0.95);
+  color: #475569;
+}
+
 /* ==========================================================================
    RESPONSIVE DESIGN (MOBILE & TABLET ADAPTATION)
    ========================================================================== */
@@ -2505,4 +2849,33 @@ html[data-theme="light"] .console-rerun-btn:hover {
   .resume-embed-container {
     height: 550px;
   }
+
+  [data-theme="light"] .mobile-nav-drawer,
+  html[data-theme="light"] .mobile-nav-drawer {
+    background: rgba(255, 255, 255, 0.98);
+    border-color: rgba(226, 232, 240, 0.95);
+    box-shadow: 0 20px 45px -10px rgba(15, 23, 42, 0.12);
+  }
+
+  [data-theme="light"] .mobile-nav-link,
+  html[data-theme="light"] .mobile-nav-link {
+    background: #f1f5f9;
+    color: #334155;
+  }
+
+  [data-theme="light"] .mobile-nav-link:hover,
+  [data-theme="light"] .mobile-nav-link.is-active,
+  html[data-theme="light"] .mobile-nav-link:hover,
+  html[data-theme="light"] .mobile-nav-link.is-active {
+    background: rgba(37, 99, 235, 0.08);
+    color: #2563eb;
+  }
+
+  [data-theme="light"] .mobile-nav-btn,
+  html[data-theme="light"] .mobile-nav-btn {
+    background: #ffffff;
+    border-color: rgba(226, 232, 240, 0.95);
+    color: #0f172a;
+  }
 }
+
