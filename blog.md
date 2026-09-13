@@ -2,7 +2,7 @@
 layout: interface
 page_key: blog
 title: 深度公开手记与思考 · Blog
-description: GotYoo 的公开文章、系统架构设计笔记与阶段性工程思考。
+description: Kairo 的公开文章、系统架构设计笔记与阶段性工程思考。
 permalink: /blog/
 ---
 <section class="subpage-hero">

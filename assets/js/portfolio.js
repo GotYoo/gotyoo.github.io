@@ -1,5 +1,5 @@
 /**
- * GotYoo · Modern Portfolio & Engineering Workbench System
+ * Kairo · Modern Portfolio & Engineering Workbench System
  * Zero-dependency, lightweight, high-performance vanilla JS
  */
 
@@ -13,10 +13,10 @@
   /* ==========================================================================
      1. THEME MANAGEMENT (Dark Obsidian / Light Studio)
      ========================================================================== */
-  const THEME_KEY = 'gotyoo_theme_pref';
+  const THEME_KEY = 'kairo_theme_pref';
 
   function initTheme() {
-    const savedTheme = localStorage.getItem(THEME_KEY);
+    const savedTheme = localStorage.getItem(THEME_KEY) || localStorage.getItem('gotyoo_theme_pref');
     const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const initialTheme = savedTheme || (systemPrefersDark ? 'dark' : 'dark'); // default dark
 
@@ -216,7 +216,7 @@
           const promptLine = document.createElement('div');
           promptLine.className = 'term-line term-prompt-line';
           promptLine.innerHTML = `
-            <span class="term-tag term-tag--prompt">gotyoo@minicode:~$</span>
+            <span class="term-tag term-tag--prompt">kairo@agent:~$</span>
             <span class="term-text term-text--dim">ready for review</span>
             <span class="term-cursor" aria-hidden="true"></span>
           `;

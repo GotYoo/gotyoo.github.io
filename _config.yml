@@ -1,7 +1,7 @@
 # Site
-title:              GotYoo
-bio:                'Developer · Builder · Life'
-description:        "GotYoo 的个人主页，收录项目、公开文章与 Life 记录。"
+title:              Kairo
+bio:                'Learner · Builder · Systems'
+description:        "Kairo (吴汉卿) 的个人主页与工程工作台，聚焦大模型智能体决策系统、本地 Harness 与长链路工程落地。"
 locale:             zh_CN
 baseurl: "" # the site is served from the domain root
 url: "https://lxmhappy.live"

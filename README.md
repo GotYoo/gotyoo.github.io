@@ -1,6 +1,6 @@
-# GotYoo · Learner & Builder Workbench
+# Kairo · Learner & Builder Workbench
 
-> GotYoo (吴汉卿) 的个人主页与工程工作台 · [https://lxmhappy.live](https://lxmhappy.live)
+> Kairo (吴汉卿) 的个人主页与工程工作台 · [https://lxmhappy.live](https://lxmhappy.live)
 
 ## 核心定位与设计哲学
 

@@ -2,7 +2,7 @@
 layout: interface
 page_key: about
 title: 学术履历与个人介绍 · About
-description: 关于 GotYoo (吴汉卿) 的学术背景、研究方向、技术理念与工作方式。
+description: 关于 Kairo (吴汉卿) 的学术背景、研究方向、技术理念与工作方式。
 permalink: /about/
 ---
 <section class="subpage-hero">
