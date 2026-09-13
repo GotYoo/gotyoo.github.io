@@ -42,7 +42,7 @@ permalink: /blog/
       {% for post in site.posts %}
       <article class="essay-card">
         <div class="essay-meta">
-          <span class="essay-tag">ARCHITECTURE NOTE</span>
+          <span class="essay-tag">{{ post.category | default: "SYSTEM NOTE" }}</span>
           <span>•</span>
           <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y.%m.%d" }}</time>
           <span>•</span>

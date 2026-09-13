@@ -1,4 +1,4 @@
-/**
+﻿/**
  * GotYoo · Modern Portfolio & Engineering Workbench System
  * Zero-dependency, lightweight, high-performance vanilla JS
  */
@@ -8,6 +8,7 @@
 
   // State
   let activeTerminalInterval = null;
+  let hasTerminalRun = false;
 
   /* ==========================================================================
      1. THEME MANAGEMENT (Dark Obsidian / Light Studio)
@@ -149,8 +150,9 @@
           pane.style.display = pane.getAttribute('data-console-pane') === targetTab ? 'block' : 'none';
         });
 
-        if (targetTab === 'stream') {
-          runTerminalStream();
+        // Only start if it hasn't run yet
+        if (targetTab === 'stream' && !hasTerminalRun) {
+          runTerminalStream(false);
         }
       });
     });
@@ -161,12 +163,14 @@
       });
     }
 
-    runTerminalStream();
+    runTerminalStream(false);
   }
 
   function runTerminalStream(force = false) {
     const streamContainer = document.getElementById('terminalStream');
     if (!streamContainer) return;
+
+    if (hasTerminalRun && !force) return;
 
     if (activeTerminalInterval) {
       clearInterval(activeTerminalInterval);
@@ -175,6 +179,7 @@
 
     streamContainer.innerHTML = '';
     let stepIndex = 0;
+    hasTerminalRun = true;
 
     function renderNextStep() {
       if (stepIndex >= SIMULATED_STEPS.length) {
@@ -193,11 +198,12 @@
         <span class="term-text ${step.highlight ? 'term-text--success' : ''}">${step.text}</span>
       `;
       streamContainer.appendChild(lineEl);
+      streamContainer.scrollTop = streamContainer.scrollHeight;
       stepIndex++;
     }
 
     renderNextStep();
-    activeTerminalInterval = setInterval(renderNextStep, 700);
+    activeTerminalInterval = setInterval(renderNextStep, 650);
   }
 
   /* ==========================================================================
@@ -229,35 +235,32 @@
   }
 
   /* ==========================================================================
-     6. PHOTOGRAPHY LIGHTBOX VIEWER
+     6. PHOTOGRAPHY LIGHTBOX VIEWER (Dynamic DOM Extraction)
      ========================================================================== */
-  const galleryItems = [
-    {
-      src: '/images/pic01.jpg',
-      title: '湖面把秋天留了一会儿',
-      desc: '安静的自然倒影与树林清晨薄雾，湖光静止的清澈片刻。',
-      meta: 'AUTUMN LAKE · NATURAL LIGHT'
-    },
-    {
-      src: '/images/bg.jpg',
-      title: '向水面更深处出发',
-      desc: '开阔水域与日光映射下的前行片刻，湛蓝波纹与远方地平线。',
-      meta: 'INTO THE BLUE · WIDE WATER'
-    },
-    {
-      src: '/images/pic02.jpg',
-      title: '把日常换一种光线',
-      desc: '旷野、公路与拿起相机的瞬间，阳光在风里留下清晰的轮廓。',
-      meta: 'ON THE ROAD · GOLDEN DRIFT'
-    }
-  ];
-
   let currentPhotoIdx = 0;
+  let dynamicGallery = [];
 
   function initLightbox() {
-    const photoCards = document.querySelectorAll('[data-photo-index]');
     const lightbox = document.getElementById('photoLightbox');
     if (!lightbox) return;
+
+    const photoCards = Array.from(document.querySelectorAll('.photo-card'));
+    if (!photoCards.length) return;
+
+    // Dynamically build gallery items from DOM cards
+    dynamicGallery = photoCards.map((card) => {
+      const img = card.querySelector('img');
+      const title = card.querySelector('.photo-card__title');
+      const desc = card.querySelector('.photo-card__desc');
+      const tag = card.querySelector('.photo-card__tag');
+      return {
+        src: img ? img.getAttribute('src') : '',
+        alt: img ? img.getAttribute('alt') : '',
+        title: title ? title.textContent.trim() : '照片记录',
+        desc: desc ? desc.textContent.trim() : '',
+        meta: tag ? tag.textContent.trim() : 'SELECTED FRAME'
+      };
+    });
 
     const imgEl = lightbox.querySelector('[data-lightbox-img]');
     const titleEl = lightbox.querySelector('[data-lightbox-title]');
@@ -265,19 +268,21 @@
     const tagEl = lightbox.querySelector('[data-lightbox-tag]');
     const closeBtn = lightbox.querySelector('[data-lightbox-close]');
 
-    photoCards.forEach((card) => {
+    photoCards.forEach((card, idx) => {
       card.addEventListener('click', () => {
-        const idx = parseInt(card.getAttribute('data-photo-index'), 10) || 0;
         openPhoto(idx);
       });
     });
 
     function openPhoto(index) {
-      if (index < 0 || index >= galleryItems.length) return;
+      if (index < 0 || index >= dynamicGallery.length) return;
       currentPhotoIdx = index;
-      const item = galleryItems[index];
+      const item = dynamicGallery[index];
 
-      if (imgEl) imgEl.src = item.src;
+      if (imgEl) {
+        imgEl.src = item.src;
+        imgEl.alt = item.alt || item.title;
+      }
       if (titleEl) titleEl.textContent = item.title;
       if (descEl) descEl.textContent = item.desc;
       if (tagEl) tagEl.textContent = item.meta;
@@ -302,20 +307,26 @@
     window.addEventListener('keydown', (e) => {
       if (!lightbox.classList.contains('is-active')) return;
       if (e.key === 'Escape') closePhoto();
-      if (e.key === 'ArrowRight') openPhoto((currentPhotoIdx + 1) % galleryItems.length);
-      if (e.key === 'ArrowLeft') openPhoto((currentPhotoIdx - 1 + galleryItems.length) % galleryItems.length);
+      if (e.key === 'ArrowRight' && dynamicGallery.length > 0) {
+        openPhoto((currentPhotoIdx + 1) % dynamicGallery.length);
+      }
+      if (e.key === 'ArrowLeft' && dynamicGallery.length > 0) {
+        openPhoto((currentPhotoIdx - 1 + dynamicGallery.length) % dynamicGallery.length);
+      }
     });
   }
 
   /* ==========================================================================
-     7. COMMAND PALETTE (CMD+K / CTRL+K)
+     7. COMMAND PALETTE (CMD+K / CTRL+K with Full Keyboard Navigation)
      ========================================================================== */
   function initCommandPalette() {
     const palette = document.getElementById('cmdPalette');
     const openBtns = document.querySelectorAll('[data-open-cmd]');
     const input = document.getElementById('cmdInput');
-    const items = document.querySelectorAll('.cmd-item');
+    const items = Array.from(document.querySelectorAll('.cmd-item'));
     if (!palette) return;
+
+    let selectedIndex = -1;
 
     function openPalette() {
       palette.classList.add('is-active');
@@ -325,6 +336,7 @@
         input.focus();
       }
       filterCmdItems('');
+      setSelectedIndex(0);
     }
 
     function closePalette() {
@@ -339,7 +351,7 @@
     });
 
     window.addEventListener('keydown', (e) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault();
         if (palette.classList.contains('is-active')) {
           closePalette();
@@ -352,9 +364,47 @@
       }
     });
 
+    function getVisibleItems() {
+      return items.filter((item) => item.style.display !== 'none');
+    }
+
+    function setSelectedIndex(idx) {
+      const visible = getVisibleItems();
+      if (!visible.length) {
+        selectedIndex = -1;
+        return;
+      }
+      if (idx < 0) idx = 0;
+      if (idx >= visible.length) idx = visible.length - 1;
+      selectedIndex = idx;
+
+      items.forEach((it) => it.classList.remove('is-selected'));
+      visible[selectedIndex].classList.add('is-selected');
+      visible[selectedIndex].scrollIntoView({ block: 'nearest' });
+    }
+
     if (input) {
       input.addEventListener('input', (e) => {
         filterCmdItems(e.target.value.toLowerCase().trim());
+        setSelectedIndex(0);
+      });
+
+      input.addEventListener('keydown', (e) => {
+        const visible = getVisibleItems();
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          setSelectedIndex(selectedIndex + 1);
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          setSelectedIndex(selectedIndex - 1);
+        } else if (e.key === 'Enter') {
+          e.preventDefault();
+          if (visible[selectedIndex]) {
+            const action = visible[selectedIndex].getAttribute('data-action');
+            closePalette();
+            executeAction(action);
+          }
+        }
       });
     }
 
@@ -375,33 +425,104 @@
 
     function executeAction(action) {
       if (!action) return;
-      if (action.startsWith('#') || action.startsWith('/')) {
+      if (action.startsWith('#')) {
+        const targetEl = document.querySelector(action);
+        if (targetEl) {
+          targetEl.scrollIntoView({ behavior: 'smooth' });
+        } else {
+          window.location.href = '/' + action;
+        }
+      } else if (action.startsWith('/')) {
         window.location.href = action;
       } else if (action === 'copy-email') {
         copyText('654601458@qq.com', '已复制邮箱：654601458@qq.com');
       } else if (action === 'toggle-theme') {
         toggleTheme();
       } else if (action === 'github') {
-        window.open('https://github.com/GotYoo', '_blank');
+        window.open('https://github.com/GotYoo', '_blank', 'noopener');
       }
     }
   }
 
   /* ==========================================================================
-     8. ACTIVE NAVIGATION SPY
+     8. MOBILE NAVIGATION DRAWER
+     ========================================================================== */
+  function initMobileMenu() {
+    const toggleBtn = document.querySelector('[data-mobile-menu-toggle]');
+    const drawer = document.getElementById('mobileNavDrawer');
+    if (!toggleBtn || !drawer) return;
+
+    function openDrawer() {
+      drawer.classList.add('is-open');
+      toggleBtn.setAttribute('aria-expanded', 'true');
+      toggleBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+    }
+
+    function closeDrawer() {
+      drawer.classList.remove('is-open');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+      toggleBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+    }
+
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (drawer.classList.contains('is-open')) {
+        closeDrawer();
+      } else {
+        openDrawer();
+      }
+    });
+
+    const links = drawer.querySelectorAll('a, button');
+    links.forEach((link) => {
+      link.addEventListener('click', () => {
+        closeDrawer();
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      if (drawer.classList.contains('is-open') && !drawer.contains(e.target) && !toggleBtn.contains(e.target)) {
+        closeDrawer();
+      }
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && drawer.classList.contains('is-open')) {
+        closeDrawer();
+      }
+    });
+  }
+
+  /* ==========================================================================
+     9. ACTIVE NAVIGATION SPY (Top Anchor & Sections)
      ========================================================================== */
   function initNavObserver() {
     const navLinks = document.querySelectorAll('.site-nav__link');
-    const sections = document.querySelectorAll('section[id]');
+    const sections = document.querySelectorAll('section[id], main#top');
     if (!navLinks.length || !sections.length) return;
+
+    function handleScroll() {
+      if (window.scrollY < 160) {
+        navLinks.forEach((link) => {
+          const href = link.getAttribute('href');
+          if (href === '#top' || href === '/') {
+            link.classList.add('is-active');
+          } else if (href && href.startsWith('#')) {
+            link.classList.remove('is-active');
+          }
+        });
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting && window.scrollY >= 160) {
           const id = entry.target.getAttribute('id');
           navLinks.forEach((link) => {
             const href = link.getAttribute('href');
-            if (href === '#' + id || href === '/' + id) {
+            if (href === '#' + id) {
               link.classList.add('is-active');
             } else if (href && href.startsWith('#')) {
               link.classList.remove('is-active');
@@ -410,7 +531,7 @@
         }
       });
     }, {
-      rootMargin: '-20% 0px -70% 0px'
+      rootMargin: '-20% 0px -65% 0px'
     });
 
     sections.forEach((sec) => observer.observe(sec));
@@ -426,6 +547,7 @@
     initProjectFilters();
     initLightbox();
     initCommandPalette();
+    initMobileMenu();
     initNavObserver();
   });
 

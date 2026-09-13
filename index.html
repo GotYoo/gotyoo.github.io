@@ -25,6 +25,14 @@ sitemap:
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="{{ '/assets/css/portfolio.css' | relative_url }}?v=3.0.0">
+  <script>
+    (function(){
+      try{
+        var t=localStorage.getItem('gotyoo_theme_pref')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'dark');
+        document.documentElement.setAttribute('data-theme',t);
+      }catch(e){}
+    })();
+  </script>
   <script src="{{ '/assets/js/portfolio.js' | relative_url }}?v=3.0.0" defer></script>
   <title>{{ page.title }}</title>
 </head>
@@ -84,6 +92,33 @@ sitemap:
           <span>联系我</span>
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
         </button>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button type="button" class="btn-icon btn-mobile-menu" data-mobile-menu-toggle title="打开导航菜单" aria-label="打开导航菜单" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-nav-drawer" id="mobileNavDrawer" aria-hidden="true">
+      <nav class="mobile-nav-links" aria-label="移动端主导航">
+        <a class="mobile-nav-link" href="#top"><span>首页</span><span>↑</span></a>
+        <a class="mobile-nav-link" href="#projects"><span>精选项目</span><span>⚡</span></a>
+        <a class="mobile-nav-link" href="#writing"><span>公开手记</span><span>📝</span></a>
+        <a class="mobile-nav-link" href="#life"><span>生活切片</span><span>📷</span></a>
+        <a class="mobile-nav-link" href="#about"><span>学术履历</span><span>🎓</span></a>
+        <a class="mobile-nav-link" href="{{ '/resume/' | relative_url }}"><span>个人简历 (PDF)</span><span>↗</span></a>
+      </nav>
+      <div class="mobile-nav-footer">
+        <button type="button" class="mobile-nav-btn" data-open-cmd>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <span>快捷搜索 (⌘K)</span>
+        </button>
+        <button type="button" class="mobile-nav-btn" data-copy-email="{{ site.email }}">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          <span>一键复制邮箱</span>
+        </button>
       </div>
     </div>
   </header>
@@ -93,7 +128,7 @@ sitemap:
     <!-- ====================================================================
          HERO SECTION: THE BUILDER WORKBENCH
          ==================================================================== -->
-    <section class="hero-section">
+    <section class="hero-section" id="hero">
       <div class="hero-layout">
         <!-- Hero Left: Narrative & Mission -->
         <div class="hero-intro">
@@ -430,10 +465,20 @@ sitemap:
                 <span>查看站点源码</span>
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
               </a>
+              <a href="{{ '/projects/personal-interface/' | relative_url }}" class="card-action-link card-action-link--muted">
+                <span>架构案例复盘 ↗</span>
+              </a>
             </div>
           </div>
         </article>
 
+      </div>
+
+      <!-- View All Projects Link -->
+      <div class="section-footer-row">
+        <a href="{{ '/projects/' | relative_url }}" class="card-action-link">
+          <span>查看全部工程归档与方案解析 ↗</span>
+        </a>
       </div>
     </section>
 
@@ -488,7 +533,7 @@ sitemap:
             {% for post in site.posts limit: 3 %}
             <article class="essay-card">
               <div class="essay-meta">
-                <span class="essay-tag">ARCHITECTURE</span>
+                <span class="essay-tag">{{ post.category | default: "ARCHITECTURE" }}</span>
                 <span>•</span>
                 <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y.%m.%d" }}</time>
                 <span>•</span>
@@ -498,7 +543,7 @@ sitemap:
                 <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
               </h3>
               <p class="essay-excerpt">
-                {{ post.excerpt | strip_html | truncate: 110 | default: "点击阅读全文，查看完整架构思考与工程实践。" }}
+                {{ post.excerpt | strip_html | truncate: 120 | default: "点击阅读全文，查看完整架构思考与工程实践。" }}
               </p>
               <div class="essay-footer">
                 <a href="{{ post.url | relative_url }}" class="read-link">
@@ -508,30 +553,11 @@ sitemap:
               </div>
             </article>
             {% endfor %}
+          {% else %}
+            <div class="about-bio-card" style="text-align: center; padding: 40px 20px;">
+              <p style="color: var(--text-muted);">正在整理公开手记与系统推演记录...</p>
+            </div>
           {% endif %}
-
-          <!-- Curated Tech Note Entry -->
-          <article class="essay-card">
-            <div class="essay-meta">
-              <span class="essay-tag" style="color:var(--accent-purple);">AGENT HARNESS</span>
-              <span>•</span>
-              <time>2026.06.12</time>
-              <span>•</span>
-              <span>系统手记</span>
-            </div>
-            <h3 class="essay-title">
-              <a href="{{ '/blog/' | relative_url }}">长链路代码智能体的分层记忆调度与容错设计</a>
-            </h3>
-            <p class="essay-excerpt">
-              针对 SWE-bench 长周期任务中出现的“记忆遗忘”、“上下文爆炸”和“异常级联”，深入拆解 L1 工作记忆与 L2 经验记忆的双层索引拓扑。
-            </p>
-            <div class="essay-footer">
-              <a href="{{ '/blog/' | relative_url }}" class="read-link">
-                <span>前往手记专栏</span>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
-              </a>
-            </div>
-          </article>
         </div>
       </div>
     </section>
@@ -554,44 +580,22 @@ sitemap:
 
       <!-- Photo Cards (Click triggers Lightbox) -->
       <div class="photo-gallery-grid">
-        <div class="photo-card" data-photo-index="0" title="点击放大查看">
-          <div class="photo-img-wrap">
-            <img src="{{ '/images/pic01.jpg' | relative_url }}" alt="湖面把秋天留了一会儿" loading="lazy">
-            <div class="photo-card__overlay">
-              <span class="photo-card__tag">01 / STILL WATER</span>
+        {% if site.data.life_photos.items.size > 0 %}
+          {% for photo in site.data.life_photos.items limit: 3 %}
+          <div class="photo-card" data-photo-index="{{ forloop.index0 }}" title="点击放大查看">
+            <div class="photo-img-wrap">
+              <img src="{{ photo.image | relative_url }}" alt="{{ photo.title }}" loading="lazy">
+              <div class="photo-card__overlay">
+                <span class="photo-card__tag">{{ photo.tag | default: "SELECTED FRAME" }}</span>
+              </div>
+            </div>
+            <div class="photo-card__caption">
+              <h3 class="photo-card__title">{{ photo.title }}</h3>
+              <p class="photo-card__desc">{{ photo.desc }}</p>
             </div>
           </div>
-          <div class="photo-card__caption">
-            <h3 class="photo-card__title">湖面把秋天留了一会儿</h3>
-            <p class="photo-card__desc">安静的自然倒影与树林清晨薄雾，水光沉静的微凉时刻。</p>
-          </div>
-        </div>
-
-        <div class="photo-card" data-photo-index="1" title="点击放大查看">
-          <div class="photo-img-wrap">
-            <img src="{{ '/images/bg.jpg' | relative_url }}" alt="向水面更深处出发" loading="lazy">
-            <div class="photo-card__overlay">
-              <span class="photo-card__tag">02 / INTO THE BLUE</span>
-            </div>
-          </div>
-          <div class="photo-card__caption">
-            <h3 class="photo-card__title">向水面更深处出发</h3>
-            <p class="photo-card__desc">开阔水域与日光映射下的前行片刻，纯净湖蓝与远阔视野。</p>
-          </div>
-        </div>
-
-        <div class="photo-card" data-photo-index="2" title="点击放大查看">
-          <div class="photo-img-wrap">
-            <img src="{{ '/images/pic02.jpg' | relative_url }}" alt="把日常换一种光线" loading="lazy">
-            <div class="photo-card__overlay">
-              <span class="photo-card__tag">03 / ON THE ROAD</span>
-            </div>
-          </div>
-          <div class="photo-card__caption">
-            <h3 class="photo-card__title">把日常换一种光线</h3>
-            <p class="photo-card__desc">旷野、公路与拿起相机的瞬间，阳光在风里投下分明的影。</p>
-          </div>
-        </div>
+          {% endfor %}
+        {% endif %}
       </div>
 
       <div style="margin-top: 28px; text-align: right;">
@@ -675,6 +679,9 @@ sitemap:
           </a>
           <a href="{{ '/resume/' | relative_url }}" class="btn-copy-email">
             <span>在线高清预览 ↗</span>
+          </a>
+          <a href="{{ '/about/' | relative_url }}" class="btn-ghost-action">
+            <span>关于全文与理念 ↗</span>
           </a>
         </div>
       </div>
