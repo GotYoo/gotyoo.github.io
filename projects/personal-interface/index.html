@@ -5,66 +5,58 @@ title: Personal Interface · Case Study
 description: GotYoo 个人网站的信息架构、交互设计与静态部署案例。
 permalink: /projects/personal-interface/
 ---
-<article class="air-article-page">
-  <header class="air-article-hero">
-    <div class="air-article-hero__inner">
-      <div class="air-breadcrumb">
-        <a href="{{ '/projects/' | relative_url }}">← 项目归档</a>
-        <span>/</span>
-        <span>CASE STUDY</span>
-      </div>
-      <h1 class="air-article-title">Personal <em>Interface</em></h1>
-      <p class="air-sub-desc">将个人主页从单一展示页重构为可持续维护的个人数字工作台系统。</p>
-      <div class="air-article-meta">
-        <span>Role: Design &amp; Engineering</span>
-        <span class="air-dot">•</span>
-        <span>Stack: Jekyll · CSS · Vanilla JS</span>
-        <span class="air-dot">•</span>
-        <span>Deployment: GitHub Pages</span>
-      </div>
+<article class="article-page">
+  <header class="article-hero">
+    <div class="article-breadcrumb">
+      <a href="{{ '/projects/' | relative_url }}">← 全部工程项目</a>
+      <span>/</span>
+      <span>CASE STUDY</span>
+    </div>
+    <h1 class="article-title">Personal Interface Architecture</h1>
+    <div class="article-meta">
+      <span>Role: Design &amp; Systems Engineering</span>
+      <span>•</span>
+      <span>Stack: CSS Tokens · Jekyll · Vanilla JS</span>
+      <span>•</span>
+      <span>Deployment: GitHub Pages</span>
     </div>
   </header>
 
-  <div class="air-article-layout">
-    <aside class="air-article-sidebar">
-      <div class="air-toc-card">
-        <p class="air-toc-title">案例目录</p>
-        <nav class="air-toc" data-article-toc></nav>
+  <div class="article-layout">
+    <div class="markdown-content">
+      <h2>01 / 背景与问题 · Context</h2>
+      <p>问题不是页面不够炫酷，而是过去的内容容易堆砌在同一层级。招聘方难以快速定位工程能力与证据，个人生活切片也容易挤占专业判断的注意力。</p>
+
+      <h2>02 / 架构决策 · Decisions</h2>
+      <p>将整个个人网站明确解耦为五个长期维护的独立界面：</p>
+      <ul>
+        <li><strong>Home</strong>：Learner &amp; Builder 个人主页与工程工作台，承担定位、精选项目与控制台交互。</li>
+        <li><strong>Projects</strong>：工程项目归档与深度案例分析。</li>
+        <li><strong>Blog</strong>：沉淀长周期思考的技术笔记与复盘文章。</li>
+        <li><strong>Life</strong>：独立、真实且低调的照片、旅行与生活痕迹。</li>
+        <li><strong>Resume</strong>：直接展示可在线阅读与下载的高清 PDF 简历。</li>
+      </ul>
+
+      <h2>03 / 交互与性能原则 · Performance &amp; Motion</h2>
+      <p>动态交互负责解释层级，不负责代替内容本身。全站放弃重型框架与庞大 CSS 库，采用纯原生 CSS 与轻量 Vanilla JS，保证首屏在任何设备上 0 延迟秒开，并支持优雅的深浅主题切换、快捷指令（⌘K）与减弱动态偏好。</p>
+
+      <h2>04 / 验证与上线 · Validation</h2>
+      <p>每次重构均经过桌面与移动端渲染测试、无障碍访问测试、静态编译语法校验与 GitHub Pages 自动化流水线验证，确保对外公开链接 100% 可用且无控制台报错。</p>
+    </div>
+
+    <div class="resume-download-card" style="margin-top: 48px;">
+      <div class="resume-download-info">
+        <h3>从真实需求出发，做好每一次工程选型与审美表达。</h3>
+        <p>欢迎就本站的前端架构与工程设计展开交流。</p>
       </div>
-    </aside>
-
-    <div class="air-article-card">
-      <div class="air-markdown-content" data-article-content>
-        <h2>01 / 背景与问题 · Context</h2>
-        <p>问题不是页面不够炫酷，而是过去的内容容易堆砌在同一层级。招聘方难以快速定位工程能力与证据，个人生活切片也容易挤占专业判断的注意力。</p>
-
-        <h2>02 / 架构决策 · Decisions</h2>
-        <p>将整个个人网站明确解耦为五个长期维护的独立界面：</p>
-        <ul>
-          <li><strong>Home</strong>：Air.inc 官方高审美晨曦天幕主页，承担定位、精选项目与工作台交互。</li>
-          <li><strong>Projects</strong>：工程项目归档与深度案例分析。</li>
-          <li><strong>Blog</strong>：沉淀长周期思考的技术笔记与复盘文章。</li>
-          <li><strong>Life</strong>：独立、真实且低调的照片、旅行与生活痕迹。</li>
-          <li><strong>Resume</strong>：直接展示可打印与下载的原始 PDF 简历。</li>
-        </ul>
-
-        <h2>03 / 交互与性能原则 · Performance &amp; Motion</h2>
-        <p>动态交互负责解释层级，不负责代替内容本身。全站放弃重型框架与庞大 CSS 库，采用纯原生 CSS 与轻量 Vanilla JS，保证首屏在任何设备上 0 延迟秒开，并支持优雅的响应式适配与减弱动态偏好。</p>
-
-        <h2>04 / 验证与上线 · Validation</h2>
-        <p>每次重构均经过桌面与移动端渲染测试、无障碍访问测试、静态编译语法校验与 GitHub Pages 自动化流水线验证，确保对外公开链接 100% 可用且无控制台报错。</p>
+      <div class="resume-actions-group">
+        <a href="{{ '/projects/' | relative_url }}" class="btn-copy-email">
+          <span>← 返回项目列表</span>
+        </a>
+        <a href="{{ '/resume/' | relative_url }}" class="btn-primary-action">
+          <span>查看完整简历 ↗</span>
+        </a>
       </div>
-
-      <footer class="air-article-card__footer">
-        <div class="air-article-card__quote">
-          <p class="air-quote-en">Engineering ideas. <em>AI</em> reality.</p>
-          <p class="air-quote-cn">从真实需求出发，做好每一次工程选型与审美表达。</p>
-        </div>
-        <div class="air-article-card__actions">
-          <a href="{{ '/projects/' | relative_url }}" class="air-btn air-btn--outline">返回项目列表</a>
-          <a href="{{ '/resume/' | relative_url }}" class="air-btn air-btn--primary">查看个人简历 ↗</a>
-        </div>
-      </footer>
     </div>
   </div>
 </article>

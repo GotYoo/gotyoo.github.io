@@ -5,64 +5,56 @@ title: 生活与片刻 · Life
 description: 照片、旅行，以及值得留下的普通日常片刻。
 permalink: /life/
 ---
-<section class="air-sub-hero">
-  <div class="air-sub-hero__inner">
-    <div class="air-badge">03 / LIFE, TRAVEL &amp; ORDINARY MOMENTS</div>
-    <h1 class="air-sub-title">Life &amp; <em>Moments</em></h1>
-    <p class="air-sub-desc">这里不承担求职与效率，只保存照片、旅行、日光与一些值得再次想起的宁静片刻。</p>
-  </div>
+<section class="subpage-hero">
+  <span class="subpage-badge">03 // LIFE, TRAVEL &amp; ORDINARY MOMENTS</span>
+  <h1 class="subpage-title">Life &amp; Moments</h1>
+  <p class="subpage-desc">
+    这里不承担求职与效率指标，只保存照片、旅行、日光与一些值得再次想起的宁静片刻。
+  </p>
 </section>
 
-<div class="air-marquee-wrap" aria-hidden="true">
-  <div class="air-marquee-track">
-    <span>PHOTOGRAPHY</span><i>✦</i><span>AUTUMN LAKE</span><i>✦</i><span>TRAVEL NOTES</span><i>✦</i><span>SUNLIGHT</span><i>✦</i><span>ORDINARY MOMENTS</span><i>✦</i><span>PHOTOGRAPHY</span><i>✦</i><span>AUTUMN LAKE</span><i>✦</i><span>TRAVEL NOTES</span><i>✦</i><span>SUNLIGHT</span><i>✦</i><span>ORDINARY MOMENTS</span><i>✦</i>
-  </div>
+<!-- Section 1: Selected Frames -->
+<div class="section-head" style="margin-bottom: 24px;">
+  <span class="section-tag">01 // SELECTED FRAMES</span>
+  <h2 class="section-title">日常光线与风景切片</h2>
 </div>
 
-<section class="air-sub-section">
-  <div class="air-shell">
-
-    <div class="air-section-label">
-      <span>01 / SELECTED FRAMES</span>
-      <p>日常光线与风景切片</p>
-    </div>
-
-    <div class="air-photo-grid">
-      {% if site.data.life_photos.items.size > 0 %}
-        {% for photo in site.data.life_photos.items %}
-        <figure class="air-photo-card">
-          <div class="air-photo-card__img-wrap">
-            <img src="{{ photo.image | relative_url }}" alt="{{ photo.title }}" loading="lazy">
-          </div>
-          <figcaption class="air-photo-card__caption">
-            <span class="air-photo-num">{{ photo.tag | default: "FRAME" }}</span>
-            <h3>{{ photo.title }}</h3>
-            <p>{{ photo.desc }}</p>
-          </figcaption>
-        </figure>
-        {% endfor %}
-      {% endif %}
-    </div>
-
-    <div class="air-section-label" style="margin-top: 60px;">
-      <span>02 / LIFE TIMELINE</span>
-      <p>阶段性印记与轨迹</p>
-    </div>
-
-    <div class="air-timeline">
-      {% if site.data.life_timeline.items.size > 0 %}
-        {% for item in site.data.life_timeline.items %}
-        <div class="air-timeline-item">
-          <div class="air-timeline-time">{{ item.time }}</div>
-          <div class="air-timeline-card">
-            <span class="air-pill air-pill--{{ item.pill | downcase | default: 'blue' }}">{{ item.pill | default: "MOMENT" }}</span>
-            <h3>{{ item.title }}</h3>
-            <p>{{ item.desc }}</p>
-          </div>
+<div class="photo-gallery-grid">
+  {% if site.data.life_photos.items.size > 0 %}
+    {% for photo in site.data.life_photos.items %}
+    <div class="photo-card" data-photo-index="{{ forloop.index0 }}" title="点击放大查看照片">
+      <div class="photo-img-wrap">
+        <img src="{{ photo.image | relative_url }}" alt="{{ photo.title }}" loading="lazy">
+        <div class="photo-card__overlay">
+          <span class="photo-card__tag">{{ photo.tag | default: "FRAME" }}</span>
         </div>
-        {% endfor %}
-      {% endif %}
+      </div>
+      <div class="photo-card__caption">
+        <h3 class="photo-card__title">{{ photo.title }}</h3>
+        <p class="photo-card__desc">{{ photo.desc }}</p>
+      </div>
     </div>
+    {% endfor %}
+  {% endif %}
+</div>
 
-  </div>
-</section>
+<!-- Section 2: Life Timeline -->
+<div class="section-head" style="margin-top: 64px; margin-bottom: 24px;">
+  <span class="section-tag">02 // LIFE TIMELINE</span>
+  <h2 class="section-title">阶段性印记与轨迹</h2>
+</div>
+
+<div class="timeline-list" style="margin-bottom: 60px;">
+  {% if site.data.life_timeline.items.size > 0 %}
+    {% for item in site.data.life_timeline.items %}
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="timeline-time">{{ item.time }}</div>
+        <h3 class="timeline-title">{{ item.title }}</h3>
+        <p class="timeline-desc">{{ item.desc }}</p>
+      </div>
+    </div>
+    {% endfor %}
+  {% endif %}
+</div>

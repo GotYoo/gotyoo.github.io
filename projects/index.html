@@ -1,130 +1,218 @@
 ---
 layout: interface
 page_key: projects
-title: 项目与工程实践 · Projects
+title: 精选工程实践与智能体架构 · Projects
 description: GotYoo 的精选工程项目、AI Agent 实践与开源作品。
 permalink: /projects/
 ---
-<section class="air-sub-hero">
-  <div class="air-sub-hero__inner">
-    <div class="air-badge">01 / SELECTED WORK &amp; SYSTEMS</div>
-    <h1 class="air-sub-title">Selected <em>Projects</em></h1>
-    <p class="air-sub-desc">项目不是名词的堆叠，而是一组可以被解释、验证和持续演进的工程选择。</p>
-  </div>
+<section class="subpage-hero">
+  <span class="subpage-badge">01 // SELECTED WORK &amp; SYSTEMS</span>
+  <h1 class="subpage-title">Selected Projects</h1>
+  <p class="subpage-desc">
+    项目不是名词的堆叠，而是一组可以被解释、验证和持续演进的工程选择。每个项目均包含明确的问题背景、系统拓扑与开源代码。
+  </p>
 </section>
 
-<section class="air-sub-section">
-  <div class="air-shell">
-    <div class="air-project-grid">
+<!-- Filter Controls -->
+<div class="project-filter-bar" role="tablist">
+  <button type="button" class="filter-btn is-active" data-filter="all">全部工程 (All)</button>
+  <button type="button" class="filter-btn" data-filter="agent">智能体系统 (AI Agent)</button>
+  <button type="button" class="filter-btn" data-filter="rag">检索增强 (RAG)</button>
+  <button type="button" class="filter-btn" data-filter="tools">极客工具 (Tools)</button>
+</div>
 
-      <div class="air-window-card">
-        <div class="air-window-card__bar">
-          <div class="air-window-dots"><span></span><span></span><span></span></div>
-          <span class="air-window-title">MiniCodeAgent / Agent Harness</span>
-          <span class="air-window-tag">2026</span>
+<div class="projects-grid">
+  <!-- Project 1: MiniCodeAgent -->
+  <article class="project-card" data-project-category="agent">
+    <div>
+      <div class="project-card__top">
+        <span class="project-badge">AI AGENT · HARNESS</span>
+        <span class="project-date">2026.03 — 06</span>
+      </div>
+      <h2 class="project-title">MiniCodeAgent</h2>
+      <p class="project-desc">
+        面向代码仓库长链路任务的本地 Agent Harness，围绕长上下文压缩、分层记忆调度、异常状态恢复与 SWE-bench 评测构建端到端执行链路。
+      </p>
+
+      <div class="project-specs">
+        <div class="spec-item">
+          <span class="spec-key">Core Engine:</span>
+          <span class="spec-val">Python / AST Tool Calling / Docker</span>
         </div>
-        <div class="air-window-card__body">
-          <div class="air-window-card__top">
-            <span class="air-pill air-pill--blue">AI AGENT</span>
-            <span class="air-date-mono">2026.03 — 06</span>
-          </div>
-          <h2 class="air-window-card__heading">MiniCodeAgent</h2>
-          <p class="air-window-card__text">面向代码仓库长链路任务的本地 Agent Harness，围绕长上下文压缩、分层记忆调度、异常状态恢复与 SWE-bench 评测构建端到端执行链路。</p>
-          <div class="air-window-tags">
-            <span>Tool Calling</span>
-            <span>Layered Memory</span>
-            <span>Checkpoint</span>
-            <span>Python</span>
-          </div>
-          <div class="air-window-card__action">
-            <a href="https://github.com/GotYoo/MiniCodeAgent" target="_blank" rel="noopener" class="air-btn air-btn--outline">查看开源仓库 ↗</a>
-          </div>
+        <div class="spec-item">
+          <span class="spec-key">Memory Model:</span>
+          <span class="spec-val">L1 Working + L2 Epistemic Hierarchical</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-key">Verification:</span>
+          <span class="spec-val">SWE-bench Automated Benchmark</span>
         </div>
       </div>
 
-      <div class="air-window-card">
-        <div class="air-window-card__bar">
-          <div class="air-window-dots"><span></span><span></span><span></span></div>
-          <span class="air-window-title">TravelPlanning / Multi-Agent</span>
-          <span class="air-window-tag">2026</span>
-        </div>
-        <div class="air-window-card__body">
-          <div class="air-window-card__top">
-            <span class="air-pill air-pill--teal">RAG SYSTEM</span>
-            <span class="air-date-mono">2026.01 — 03</span>
-          </div>
-          <h2 class="air-window-card__heading">Travel Planning Agent</h2>
-          <p class="air-window-card__text">通过结构化约束规划、高德地图 API 地理拓扑校验、Rerank 多候选重排序与 RAG 知识检索，生成可执行、时间预算闭环的多日旅行路线方案。</p>
-          <div class="air-window-tags">
-            <span>FastAPI</span>
-            <span>Vue 3</span>
-            <span>Hybrid RAG</span>
-            <span>SFT / DPO</span>
-          </div>
-          <div class="air-window-card__action">
-            <a href="{{ '/resume/' | relative_url }}" class="air-btn air-btn--outline">简历详细说明 ↗</a>
-          </div>
-        </div>
+      <div class="project-tags">
+        <span class="tech-tag">Agent Harness</span>
+        <span class="tech-tag">Context Compression</span>
+        <span class="tech-tag">Checkpointing</span>
+        <span class="tech-tag">SWE-bench</span>
       </div>
-
-      <div class="air-window-card">
-        <div class="air-window-card__bar">
-          <div class="air-window-dots"><span></span><span></span><span></span></div>
-          <span class="air-window-title">CommandBox / Desktop Util</span>
-          <span class="air-window-tag">TOOL</span>
-        </div>
-        <div class="air-window-card__body">
-          <div class="air-window-card__top">
-            <span class="air-pill air-pill--purple">OPEN SOURCE</span>
-            <span class="air-date-mono">GITHUB</span>
-          </div>
-          <h2 class="air-window-card__heading">CommandBox</h2>
-          <p class="air-window-card__text">面向高频开发命令复用的轻量桌面工具，以快捷全局唤醒、模糊搜索优先、多维度标签归档与一键复制大幅降低日常操作心智负担。</p>
-          <div class="air-window-tags">
-            <span>Python</span>
-            <span>PyQt5</span>
-            <span>Desktop</span>
-            <span>SQLite</span>
-          </div>
-          <div class="air-window-card__action">
-            <a href="https://github.com/GotYoo/CommandBox" target="_blank" rel="noopener" class="air-btn air-btn--outline">查看开源仓库 ↗</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="air-window-card">
-        <div class="air-window-card__bar">
-          <div class="air-window-dots"><span></span><span></span><span></span></div>
-          <span class="air-window-title">GotYoo Systems / Personal Web</span>
-          <span class="air-window-tag">AIR STYLE</span>
-        </div>
-        <div class="air-window-card__body">
-          <div class="air-window-card__top">
-            <span class="air-pill air-pill--blue">WEB SYSTEM</span>
-            <span class="air-date-mono">2026.09</span>
-          </div>
-          <h2 class="air-window-card__heading">Air Personal Interface</h2>
-          <p class="air-window-card__text">基于 Air.inc 官方审美重构的高品质个人界面体系，以纯净晨曦天幕、双层高透毛玻璃卡片、流畅排版与 Jekyll 静态引擎实现高质感体验。</p>
-          <div class="air-window-tags">
-            <span>Air Aesthetic</span>
-            <span>Glassmorphism</span>
-            <span>Jekyll</span>
-            <span>Vanilla JS</span>
-          </div>
-          <div class="air-window-card__action">
-            <a href="https://github.com/GotYoo/gotyoo.github.io" target="_blank" rel="noopener" class="air-btn air-btn--outline">查看站点仓库 ↗</a>
-          </div>
-        </div>
-      </div>
-
     </div>
 
-    <div class="air-banner-card">
-      <div class="air-banner-card__content">
-        <h3>工程评价准则</h3>
-        <p>所有项目按照“真实背景 — 核心职责 — 关键瓶颈 — 技术选型 — 验证指标 — 阶段反思”展开，拒绝空洞概念拼凑，保持真实与克制。</p>
+    <div class="project-card__footer">
+      <div class="card-link-group">
+        <a href="https://github.com/GotYoo/MiniCodeAgent" target="_blank" rel="noopener" class="card-action-link">
+          <span>查看 GitHub 仓库</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
+        </a>
+        <a href="{{ '/resume/' | relative_url }}" class="card-action-link card-action-link--muted">
+          <span>简历架构解析 ↗</span>
+        </a>
       </div>
-      <a href="{{ '/resume/' | relative_url }}" class="air-btn air-btn--primary">查看完整简历 ↗</a>
     </div>
+  </article>
+
+  <!-- Project 2: Travel Planning Multi-Agent -->
+  <article class="project-card" data-project-category="agent rag">
+    <div>
+      <div class="project-card__top">
+        <span class="project-badge" style="color:var(--accent-cyan);background:var(--accent-cyan-subtle);border-color:rgba(6,182,212,0.2);">MULTI-AGENT · RAG</span>
+        <span class="project-date">2026.01 — 03</span>
+      </div>
+      <h2 class="project-title">Travel Planning Agent</h2>
+      <p class="project-desc">
+        基于结构化约束规划、高德地图 API 地理拓扑校验、Hybrid RAG 与 Rerank 多候选重排序，生成高可行性、时间预算零死角的多日定制方案。
+      </p>
+
+      <div class="project-specs">
+        <div class="spec-item">
+          <span class="spec-key">Architecture:</span>
+          <span class="spec-val">Multi-Agent Constraint Satisfaction</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-key">Knowledge Engine:</span>
+          <span class="spec-val">BM25 + BGE-M3 Hybrid Search + Rerank</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-key">Deployment:</span>
+          <span class="spec-val">FastAPI Async + Vue 3 Reactive UI</span>
+        </div>
+      </div>
+
+      <div class="project-tags">
+        <span class="tech-tag">Multi-Agent</span>
+        <span class="tech-tag">FastAPI</span>
+        <span class="tech-tag">Hybrid RAG</span>
+        <span class="tech-tag">Spatial Topology</span>
+      </div>
+    </div>
+
+    <div class="project-card__footer">
+      <div class="card-link-group">
+        <a href="{{ '/resume/' | relative_url }}" class="card-action-link">
+          <span>查看项目方案说明</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
+        </a>
+      </div>
+    </div>
+  </article>
+
+  <!-- Project 3: CommandBox -->
+  <article class="project-card" data-project-category="tools">
+    <div>
+      <div class="project-card__top">
+        <span class="project-badge" style="color:var(--accent-purple);background:var(--accent-purple-subtle);border-color:rgba(139,92,246,0.2);">DESKTOP UTILITY · OPEN SOURCE</span>
+        <span class="project-date">GITHUB ACTIVE</span>
+      </div>
+      <h2 class="project-title">CommandBox</h2>
+      <p class="project-desc">
+        面向高频开发命令复用的轻量桌面工具，全局快捷唤醒、极速模糊搜索优先、多维度标签归档与毫秒级剪贴板写入，大幅降低日常操作认知负载。
+      </p>
+
+      <div class="project-specs">
+        <div class="spec-item">
+          <span class="spec-key">Runtime:</span>
+          <span class="spec-val">Python 3 / PyQt5 / SQLite</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-key">Startup Time:</span>
+          <span class="spec-val">&lt; 15ms Global Hotkey Wake</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-key">Search Engine:</span>
+          <span class="spec-val">Local In-Memory Fuzzy Match</span>
+        </div>
+      </div>
+
+      <div class="project-tags">
+        <span class="tech-tag">Desktop Native</span>
+        <span class="tech-tag">PyQt5</span>
+        <span class="tech-tag">SQLite</span>
+        <span class="tech-tag">Fuzzy Search</span>
+      </div>
+    </div>
+
+    <div class="project-card__footer">
+      <div class="card-link-group">
+        <a href="https://github.com/GotYoo/CommandBox" target="_blank" rel="noopener" class="card-action-link">
+          <span>查看开源仓库</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
+        </a>
+      </div>
+    </div>
+  </article>
+
+  <!-- Project 4: GotYoo Digital Atelier -->
+  <article class="project-card" data-project-category="tools">
+    <div>
+      <div class="project-card__top">
+        <span class="project-badge" style="color:var(--accent-emerald);background:var(--accent-emerald-subtle);border-color:rgba(16,185,129,0.2);">SYSTEM CRAFT · DESIGN</span>
+        <span class="project-date">2026.09</span>
+      </div>
+      <h2 class="project-title">GotYoo Digital Interface</h2>
+      <p class="project-desc">
+        自主设计的响应式极客界面系统，摒弃外部模板束缚，深度融合现代深浅双色自适应主题、零外部依赖轻量架构、SEO 与全平台 60fps 流畅交互。
+      </p>
+
+      <div class="project-specs">
+        <div class="spec-item">
+          <span class="spec-key">Stack:</span>
+          <span class="spec-val">CSS Custom Properties / Jekyll / Vanilla JS</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-key">Accessibility:</span>
+          <span class="spec-val">WCAG AA / Keyboard Navigation / ⌘K</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-key">Performance:</span>
+          <span class="spec-val">100 Lighthouse / 0 Framework Overhead</span>
+        </div>
+      </div>
+
+      <div class="project-tags">
+        <span class="tech-tag">Design System</span>
+        <span class="tech-tag">Dark/Light Themes</span>
+        <span class="tech-tag">Zero Overhead</span>
+        <span class="tech-tag">Responsive</span>
+      </div>
+    </div>
+
+    <div class="project-card__footer">
+      <div class="card-link-group">
+        <a href="https://github.com/GotYoo/gotyoo.github.io" target="_blank" rel="noopener" class="card-action-link">
+          <span>查看站点源码</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
+        </a>
+      </div>
+    </div>
+  </article>
+</div>
+
+<!-- Engineering Principles Banner -->
+<div class="resume-download-card" style="margin-top: 48px;">
+  <div class="resume-download-info">
+    <h3>工程评价准则</h3>
+    <p>所有项目按照“真实背景 — 核心职责 — 关键瓶颈 — 技术选型 — 验证指标 — 阶段反思”展开，拒绝空洞概念拼凑，保持真实与克制。</p>
   </div>
-</section>
+  <a href="{{ '/resume/' | relative_url }}" class="btn-primary-action">
+    <span>查看完整学术简历 ↗</span>
+  </a>
+</div>

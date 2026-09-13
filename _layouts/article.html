@@ -1,48 +1,41 @@
 ---
 layout: interface
 ---
-<article class="air-article-page">
-  <header class="air-article-hero">
-    <div class="air-article-hero__inner">
-      <div class="air-breadcrumb">
-        <a href="{{ '/blog/' | relative_url }}">← 文章归档</a>
-        <span>/</span>
-        <span>{{ page.category | default: "TECH NOTE" }}</span>
-      </div>
-      <h1 class="air-article-title">{{ page.title }}</h1>
-      <div class="air-article-meta">
-        <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y年%m月%d日" }}</time>
-        <span class="air-dot">•</span>
-        <span data-reading-time>5 MIN READ</span>
-        <span class="air-dot">•</span>
-        <button type="button" class="air-btn-text" data-copy-url>复制文章链接</button>
-      </div>
+<article class="article-page">
+  <header class="article-hero">
+    <div class="article-breadcrumb">
+      <a href="{{ '/blog/' | relative_url }}">← 全部公开手记</a>
+      <span>/</span>
+      <span>{{ page.category | default: "SYSTEM NOTE" }}</span>
+    </div>
+    <h1 class="article-title">{{ page.title }}</h1>
+    <div class="article-meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y年%m月%d日" }}</time>
+      <span>•</span>
+      <span>深度思考</span>
+      <span>•</span>
+      <button type="button" style="color:var(--accent-blue);" data-copy-email="{{ site.email }}">联系作者讨论 ↗</button>
     </div>
   </header>
 
-  <div class="air-article-layout">
-    <aside class="air-article-sidebar">
-      <div class="air-toc-card">
-        <p class="air-toc-title">目录导航</p>
-        <nav class="air-toc" data-article-toc></nav>
-      </div>
-    </aside>
+  <div class="article-layout">
+    <div class="markdown-content">
+      {{ content }}
+    </div>
 
-    <div class="air-article-card">
-      <div class="air-markdown-content" data-article-content>
-        {{ content }}
+    <div class="resume-download-card" style="margin-top: 48px;">
+      <div class="resume-download-info">
+        <h3>把真实的思考与工程选择记录下来，持续迭代。</h3>
+        <p>欢迎就本文提到的架构权衡、技术决策或代码实现展开交流探讨。</p>
       </div>
-
-      <footer class="air-article-card__footer">
-        <div class="air-article-card__quote">
-          <p class="air-quote-en">Engineering ideas. <em>AI</em> reality.</p>
-          <p class="air-quote-cn">把真实的思考与工程选择记录下来，持续迭代。</p>
-        </div>
-        <div class="air-article-card__actions">
-          <a href="{{ '/blog/' | relative_url }}" class="air-btn air-btn--outline">返回文章列表</a>
-          <button type="button" class="air-btn air-btn--primary" data-copy-url>分享此文 ↗</button>
-        </div>
-      </footer>
+      <div class="resume-actions-group">
+        <a href="{{ '/blog/' | relative_url }}" class="btn-copy-email">
+          <span>← 返回手记列表</span>
+        </a>
+        <button type="button" class="btn-primary-action" data-copy-email="{{ site.email }}">
+          <span>联系作者交流 ↗</span>
+        </button>
+      </div>
     </div>
   </div>
 </article>
