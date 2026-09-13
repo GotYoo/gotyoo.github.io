@@ -1496,9 +1496,15 @@ html[data-theme="light"] .project-badge[style*="accent-emerald"] {
 [data-theme="light"] .project-card__specs,
 html[data-theme="light"] .project-specs,
 html[data-theme="light"] .project-card__specs {
-  background: rgba(241, 245, 249, 0.75);
+  background: #f8fafc;
   border: 1px solid rgba(226, 232, 240, 0.9);
-  box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.02);
+  box-shadow: none;
+}
+
+[data-theme="light"] .spec-item + .spec-item,
+html[data-theme="light"] .spec-item + .spec-item {
+  border-top: 1px dashed rgba(226, 232, 240, 0.85);
+  padding-top: 8px;
 }
 
 [data-theme="light"] .spec-key,
@@ -1525,10 +1531,11 @@ html[data-theme="light"] .tech-tag,
 html[data-theme="light"] .tag-chip,
 html[data-theme="light"] .project-tags .tech-tag,
 html[data-theme="light"] .project-tags .tag-chip {
-  background: #f1f5f9;
-  border: 1px solid rgba(226, 232, 240, 0.9);
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.95);
   color: #475569;
   font-weight: 500;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
   transition: all var(--transition-fast);
 }
 
@@ -1541,9 +1548,9 @@ html[data-theme="light"] .tag-chip:hover,
 html[data-theme="light"] .project-tags .tech-tag:hover,
 html[data-theme="light"] .project-tags .tag-chip:hover {
   background: #ffffff;
-  border-color: rgba(203, 213, 225, 0.95);
-  color: #0f172a;
-  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+  border-color: #2563eb;
+  color: #2563eb;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.12);
   transform: translateY(-1px);
 }
 
@@ -2140,7 +2147,7 @@ html[data-theme="light"] .contact-card {
 
 [data-theme="light"] .email-copy-dock,
 html[data-theme="light"] .email-copy-dock {
-  background: #f8fafc;
+  background: #ffffff;
   border: 1px solid rgba(226, 232, 240, 0.95);
   box-shadow: 0 6px 20px -4px rgba(15, 23, 42, 0.06);
 }
@@ -2586,9 +2593,10 @@ html[data-theme="light"] .meta-chip {
 
 [data-theme="light"] .meta-chip--neutral,
 html[data-theme="light"] .meta-chip--neutral {
-  background: #f1f5f9;
+  background: #ffffff;
   color: #475569;
-  border-color: rgba(226, 232, 240, 0.9);
+  border-color: rgba(226, 232, 240, 0.95);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
 }
 
 [data-theme="light"] .meta-chip--accent,
