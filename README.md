@@ -11,7 +11,7 @@
 ## 页面架构
 
 - **首页 (`/`)**：Learner & Builder 工作台，包含 AI Agent 终端执行仿真、精选工程项目、深度公开手记、摄影切片、学术履历与一键邮箱复制。
-- **项目 (`/projects/`)**：MiniCodeAgent、TravelPlanning 多智能体、CommandBox 与系统工程归档。
+- **项目 (`/projects/`)**：MiniCodeAgent、ZhiStack 智栈开发者社区、NegAuto 彩负自动去色罩、TravelPlanning 多智能体、CommandBox 与系统工程归档。
 - **文章 (`/blog/`)**：技术笔记、系统手记与长周期思考。
 - **生活 (`/life/`)**：摄影切片与阶段性印记时间线。
 - **简历 (`/resume/`)**：学术背景与在线 PDF 简历浏览/下载。

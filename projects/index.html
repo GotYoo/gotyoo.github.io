@@ -18,7 +18,7 @@ permalink: /projects/
   <button type="button" class="filter-btn is-active" data-filter="all">全部工程 (All)</button>
   <button type="button" class="filter-btn" data-filter="agent">智能体系统 (AI Agent)</button>
   <button type="button" class="filter-btn" data-filter="rag">检索增强 (RAG)</button>
-  <button type="button" class="filter-btn" data-filter="tools">极客工具 (Tools)</button>
+  <button type="button" class="filter-btn" data-filter="tools">极客工具与计算摄影 (Tools &amp; Imaging)</button>
 </div>
 
 <div class="projects-grid">
@@ -70,7 +70,56 @@ permalink: /projects/
     </div>
   </article>
 
-  <!-- Project 2: Travel Planning Multi-Agent -->
+  <!-- Project 2: ZhiStack -->
+  <article class="project-card" data-project-category="agent rag">
+    <div>
+      <div class="project-card__top">
+        <span class="project-badge" style="color:#6366f1;background:rgba(99,102,241,0.12);border-color:rgba(99,102,241,0.25);">AI-NATIVE · CLOUD COMMUNITY</span>
+        <span class="project-date">2026.08 — 09</span>
+      </div>
+      <h2 class="project-title">ZhiStack 智栈</h2>
+      <p class="project-desc">
+        AI 原生 × 云原生开发者社区系统。主线基于模块化单体推进容器化与基础设施解耦，设计双入口统一 AI Gateway、社区 Copilot 与可评测 RAG 混合检索问答。
+      </p>
+
+      <div class="project-specs">
+        <div class="spec-item">
+          <span class="spec-key">Architecture:</span>
+          <span class="spec-val">Modular Monolith / Cloud Native (Docker &amp; RDS)</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-key">AI Gateway:</span>
+          <span class="spec-val">SSE + WebSocket Dual Adapters / Unified Fallback</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-key">Knowledge Engine:</span>
+          <span class="spec-val">Redis / Hybrid RAG &amp; Quantitative Evaluation</span>
+        </div>
+      </div>
+
+      <div class="project-tags">
+        <span class="tech-tag">Spring Boot</span>
+        <span class="tech-tag">AI Gateway</span>
+        <span class="tech-tag">Cloud Native</span>
+        <span class="tech-tag">Hybrid RAG</span>
+        <span class="tech-tag">MySQL / Redis</span>
+      </div>
+    </div>
+
+    <div class="project-card__footer">
+      <div class="card-link-group">
+        <a href="https://github.com/GotYoo/zhistack" target="_blank" rel="noopener" class="card-action-link">
+          <span>查看 GitHub 仓库</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
+        </a>
+        <a href="{{ '/resume/' | relative_url }}" class="card-action-link card-action-link--muted">
+          <span>架构演进决策 ↗</span>
+        </a>
+      </div>
+    </div>
+  </article>
+
+  <!-- Project 3: Travel Planning Multi-Agent -->
   <article class="project-card" data-project-category="agent rag">
     <div>
       <div class="project-card__top">
@@ -115,7 +164,56 @@ permalink: /projects/
     </div>
   </article>
 
-  <!-- Project 3: CommandBox -->
+  <!-- Project 4: NegAuto -->
+  <article class="project-card" data-project-category="tools">
+    <div>
+      <div class="project-card__top">
+        <span class="project-badge" style="color:var(--accent-amber);background:var(--accent-amber-subtle);border-color:rgba(245,158,11,0.25);">COMPUTATIONAL PHOTOGRAPHY · TOOL</span>
+        <span class="project-date">2026.08 — ACTIVE</span>
+      </div>
+      <h2 class="project-title">NegAuto</h2>
+      <p class="project-desc">
+        面向 C-41 彩色负片数字化的确定性反转与自动色彩还原引擎。通过光密度建模与自动片基估计消除橙色色罩，支持 16-bit 宽动态输出与多图并发批量处理。
+      </p>
+
+      <div class="project-specs">
+        <div class="spec-item">
+          <span class="spec-key">Core Engine:</span>
+          <span class="spec-val">Optical Density / Statistical Film-Base Neutralization</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-key">Quality Pipeline:</span>
+          <span class="spec-val">100% Deterministic (No Generative Hallucination)</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-key">Output &amp; GUI:</span>
+          <span class="spec-val">16-bit TIFF / Camera RAW / Batch Desktop App</span>
+        </div>
+      </div>
+
+      <div class="project-tags">
+        <span class="tech-tag">Computational Photography</span>
+        <span class="tech-tag">Python 3.12</span>
+        <span class="tech-tag">OpenCV / RawPy</span>
+        <span class="tech-tag">16-bit Workflow</span>
+        <span class="tech-tag">Golden Tests</span>
+      </div>
+    </div>
+
+    <div class="project-card__footer">
+      <div class="card-link-group">
+        <a href="https://github.com/GotYoo/NegAuto" target="_blank" rel="noopener" class="card-action-link">
+          <span>查看 GitHub 仓库</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
+        </a>
+        <a href="{{ '/life/' | relative_url }}" class="card-action-link card-action-link--muted">
+          <span>摄影生活切片 ↗</span>
+        </a>
+      </div>
+    </div>
+  </article>
+
+  <!-- Project 5: CommandBox -->
   <article class="project-card" data-project-category="tools">
     <div>
       <div class="project-card__top">
@@ -160,7 +258,7 @@ permalink: /projects/
     </div>
   </article>
 
-  <!-- Project 4: Kairo Digital Atelier -->
+  <!-- Project 6: Kairo Digital Atelier -->
   <article class="project-card" data-project-category="tools">
     <div>
       <div class="project-card__top">
